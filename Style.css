@@ -1,84 +1,209 @@
-*{
-    margin: 0;
-    padding: 0;
-    font-size: 1rem;
+body {
     font-family: Arial;
+    margin: 20px;
+    display: flex;
 }
 
-body{
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 3cm 19cm;
-    grid-template-rows: auto 1fr auto;
-    grid-template-areas: 
-    "sidebar navbar"
-    "sidebar main"
-    "footer footer"
-}
-
-nav{
-    grid-area: navbar;
-    color: black;
-    padding: 1rem;
-    position: relative;
-    background-color: white;
-}
-
-aside{ 
-    display: grid;
+.Reporter{
+    position: fixed;
     top: 0;
-    min-height: 100vh;
-    position: sticky;
-    align-self: start;
-    grid-area: sidebar;
+    left: 0;
+    background-color: #4e4e4e;
+    min-width: 200vh;
     color: white;
-    background-color: rgb(255, 255, 255);
-    z-index: -1;
+    padding: 10px;
+    z-index: 100;
 }
 
-main{
-    grid-area: main;
-    margin: 1rem;
+.Reporter ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
 }
 
-footer{
-    grid-area: footer;
-    color: white;
-    background-color: rgb(255, 255, 255);
-    padding: 1rem;
-}
-
-h1{
-    font-size: xx-large;
-    text-align: center;
-}
-
-#forside{
-    display: grid;
-}
-
-#Liste{
-    margin-top: 10%;
-    text-align: center;
-}
-
-.Bookmarks,.Bookmarks:visited{
-    z-index: 10;
+.Reporter li{
+    margin-right: 15px;
     color: white;
 }
 
-li{
-    font-size: x-large;
-    padding-top: 1rem;
+.Reporter a{
+    color: white;
 }
 
-h2{
-    font-size: x-large;
-    padding-bottom: 1rem;
+.Reporter a:hover{
+    text-decoration: underline;
 }
 
-.sidetal{
-    padding-top: 1rem;
-    float: right;
+.toc {
+    width: 200px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: #f8f8f8;
+    padding: 10px;
+    margin-top: 10px;
+    overflow-y: auto;
 }
 
+.toc ul {
+    list-style: none;
+    padding: 0;
+}
+
+.toc a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 5px 0;
+}
+
+.content {
+    margin-left: 220px;
+    margin-top: 20px;
+}
+
+.char-counter {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.header, .footer, .cover {
+    display: none;
+}
+
+/*APP Refrance */
+
+.references {
+    margin-top: 40px;
+}
+
+.reference {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.reference p {
+    margin: 0;
+}
+
+.author {
+    font-weight: bold;
+}
+
+.year {
+    font-style: italic;
+}
+
+.title {
+    font-weight: normal;
+}
+
+.journal-title {
+    font-style: italic;
+}
+
+.volume, .pages {
+    font-weight: normal;
+}
+
+.doi {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+.char-counter {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        display: block;
+    }
+
+    .Reporter{
+        display: none;
+    }
+
+    .toc {
+        position: static;
+        width: 100%;
+        page-break-before: always;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        background: none;
+    }
+
+    .toc li::after {
+        content: " - Side " counter(page);
+        font-size: 12px;
+    }
+
+    .cover{
+        display: block;
+        text-align: center;
+        page-break-before: always;
+        margin-top: 30px;
+        padding: 20px;
+        font-size: 12px;
+    }
+
+    .cover .char-counter {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: normal;
+    }
+
+    .header {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        font-size: 14px;
+        background: #ffffff;
+        padding: 10px;
+    }
+
+    .header img {
+        height: 50px;
+        float: right;
+    }
+
+    .content{
+        margin: 80px;
+        line-height: 1.5;
+    }
+
+    .footer {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        text-align: center;
+        font-size: 12px;
+        background: hsl(0, 0%, 100%);
+        padding: 5px;
+        counter-increment: page;
+        width: auto;
+    }
+
+    .footer::after {
+        content: "Side " counter(page);
+    }
+
+    h2 {
+        page-break-before: always;
+        margin-top: 70px; 
+    }
+    
+    .char-counter {
+        display: none;
+    }
+}
