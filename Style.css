@@ -4,6 +4,11 @@ body {
     display: flex;
 }
 
+html{
+    scroll-behavior: smooth;
+    scroll-padding-top: 40px;
+}
+
 .Reporter{
     position: fixed;
     top: 0;
@@ -66,6 +71,7 @@ body {
 }
 
 .char-counter {
+    display: none;
     margin-top: 20px;
     font-weight: bold;
 }
@@ -109,7 +115,7 @@ body {
     font-weight: normal;
 }
 
-.doi {
+.URL {
     color: #1a73e8;
     text-decoration: none;
 }
@@ -206,4 +212,9 @@ body {
     .char-counter {
         display: none;
     }
+
+    .NySide{
+        page-break-after: always;
+    }
+    
 }
