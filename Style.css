@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     font-size: 1rem;
+    font-family: Arial;
 }
 
 body{
@@ -16,24 +17,22 @@ body{
 }
 
 nav{
-    top: 0;
-    position: sticky;
     grid-area: navbar;
-    background-color: rgb(33, 42, 53);
-    color: white;
+    color: black;
     padding: 1rem;
+    position: relative;
+    background-color: white;
 }
 
 aside{ 
+    display: grid;
     top: 0;
     min-height: 100vh;
     position: sticky;
+    align-self: start;
     grid-area: sidebar;
     color: white;
-    background-color: rgb(51, 61, 81);
-    padding: 1rem;
-    position: sticky;
-    align-self: start;
+    background-color: rgb(255, 255, 255);
     z-index: -1;
 }
 
@@ -45,6 +44,41 @@ main{
 footer{
     grid-area: footer;
     color: white;
-    background-color: rgb(33, 42, 53);
+    background-color: rgb(255, 255, 255);
     padding: 1rem;
 }
+
+h1{
+    font-size: xx-large;
+    text-align: center;
+}
+
+#forside{
+    display: grid;
+}
+
+#Liste{
+    margin-top: 10%;
+    text-align: center;
+}
+
+.Bookmarks,.Bookmarks:visited{
+    z-index: 10;
+    color: white;
+}
+
+li{
+    font-size: x-large;
+    padding-top: 1rem;
+}
+
+h2{
+    font-size: x-large;
+    padding-bottom: 1rem;
+}
+
+.sidetal{
+    padding-top: 1rem;
+    float: right;
+}
+
