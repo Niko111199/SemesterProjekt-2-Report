@@ -129,6 +129,16 @@ html{
     font-weight: bold;
 }
 
+table, th, td {
+    border: 3px solid black;
+    max-width: 800px;
+  }
+
+.greybox{
+    background-color: #969595;
+}
+
+
 @media print {
     body {
         margin: 0;

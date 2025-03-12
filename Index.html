@@ -130,8 +130,47 @@
         <p>[Indsæt din tekst her]</p>
         
         <h2 id="risikovurdering">6. Risikovurdering</h2>
-        <p>[Indsæt din tekst her]</p>
-        
+        <table>
+            <tr>
+                <div class="greybox">
+                    <th>Risici</th>
+                    <th>Sandsynlighed</th>
+                    <th>Konsekvens</th>
+                    <th>Risiko</th>
+                    <th>Risiko-Reduktion</th>
+                    <th>Indikatorer</th>
+                    <th>Ansvarlig</th>
+                </div>
+            </tr>
+            <tr> <!-- Github-->
+                <th>Overskridning af delt arbejde gennem GitHub</th> <!-- Risici (beskrivelse)-->
+                <th>3</th> <!-- Sandsynlighed (1-5)-->
+                <th>5</th> <!-- Konsekvens (1-5)-->
+                <th>15</th> <!-- Risiko (Sandsynlighed x Konsekvens)-->
+                <th>Svar: Struktureret opbygning af GitHub projekt med korrekt brug af branches og version control</th> <!-- Risiko-Reduktion (Forebyggende handlinger)-->
+                <th>Tidligere fungerende kode virker ikke / virker ustabilt, assets / prefabs mangler</th> <!-- Indikatorer-->
+                <th></th> <!-- Ansvarlig (én person)-->
+            </tr>
+            <tr> <!-- Håndtering af GPS-->
+                <th>Ulovlig håndtering af GPS informationer fra brugeren</th> <!-- Risici (beskrivelse)-->
+                <th>4</th> <!-- Sandsynlighed (1-5)-->
+                <th>5</th> <!-- Konsekvens (1-5)-->
+                <th>20</th> <!-- Risiko (Sandsynlighed x Konsekvens)-->
+                <th>Svar: Grundig undersøgelse i GDPR lovgivning samt brugersamtykke</th> <!-- Risiko-Reduktion (Forebyggende handlinger)-->
+                <th>Manglende samtykke ved app-opstart fra bruger, implementation uden kendskab til loven</th> <!-- Indikatorer-->
+                <th></th> <!-- Ansvarlig (én person)-->
+            </tr>
+            <tr> <!-- Befærdelse i farlige områder-->
+                <th>Uopmærksom befærdelse hos brugere til farlige områder. Fx. vej med biler.</th> <!-- Risici (beskrivelse)-->
+                <th>3</th> <!-- Sandsynlighed (1-5)-->
+                <th>5</th> <!-- Konsekvens (1-5)-->
+                <th>15</th> <!-- Risiko (Sandsynlighed x Konsekvens)-->
+                <th>Svar: Advarsler i app om at bruger skal holde sig opmærksom på omgivelser</th> <!-- Risiko-Reduktion (Forebyggende handlinger)-->
+                <th>Den tænkte rute for brugeren kan krydse veje eller områder ikke egnet til befærdelse</th> <!-- Indikatorer-->
+                <th></th> <!-- Ansvarlig (én person)-->
+            </tr>
+        </table>
+
         <h2 id="referencer">7. Referencer</h2>
         <p>
             <div class="reference article-reference">
