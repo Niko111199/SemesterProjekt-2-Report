@@ -210,7 +210,8 @@ html{
     }
     
     .char-counter {
-        display: none;
+        display: block;
+        font-weight: bold;
     }
 
     .NySide{
