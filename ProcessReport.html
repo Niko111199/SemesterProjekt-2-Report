@@ -58,7 +58,7 @@
     <br>
     <br>
 
-    <div class="char-counter" id="charCounter">[Antal Tegn: 0]</div>
+    <div class="char-counter" id="charCounter" style="font-weight: bold; font-size: 25px;">[Antal Tegn: 0]</div>
     <h1>[SoftWareInginør XR]</h1>
     <h1>[2. Semester]</h1>
     <h1>[05-03-2025 til 31-5-2025]</h1>
@@ -115,14 +115,6 @@
 
     <div class="footer"></div>
 
-    <script>
-        function updateCharCount() {
-            const content = document.getElementById("content").innerText;
-            document.getElementById("charCounter").innerText = "Tegntæller: " + content.length;
-        }
-        
-        document.addEventListener("input", updateCharCount);
-        updateCharCount();
-    </script>
+    <script src="Scirpt.js"></script>
 </body>
 </html>
