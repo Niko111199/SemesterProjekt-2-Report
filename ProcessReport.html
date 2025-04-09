@@ -84,10 +84,68 @@
         <p>[Indsæt din tekst her]</p>
         
         <h2 id="Projektopstart">3. Projektopstart</h2>
-        <p>[Indsæt din tekst her]</p>
+        <p>
+            <h3>Projekt indledene Opstart</h3>
+            til at starte projekt, begyndte vi at kigge på userstorys, til at danne os et overblik
+            over hvad vi vidste vores projekt skulle havde på det opstartende tidspunkt
+
+            <h3>Projekt udførende Opstart</h3>
+            projektet opstars fase blev indledt med valget om at burge Unity 6.36f1,
+            da dette var den nyeste stabile version er unity på det gældene tispunkt
+        </p>
         
         <h2 id="Projektudførelse">4. Projektudførelse</h2>
-        <p>[Indsæt din tekst her]</p>
+        <p>
+            <h3>Tilgåning af GPS Lokation</h3>
+
+         <div class="container">
+            <img src="Images/anmodomtilladelse.jpg" alt="anmodning om tilladelse" class="image">
+                <p>
+                  Da applikationen gør brug af GPS-lokationer ved at tilgå GPS-signaler fra brugerens enhed,
+                  er det essentielt, at denne funktion håndteres i overensstemmelse med gældende lovgivning,
+                  herunder persondataforordningen (GDPR). I henhold til artikel 6, stk. 1 i GDPR,
+                  kræves et gyldigt retsgrundlag for behandling af personoplysninger, herunder lokaliseringsdata.
+                  For at sikre, at behandlingen sker lovligt, tages der udgangspunkt i Digitaliseringsstyrelsens "Huskeregler for app-udbydere",
+                  hvor det blandt andet anbefales at være gennemsigtig omkring anvendelsen af GPS samt at indhente eksplicit
+                  samtykke ved opstart af applikationen.
+                <br><br>
+                  Implementeringen sker ved, at der i AndroidManifest-filen angives,
+                  at tilladelse til adgang til lokaliseringsdata er nødvendig for,
+                  at applikationen kan fungere. Derudover anvendes scriptet AccessLocationPermission,
+                  som først kontrollerer, om brugeren overhovedet har givet tilladelse til,
+                  at applikationer må benytte GPS-signaler. Såfremt denne tilladelse foreligger,
+                  anmoder applikationen direkte brugeren om adgang til GPS-data for den specifikke app.
+                  Først når begge tilladelser er givet, aktiveres GPS-sporingen ved hjælp af funktionen Input.location.Start().
+                <br><br>
+                  Af hensyn til dataminimering og for at sikre, at brugerens lokation ikke spores unødigt,
+                  anvendes den indbyggede metode OnApplicationQuit(), hvor Input.location.Stop() kaldes.
+                  Herved sikres det, at sporing udelukkende finder sted under aktiv brug af applikationen,
+                  hvilket er i overensstemmelse med GDPR's principper om proportionalitet og dataminimering.
+                </p>
+            </div>
+
+            <h3>Brug af GPS signal</h3>
+            
+            I den første iteration af applikationen skal systemet kunne få adgang til oplysninger om brugerens placering og sammenligne,
+            om brugeren befinder sig på samme sted som en given position.
+            For at opnå adgang til brugerens latitude og longitude kan metoderne
+            input.location.lastData.latitude og input.location.lastData.longitude anvendes,
+            når funktionen input.location.start() aktiveres. Dette muliggør,
+            at systemet med hver opdatering kan registrere brugerens aktuelle koordinater (latitude og longitude).
+            Derudover bør der implementeres et system til position sammenligning,
+            idet målet er at udvikle et succesfuldt og langtidsholdbart software.
+            For at sikre, at systemet er i overensstemmelse med SOLID-principperne,
+            vil Haversine-formlen blive anvendt. Denne formel beregner afstanden mellem
+            to punkter på en globus baseret på forskellene i latitude og longitude,
+            hvilket sikrer mere præcise resultater, især over større afstande.
+            <br><br>
+            Anvendelsen af Haversine-formlen vil yderligere muliggøre en fremtidig udvidelse
+            af systemet til at dække større geografiske områder, hvis dette skulle blive nødvendigt.
+            Når afstanden er beregnet ved hjælp af Haversine-formlen,
+            kan den sammenlignes med en forudbestemt maksimal afstand, som systemet accepterer.
+            Denne fremgangsmåde kan nemt udvides til at inkludere funktionalitet,
+            der muliggør instantiationen af objekter på specifikke positioner.
+        </p>
         
         <h2 id="refleksioner">5. Personlige refleksioner</h2>
         <p>[Indsæt din tekst her]</p>
