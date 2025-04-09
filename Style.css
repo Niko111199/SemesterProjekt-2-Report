@@ -80,7 +80,7 @@ html{
     display: none;
 }
 
-.sidetal{
+.sidetal, .SideNummer{
     display: none;
 }
 
@@ -138,12 +138,21 @@ table, th, td {
     background-color: #969595;
 }
 
+.dontshow{
+    display: none;
+}
+
 
 @media print {
     body {
         margin: 0;
         padding: 0;
         display: block;
+    }
+
+    html{
+        scroll-behavior: smooth;
+        scroll-padding-top: -50px;
     }
 
     .Reporter{
@@ -198,20 +207,15 @@ table, th, td {
     }
 
     .footer {
-        display: block;
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        text-align: center;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
         font-size: 12px;
-        background: hsl(0, 0%, 100%);
-        padding: 5px;
-        counter-increment: page;
-        width: auto;
+        font-family: Arial, sans-serif;
     }
 
     .sidetal{
-        display: block;
+        display: inline-block;
     }
 
     h2 {
@@ -226,6 +230,17 @@ table, th, td {
 
     .NySide{
         page-break-after: always;
+    }
+
+    .dontshow{
+        display: block;
+    }
+
+    .SideNummer{
+        display: block;
+        position: absolute;
+        right: 5px;
+        
     }
     
 }
