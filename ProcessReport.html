@@ -79,9 +79,11 @@
     <div class="content" id="content">
         <h2 id="Indledning">1. Indledning</h2>
         <p>[Indsæt din tekst her]</p>
+        <div class="SideNummer"></div>
         
         <h2 id="Gruppearbejde">2. Gruppearbejde</h2>
         <p>[Indsæt din tekst her]</p>
+        <div class="SideNummer"></div>
         
         <h2 id="Projektopstart">3. Projektopstart</h2>
         <p>
@@ -93,6 +95,7 @@
             projektet opstars fase blev indledt med valget om at burge Unity 6.36f1,
             da dette var den nyeste stabile version er unity på det gældene tispunkt
         </p>
+        <div class="SideNummer"></div>
         
         <h2 id="Projektudførelse">4. Projektudførelse</h2>
         <p>
@@ -123,9 +126,12 @@
                   hvilket er i overensstemmelse med GDPR's principper om proportionalitet og dataminimering.
                 </p>
             </div>
+            <br class="onlyonprint"><br class="onlyonprint"><br class="onlyonprint"><br class="onlyonprint"><br class="onlyonprint"><br class="onlyonprint">
+            <div class="SideNummer"></div>
 
-            <h3>Brug af GPS signal</h3>
-            
+            <div class="page-break">
+                <br class="onlyonprint"><br class="onlyonprint">
+                <h3>Brug af GPS signal</h3>
             I den første iteration af applikationen skal systemet kunne få adgang til oplysninger om brugerens placering og sammenligne,
             om brugeren befinder sig på samme sted som en given position.
             For at opnå adgang til brugerens latitude og longitude kan metoderne
@@ -138,29 +144,81 @@
             vil Haversine-formlen blive anvendt. Denne formel beregner afstanden mellem
             to punkter på en globus baseret på forskellene i latitude og longitude,
             hvilket sikrer mere præcise resultater, især over større afstande.
-            <br><br>
+            </div>
+            <br>
             Anvendelsen af Haversine-formlen vil yderligere muliggøre en fremtidig udvidelse
             af systemet til at dække større geografiske områder, hvis dette skulle blive nødvendigt.
             Når afstanden er beregnet ved hjælp af Haversine-formlen,
             kan den sammenlignes med en forudbestemt maksimal afstand, som systemet accepterer.
             Denne fremgangsmåde kan nemt udvides til at inkludere funktionalitet,
             der muliggør instantiationen af objekter på specifikke positioner.
+
+            <h3>opstart af augmented reality (kronjuveler)</h3>
+
+            <div class="container">
+                <img src="Images/DevArt.jpg" alt="DevArt" class="image">
+              
+                <p>
+                  Efter at have etableret de fundamentale elementer til opbygningen af vores GPS-baserede system,
+                  blev næste skridt at implementere en basal form for augmented reality (AR).
+                  I denne forbindelse blev udviklingen af de tilfældigt genererede “kronjuveler” påbegyndt.
+                  Disse objekter er placeret i nærheden af spilleren med det formål
+                  at gøre dem let tilgængelige uden afhængighed af præcise GPS-koordinater.
+                </p>
+                <br class="onlyonprint"><br class="onlyonprint"><br class="onlyonprint"><br class="onlyonprint"><br class="onlyonprint"><br class="onlyonprint">
+                <div class="SideNummer"></div>
+              
+                <p>
+                    <br class="onlyonprint"><br class="onlyonprint"><br class="onlyonprint">
+                  For at opnå dette blev der udviklet et system baseret på plane detection.
+                  Systemet anvender en raycasting-teknik, hvor der med faste tidsintervaller -
+                  defineret mellem to inputværdier i sekunder  udsendes en ray fra telefonens kamera.
+                  Denne ray fortsætter, indtil den registrerer et plane med en passende størrelse,
+                  hvorefter et præfabrikeret objekt (prefab) instansieres på den fundne position.
+                  På sigt planlægges dette system optimeret ved brug af objekt-pooling,
+                  hvor objekter genbruges frem for at blive destrueret og oprettet på ny.
+                  Det nuværende system instansierer dog stadig objekterne dynamisk i nærheden af spilleren.
+                </p>
+            
+                <p>
+                  Efter implementeringen af denne funktionalitet var næste skridt at definere interaktionen mellem spilleren og kronjuvelerne.
+                  Dette blev realiseret ved, at systemet registrerer spillerens tryk på skærmen og udsender en ray fra dette punkt.
+                  Hvis ray'en rammer et objekt, der har det korrekte tag (dvs. identificeres som en “kronjuvel”),
+                  aktiveres en funktion, der tilføjer en vis mængde guld til spillerens konto.
+                  Objektet destrueres derefter (eller senere i udviklingen returneres til objekt-poolen).
+                </p>
+              
+                <p>
+                  I forlængelse heraf blev der også implementeret et simpelt valutasystem,
+                  som forbereder spillet på en fremtidig økonomifunktion. Systemet anvender Singleton Design Pattern for at sikre,
+                  at den samme instans af valuta - kaldet “guld” - anvendes på tværs af alle scener og spilsituationer.
+                  Da guld blot repræsenteres af en integer-værdi, gemmes denne ved hjælp af PlayerPrefs, hvilket sikrer,
+                  at spillerens valuta bevares på tværs af spilsessioner - også efter at applikationen er lukket.
+                </p>
+              
+                <p>
+                  Samlet set danner disse systemer et grundlag for både spillets AR-elementer og økonomiske mekanismer,
+                  og de planlægges løbende optimeret med hensyn til ydeevne og brugervenlighed.
+                </p>
+              </div>
+              <div class="SideNummer"></div>
         </p>
         
         <h2 id="refleksioner">5. Personlige refleksioner</h2>
         <p>[Indsæt din tekst her]</p>
+        <div class="SideNummer"></div>
         
         <h2 id="vejledning">6. Refleksioner over vejledning</h2>
         <p>[Indsæt din tekst her]</p>
+        <div class="SideNummer"></div>
 
         <h2 id="Konklusion">7. Konklusion</h2>
         <p>[Indsæt din tekst her]</p>
+        <div class="SideNummer"></div>
         
         <h2 id="referencer">8. Referencer</h2>
         <p>[Indsæt din tekst her]</p>
     </div>
-
-    <div class="char-counter" id="charCounter">Tegntæller: 0</div>
 
     <div class="footer"></div>
 

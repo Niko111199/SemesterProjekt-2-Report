@@ -9,6 +9,10 @@ html{
     scroll-padding-top: 40px;
 }
 
+.onlyonprint{
+    display: none;
+}
+
 .Reporter{
     position: fixed;
     top: 0;
@@ -157,12 +161,34 @@ table, th, td {
         margin: 0;
         padding: 0;
         display: block;
+        page-break-inside: avoid;
+        break-inside: avoid;
     }
 
     html{
         scroll-behavior: smooth;
         scroll-padding-top: -50px;
     }
+
+    p {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .onlyonprint{
+        display: block;
+    }
+
+    .page-break {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    .break-print {
+        page-break-before: always;
+        break-before: page;
+        display: block;
+      }
 
     .Reporter{
         display: none;
