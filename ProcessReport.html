@@ -200,6 +200,33 @@
                   Samlet set danner disse systemer et grundlag for både spillets AR-elementer og økonomiske mekanismer,
                   og de planlægges løbende optimeret med hensyn til ydeevne og brugervenlighed.
                 </p>
+
+                <h3>Lokationssporing og Spilområde</h3>
+
+               <p>
+                I denne nyupstartet iteration af systemet introduceres muligheden for sporing af specifikke positioner.
+                Dette realiseres gennem en ny objektstruktur kaldet Location. Et Location-objekt indeholder tre variabler:
+                en string, der repræsenterer navnet på positionen, samt to floats,
+                som angiver henholdsvis breddegrad (latitude) og længdegrad (longitude).
+                På baggrund heraf oprettes en liste, Locations, der samler flere Location-objekter og
+                danner grundlag for videre funktionalitet, såsom søgning efter specifikke positioner.
+                </p>
+                
+                <p>
+                Yderligere introduceres konceptet om et "spilområde" (game area),
+                hvilket definerer det geografiske område, inden for hvilket spillet skal foregå.
+                Hvis en spiller bevæger sig uden for dette område, modtager vedkommende en besked, der informerer om,
+                at han eller hun er uden for det tilladte spilleområde.
+                For at bestemme spilområdets centrum anvendes listen af Locations.
+                Systemet itererer gennem samtlige Location-objekter og beregner gennemsnittet
+                af deres latitude- og longitude-koordinater. Resultatet bliver et centralt punkt,
+                som repræsenterer midten af spilområdet.
+                Ved hjælp af dette punkt kan systemet foretage en afstandsberegning mellem spilleren og centrum.
+                Hvis afstanden er mindre end en foruddefineret radius,
+                betragtes spilleren som værende inden for spilområdet;
+                overskrides denne radius, anses spilleren for at have forladt området, og vil derved bliver
+                informeret vedrørrende dette.
+                </p>
               </div>
               <div class="SideNummer"></div>
         </p>
