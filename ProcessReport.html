@@ -153,6 +153,44 @@
             Denne fremgangsmåde kan nemt udvides til at inkludere funktionalitet,
             der muliggør instantiationen af objekter på specifikke positioner.
 
+            <h3>Indsamling af lokations- og kompasinformation</h3>
+            
+            <p>
+              For at imødekomme principperne bag Single Responsibility, som er en del af SOLID-arkitekturen,
+              er indsamlingen og den efterfølgende behandling af lokations- og kompasdata adskilt i separate klasser.
+              Denne opdeling muliggører en mere effektiv anvendelse af Unitys indbyggede "MonoBehaviour"-package,
+              idet databehandling og tilhørende beregninger kan håndteres uden for MonoBehaviour.
+              Dette bidrager til en reduceret belastning af brugerens enhed og sikrer en mere ressourceeffektiv drift.
+            </p>
+
+            <p>
+              Lokations- og kompasdata indsamles gennem henholdsvis klasserne "WorldPos" & "Compas".
+              hvor MonoBehaviour anvendes til at tilgå Unitys interne lokationstjeneste. De indsamlede oplysninger gemmes i en attribut kaldet "Lastdata",
+              som muliggør tilgængeliggørelse af data i en hensigtsmæssig attribut-struktur.
+            </p>
+
+            <h3>Databehandling uden for MonoBehaviour</h3>
+
+            <h4>Anvendelse af Haversine-formlen til afstandsberegning</h4>
+
+            <p>
+              I forbindelse med betinget instansiering af kongekroner skal der verificeres, om spilleren befinder sig inden for en given radius af et referencepunkt.
+              Denne afstandsberegning udføres ved hjælp af Haversine-formlen og er implementeret uden for MonoBehaviour i klassen "PositionCheck".
+              Klassen tilbyder en offentlig metode, som returnerer en bool værdi afhængigt af, om spillerens position og
+              objektets position overholder den givne radius.
+            </p>
+
+            <h4>Beregning af retning ved hjælp af bearing-formlen</h4>
+
+            <h4></h4>
+            <p>
+              Udover afstanden skal også spillerens orientering verificeres for at muliggøre instansiering af kongekroner.
+              Dette gøres ved anvendelse af bearing-formlen, som beregner vinklen mellem to punkter på en sfærisk overflade. 
+              Implementeringen foretages i klassen "DirectionCheck", som er adskilt fra MonoBehaviour.
+              Klassen indeholder en metode, der returnerer en bool afhængigt af,
+              om vinklen mellem spillerens og objektets position befinder sig inden for en defineret grænseværdi for acceptabel retning.
+            </p>
+
             <h3>opstart af augmented reality (kronjuveler)</h3>
 
             <div class="container">
@@ -200,10 +238,41 @@
                   Samlet set danner disse systemer et grundlag for både spillets AR-elementer og økonomiske mekanismer,
                   og de planlægges løbende optimeret med hensyn til ydeevne og brugervenlighed.
                 </p>
+
+                <h3>Lokationssporing og Spilområde</h3>
+
+               <p>
+                I denne nyupstartet iteration af systemet introduceres muligheden for sporing af specifikke positioner.
+                Dette realiseres gennem en ny objektstruktur kaldet Location. Et Location-objekt indeholder tre variabler:
+                en string, der repræsenterer navnet på positionen, samt to floats,
+                som angiver henholdsvis breddegrad (latitude) og længdegrad (longitude).
+                På baggrund heraf oprettes en liste, Locations, der samler flere Location-objekter og
+                danner grundlag for videre funktionalitet, såsom søgning efter specifikke positioner.
+                </p>
+                
+                <p>
+                Yderligere introduceres konceptet om et "spilområde" (game area),
+                hvilket definerer det geografiske område, inden for hvilket spillet skal foregå.
+                Hvis en spiller bevæger sig uden for dette område, modtager vedkommende en besked, der informerer om,
+                at han eller hun er uden for det tilladte spilleområde.
+                For at bestemme spilområdets centrum anvendes listen af Locations.
+                Systemet itererer gennem samtlige Location-objekter og beregner gennemsnittet
+                af deres latitude- og longitude-koordinater. Resultatet bliver et centralt punkt,
+                som repræsenterer midten af spilområdet.
+                Ved hjælp af dette punkt kan systemet foretage en afstandsberegning mellem spilleren og centrum.
+                Hvis afstanden er mindre end en foruddefineret radius,
+                betragtes spilleren som værende inden for spilområdet;
+                overskrides denne radius, anses spilleren for at have forladt området, og vil derved bliver
+                informeret vedrørrende dette.
+                </p>
               </div>
               <div class="SideNummer"></div>
         </p>
         
+        <br>
+
+        
+
         <h2 id="refleksioner">5. Personlige refleksioner</h2>
         <p>[Indsæt din tekst her]</p>
         <div class="SideNummer"></div>
