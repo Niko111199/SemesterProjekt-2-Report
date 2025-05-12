@@ -265,6 +265,52 @@
                 overskrides denne radius, anses spilleren for at have forladt området, og vil derved bliver
                 informeret vedrørrende dette.
                 </p>
+
+                <h3>Udvikling og Justering af AR-Produkter til Virtuel Butik</h3>
+                <p>
+                  Efter afslutningen af den indledende udvikling af butikken blev fokus rettet mod implementeringen af de produkter,
+                  som brugerne kunne købe og interagere med. Den oprindelige intention var at benytte Full Body Tracking til at skabe virtuelle "kostumer",
+                  som brugerne kunne iføre sig og tage billeder af i augmented reality (AR).
+                  Efter adskillige timers arbejde viste det sig dog,
+                  at Unitys dokumentation - i det med småt - angav,
+                  at fuld kropssporing udelukkende understøttes på iOS-enheder.
+                </p>
+
+                <p>
+                  Da projektets målplatform udelukkende anvender Samsung-enheder og gør brug af Google ARCore,
+                  var denne funktionalitet desværre ikke anvendelig.
+                  Projektgruppen måtte derfor revurdere strategien og vendte tilbage til tegnebrættet.
+                  Det blev besluttet at anvende Face Tracking som alternativ.
+                  Denne tilgang tillod stadig brugeren at tage billeder af sig selv i AR,
+                  hvilket stemte overens med kravspecifikationen, hvor metoden til at tage billedet ikke var nærmere defineret.
+                </p>
+
+                <p>
+                  For at påbegynde implementeringen af Face Tracking blev Unitys Learning Path for teknologien gennemgået.
+                  Herefter blev der udviklet en klasse til håndtering af ansigtsfiltre. Denne klasse gjorde det muligt at tilføje og bladre mellem forskellige filtre.
+                  For at gøre systemet mere skalerbart og integrerbart med butikken,
+                  blev filtrene struktureret som ScriptableObjects, der indeholder en liste over tilgængelige filtre.
+                  En metode til dynamisk at tilføje nye filtre blev tilføjet, hvilket gør det muligt at knytte købte varer til filtrene,
+                  således at et filter bliver tilgængeligt for brugeren efter køb.
+                </p>
+
+                <p>
+                  Efterfølgende blev der udviklet en funktionalitet til at tage billeder og gemme dem i brugerens kamerarulle.
+                  Et tidligt teknisk problem bestod i, at UI-elementerne, som anvendes til at tage billeder,
+                  fortsatte med at være synlige på det færdige billede. Dette blev løst ved at konvertere fotofunktionen til en IEnumerator-metode,
+                  som sikrer sekventiel udførelse. Inden selve billedet tages, sættes UI-elementernes alfaværdi til 0 (gennemsigtige),
+                  og efter billedet er gemt, sættes alfaværdien tilbage til 255 (fuldt synlig).
+                  Billedet gemmes via en platformsspecifik filsti tilpasset Android/Samsung-enheder,
+                  og brugeren modtager samtidig en Toast-meddelelse med bekræftelse af, at billedet er gemt.
+                </p>
+
+                <p>
+                  Afslutningsvis blev AndroidManifest.xml opdateret,
+                  så applikationen eksplicit anmoder om tilladelse til at benytte kameraet -
+                  analogt med hvordan tilladelser til lokationstracking håndteres.
+                  Dette skridt er taget for at sikre overholdelse af gældende lovgivning vedrørende brugen af kamera og persondata.
+                </p>
+
               </div>
               <div class="SideNummer"></div>
         </p>
