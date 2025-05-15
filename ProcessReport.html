@@ -266,6 +266,37 @@
                 informeret vedrørrende dette.
                 </p>
 
+                <h3>Simulator (UI):</h3>
+                <p>
+                  Udviklingen af mobilapplikationen Royal-Go blev gennemført med fokus på design, 
+                  brugergrænseflade og visuel identitet. I udviklingsfasen blev der udarbejdet en funktionel og intuitiv brugergrænseflade målrettet mobile enheder. 
+                  Startmenuen blev designet til at give adgang til tre centrale funktioner: Skattejagt, Skattekammer og Butik, hvor navigationen mellem scener blev realiseret gennem et skript i Unity. 
+                  Et indkøbskurvsikon blev integreret som en grafisk navigationsknap, der skaber visuel og funktionel sammenhæng til butiksscenen.
+                </p>
+
+                <p>
+                    Til den tekniske implementering blev C# anvendt i Unity-miljøet. 
+                    For at muliggøre hurtig prototypeudvikling blev navigation og funktionalitet hardkodet, velvidende at denne metode er mindre skalerbar i større produktionsmiljøer, men egnet til en effektiv tidlig version.
+                </p>
+
+                <h3>Udvikling af ButikScene</h3>
+
+                <p>
+                  Dette projekt har haft som mål at udvikle en shop-funktion i Unity, hvor spilleren kan købe kosmetiske genstande for en opsamlet valuta (guld). 
+                  Udviklingsprocessen har bestået af en iterativ tilgang, hvor funktionalitet gradvist blev udvidet og testet i sammenhæng med brugergrænseflade og gameplay-integration.
+                </p>
+
+                <p>
+                    Projektet blev startet med et færdigt "gold script", der håndterede spillerens valuta, inklusive lagring og visning af guld. Dette script dannede fundamentet for hele shop-systemet. 
+                    Dernæst blev et ShopManager-script udviklet med målet om at undgå hårdkodning og i stedet lade shop-items konfigureres via Unity-editoren.
+                </p>
+
+                <p>
+                  UI blev designet med mobilanvendelse i tankerne. 
+                  Herunder blev en Scroll View konfigureret korrekt til mobil, og shop-items blev lagt ind som prefabs med Vertical Layout Group og Content Size Fitter, 
+                  så visningen automatisk tilpasser sig forskellige skærmstørrelser.
+                </p>
+
                 <h3>Udvikling og Justering af AR-Produkter til Virtuel Butik</h3>
                 <p>
                   Efter afslutningen af den indledende udvikling af butikken blev fokus rettet mod implementeringen af de produkter,
