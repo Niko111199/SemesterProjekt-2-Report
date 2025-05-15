@@ -342,6 +342,31 @@
                   Dette skridt er taget for at sikre overholdelse af gældende lovgivning vedrørende brugen af kamera og persondata.
                 </p>
 
+                <h3>Implementering af tværgående funktionalitet mellem scener: Butik og AR-ansigtsfiltre</h3>
+
+                <p>I dette sprint blev der fokuseret på at udvikle funktionalitet, der forbinder eksisterende systemer på tværs af scener,
+                   nærmere bestemt interaktionen mellem butiksscenen og "skattekammeret",
+                   hvor brugeren har mulighed for at benytte ansigtsfiltre i et AR-miljø.
+                   Formålet var at gøre det muligt for brugeren at købe ansigtsfiltre i butikken og efterfølgende anvende disse i skattekammeret til at tage billeder.</p>
+
+                <p>Implementeringen blev realiseret gennem en metode, der først validerer,
+                  om brugeren har tilstrækkelige midler i form af "guld" (håndteret via et eksisterende Gold-script) til at foretage et køb.
+                  Herefter undersøges det, om den valgte vare er gyldig. Hvis begge betingelser er opfyldt,
+                  tilføjes det pågældende ansigtsfilter (repræsenteret som et prefab) til en liste over tilgængelige filtre for brugeren.
+                  Denne funktionalitet blev realiseret ved hjælp af scriptet ARFaceFilters, som håndterer brugerens samling af filtre.</p>
+                  
+                <p>et væsentligt aspekt af denne opgave var at sikre persistens, så købte varer forbliver tilgængelige på tværs af sessioner.
+                  Da Unitys PlayerPrefs og JSON-format ikke understøtter direkte lagring af GameObject-referencer, blev der i stedet valgt en løsning,
+                  hvor navnene på de købte filtre gemmes som strings i JSON-format. Disse gemmes i PlayerPrefs,
+                  og ved genstart af applikationen indlæses navnene og matches mod en statisk liste over alle tilgængelige ansigtsfiltre i systemet.
+                  Ved et match rekonstrueres brugerens samling, hvilket sikrer, at købte varer forbliver tilgængelige.</p>
+
+                <p>Når et køb er gennemført, fratrækkes den relevante mængde guld fra brugerens saldo.
+                   Det købte produkt fjernes derefter fra butikkens udbud, og butikken opdateres, så kun ikke-købte varer vises.
+                   Købsstatussen gemmes ligeledes i PlayerPrefs, hvilket forhindrer brugeren i at købe den samme vare mere end én gang.</p>
+
+                <p>Denne løsning understøtter således både funktionel integration mellem separate scener og sikrer datavedholdelse for brugerens købte indhold,
+                   hvilket er centralt for en konsistent brugeroplevelse.</p>
               </div>
               <div class="SideNummer"></div>
         </p>
