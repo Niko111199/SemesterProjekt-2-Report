@@ -297,6 +297,19 @@
                   så visningen automatisk tilpasser sig forskellige skærmstørrelser.
                 </p>
 
+                <h3>Integration med ARFaceList</h3>
+                <p>
+                  Som en del af shop-funktionaliteten blev der arbejdet på at integrere købte AR-face-prefabs direkte i en ARFaceList, som bruges af AR-systemet i Skattekammer-scenen. 
+                  Løsningen gjorde det muligt for spilleren at købe kosmetiske ansigtsgenstande (f.eks. masker), som derefter blev tilføjet automatisk til en liste (ScriptableObject). 
+                  Denne liste blev brugt af FacePrefabSelector i AR-scenen til at vise og skifte mellem de købte ansigter. Shoppen blev dermed direkte koblet til AR-oplevelsen, og implementeringen understøttede dynamisk opbygning uden hårdkodning.
+                </p>
+
+                <p>
+                    Selvom løsningen teknisk fungerede og opfyldte kravene, blev den ikke et elementært delelement i det endelige projekt. 
+                    Undervejs i forløbet blev der identificeret en anden metode, som bedre matchede projektets behov og mål – både med hensyn til performance, fleksibilitet og brugeroplevelse. 
+                    Derfor blev metoden fravalgt til fordel for en mere effektiv tilgang, men arbejdet med denne del har givet vigtig indsigt i integration mellem shop-system og runtime-data i Unity.
+                </p>
+
                 <h3>Udvikling og Justering af AR-Produkter til Virtuel Butik</h3>
                 <p>
                   Efter afslutningen af den indledende udvikling af butikken blev fokus rettet mod implementeringen af de produkter,
