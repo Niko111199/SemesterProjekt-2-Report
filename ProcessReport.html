@@ -393,6 +393,78 @@
 
                 <p>Denne løsning understøtter således både funktionel integration mellem separate scener og sikrer datavedholdelse for brugerens købte indhold,
                    hvilket er centralt for en konsistent brugeroplevelse.</p>
+
+                <h3>Implementering af miniGame System</h3>
+
+                <p>I dette sprint blev det besluttet at fokusere på at færdiggøre selve kernen af spiloplevelsen - det,
+                   vi betegner som "skattejagten". Den primære målsætning var at etablere funktionaliteten omkring interaktionen med en kongekrone,
+                   som fungerer som udgangspunkt for en række minispil.
+                   Når spilleren interagerer med kronen, skal et tilfældigt minispil aktiveres, hvilket,
+                   ved succesfuld gennemførelse, belønner spilleren med en vis mængde guld.</p>
+
+                <p>For at sikre systemets fleksibilitet og fremtidige udvidelsesmuligheder
+                   blev der valgt en arkitektonisk løsning baseret på Strategy Pattern.
+                   Denne tilgang muliggør nem integration af nye minispil uden behov for at ændre den eksisterende logik.
+                   Et centralt element i implementeringen var en MiniGameManager, som automatisk identificerer og registrerer alle spil,
+                   der implementerer det definerede IMiniGame interface. Ved aktivering udvælges et af disse spil tilfældigt.</p>
+
+                <p>Eftersom alle spilkomponenter er afhængige af Unitys MonoBehaviour,
+                   blev der oprettet en abstrakt klasse, MiniGameBase,
+                   som fungerer som bindeled mellem IMiniGame og de konkrete spiltyper.
+                   Denne løsning muliggør, at minispil både kan nedarve fra MonoBehaviour og samtidig overholde IMiniGame interfacet.</p>
+
+                <h3>Valg og Implementering af Minispil</h3>
+
+                <p>Til at begynde med blev der udviklet tre minispil,
+                   som alle tager udgangspunkt i kendte spilmekanikker for at sikre høj brugerforståelse og lav indlæringskurve.
+                  Disse er:</p>
+
+                <ul>
+                  <li><b>KingClicker:</b> inspireret  af "Cookie Clicker</li>
+                  <li><b>FalppyKing:</b> inspireret af "flappy Bird</li>
+                  <li><b>CatchKing:</b> inspireret af klassiske "dropper"-spil </li>
+                </ul>
+
+                <p>Alle minispil blev implementeret som UI-elementer,
+                   hvilket reducerede den tekniske kompleksitet,
+                   men medførte visse begrænsninger i brugen af fysiske komponenter såsom colliders og transforms.</p>
+
+                <h4>KingClicker</h4>
+                <p>Dette var det første spil, der blev implementeret.
+                   Spillet går ud på, at spilleren optjener guld ved at klikke gentagne gange på en kongekrone inden for en begrænset tidsramme.
+                   Tidens udløb vises via en grafisk UI-slider. Spillet er simpelt i sin mekanik,
+                   men tjener som en effektiv introduktion til minispilssystemet.</p>
+
+                  <h4>FlappyKing</h4>
+                  <p>Dette spil er en UI-baseret version af "Flappy Bird",
+                     hvor spilleren styrer en faldende kongekrone ved at trykke på skærmen for at få den til at stige.
+                     Målet er at navigere gennem rør og optjene guld. 
+                     En teknisk udfordring i dette spil var,
+                     at UI-elementer i Unity ikke understøtter klassiske fysiske komponenter som colliders.
+                     Derfor blev logikken implementeret ved hjælp af RectTransform overlap-tjek frem for fysiske kollisioner.
+                     På trods af dette lykkedes det at skabe en oplevelse, der minder om originalen.</p>
+
+                  <h4>CatchKing</h4>
+                  <p>Det sidste spil, der blev udviklet i denne sprint, var CatchKing.
+                     Her falder både kroner og bomber ned over skærmen,
+                     og spilleren skal forsøge at samle så mange kroner som muligt uden at røre bomberne.
+                     Spillet benytter sig af en Object Pooling-mekanisme til at håndtere de faldende elementer effektivt.
+                     En udfordring her var at sikre korrekt interaktion mellem objekterne i puljen og brugerens input,
+                     hvilket dog blev løst tilfredsstillende.</p>
+
+                  <h3>Integration og Visuelle Forbedringer</h3>
+
+                  <p>Efter implementeringen af de individuelle spil blev MiniGameManager integreret med kongekronen i spilverdenen.
+                     Det betyder, at hver gang en krone genereres i spillet,
+                     medfølger funktionaliteten til at starte minispil direkte ved interaktion.
+                     Derudover blev der udviklet en separat klasse, der håndterer rotationen af kongekronen
+                     for at give en animeret og mere iøjnefaldende præsentation, hvilket bidrager til et mere levende og dynamisk visuelt udtryk.</p>
+
+                  <p>Det samlede resultat af sprintet er et fleksibelt og skalerbart minispilssystem,
+                     der gør det muligt for udviklere nemt at tilføje nye spil blot ved at implementere
+                     det eksisterende interface og arve fra den abstrakte MiniGameBase klasse.
+                     Denne arkitektur sikrer en nem vedligeholdelse og udvidelse af systemet i fremtidige iterationer
+                     og understøtter videreudviklingen af den samlede spiloplevelse.</p>
               </div>
               <div class="SideNummer"></div>
         </p>
