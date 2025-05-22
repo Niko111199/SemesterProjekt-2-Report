@@ -465,6 +465,52 @@
                      det eksisterende interface og arve fra den abstrakte MiniGameBase klasse.
                      Denne arkitektur sikrer en nem vedligeholdelse og udvidelse af systemet i fremtidige iterationer
                      og understøtter videreudviklingen af den samlede spiloplevelse.</p>
+
+                    <h3>Implementering af point-system (ScoreTracker)</h3>
+
+                    <p> 
+                        For at udvide shop-systemet og øge spillerens motivation blev et nyt pointsystem implementeret sideløbende med det eksisterende guld. 
+                        Ideen bag systemet var, at spilleren optjener point hver gang der optjenes guld, men uden at miste disse point ved køb. 
+                        På den måde fungerer point som en form for "samlet optjent guld", som giver et billede af den langsigtede progression.
+                    </p>
+
+                    <p>
+                        Systemet blev designet ud fra SOLID-principper – særligt Single Responsibility og Dependency Inversion. 
+                        Logikken blev derfor delt op i interfaces: IAddScore og IGetScore, og selve tracking-klassen ScoreTrackerSeparated blev isoleret fra UI. 
+                        UI-delen blev håndteret af en separat ScoreTrackerPresenter, som kommunikerer via SetPresenter(...)-metoden. 
+                        Denne opdeling gør systemet lettere at vedligeholde og udvide, f.eks. hvis man senere vil vise point på flere UI-elementer eller skifte lagringsmetode.
+                    </p>
+
+                    <h3>Leaderboard og integration med point-systemet</h3>
+
+                    <p>
+                        Et leaderboard blev tilføjet som en afsluttende del af point-systemet, så spilleren kan sammenligne sin score med andre. 
+                        Dette system blev bygget ud fra en Unity-pakke leveret af Pelle, som indeholdt scripts som SubmitScorePanel, ScoreView, ScoreList, LeaderBoard, HighscoreData og AddScore.
+                    </p>
+
+                    <p>
+                        Leaderboardet blev integreret med det eksisterende ScoreTrackerSeparated og ScoreTrackerPresenter-system ved at ændre SubmitScorePanel-scriptet. 
+                        I stedet for manuelt indtastede scores hentes spillerens faktiske score nu automatisk og vises i et låst felt. 
+                        Dette bidrager til en mere brugervenlig oplevelse og forbedrer dataintegriteten. Til integrationen blev der benyttet en API Key og et Game ID udleveret af Pelle, som konfigureres i HighscoreData for at muliggøre ekstern lagring og visning af highscores.
+                    </p>
+
+                    <b>API Key:</b>
+                    <p>
+                        6d5ad9adc2e3ecc525b288b9af5719f0b6b082352715ab8f8efa03daa012e6c3
+                    </p>
+
+                    <b>ID:</b>
+                    <p>
+                        SEP2-AR-RRI
+                    </p>
+
+                    <p>
+                        UI'et fra pakken blev også tilpasset, så det visuelt passede med resten af projektet og fungerede på mobil. 
+                        Selvom vi oprindeligt vurderede, at opgaven ville tage omkring 100 story points, viste det sig, at den reelle arbejdsbyrde var tættere på 16 story points, da koden i høj grad allerede var givet og kun krævede integration og justeringer.
+                    </p>
+
+
+
               </div>
               <div class="SideNummer"></div>
         </p>
