@@ -255,12 +255,6 @@
               Dette bidrager til en reduceret belastning af brugerens enhed og sikrer en mere ressourceeffektiv drift.
             </p>
 
-            <p>
-              Lokations- og kompasdata indsamles gennem henholdsvis klasserne "WorldPos" & "Compas".
-              hvor MonoBehaviour anvendes til at tilgå Unitys interne lokationstjeneste. De indsamlede oplysninger gemmes i en attribut kaldet "Lastdata",
-              som muliggør tilgængeliggørelse af data i en hensigtsmæssig attribut-struktur.
-            </p>
-
             <h3>Databehandling uden for MonoBehaviour</h3>
 
             <h4>Anvendelse af Haversine-formlen til afstandsberegning</h4>
@@ -334,7 +328,7 @@
                 <h3>Lokationssporing og Spilområde</h3>
 
                <p>
-                I denne nyupstartet iteration af systemet introduceres muligheden for sporing af specifikke positioner.
+                I denne nyupstartede iteration af systemet introduceres muligheden for sporing af specifikke positioner.
                 Dette realiseres gennem en ny objektstruktur kaldet Location. Et Location-objekt indeholder tre variabler:
                 en string, der repræsenterer navnet på positionen, samt to floats,
                 som angiver henholdsvis breddegrad (latitude) og længdegrad (longitude).
@@ -358,15 +352,38 @@
                 informeret vedrørrende dette.
                 </p>
                 
-                <img src="Images/Logo2.png" alt="DevArt" class="image">
+                <h3>Bestemmelse af næste lokation</h3>
+                <p>
+                Når spilleren når den tilsigtede lokation og kongekronen initisaliseres, er det nødvendigt for systemet at skifte målet for spilleren til et nyt.
+                Både for at undgå yderligere end 1 initialisering af kronen men også for at spilleren kan udforske alle punkter på listen. 
+                Til dette er der implementeret en funktion i navigationssystemet kaldet "RemoveAndSetNewTarget()". 
+                Her slettes først det nuværende "target" fra listen over placeringer før det nye bliver valgt.
+                Funktionen udnytter den førnævnte klasse "positionCheck" som bruger Haversine-formlen til at give en afstand mellem punkter. 
+                Med dette bruges en for-løkke til at køre i gennem alle punkter i listen over placeringer og finder den mindste afstand fra spillerens nuværende position.
+                </p>
+                
+                
+               <h3>Visualiering af spiller- og lokationsretninger</h3>
+
+               <img src="Images/direction.png" alt="DevArt" class="image">
+                <p>
+                  For at kunne indikere en retning for spillerne at gå, 
+                  kan en blanding af det nuværende mål og dets position, spillerens enheds kompas-retning og retningen til målet fra spillerens position bruges.
+                  Alt informationen kan tilgås ved hjælp af event systemet som trækker data fra navigationssystemet. I en UIPresenter kaldet "DirectionPresenter"
+                  opdateres to UI elementer med rotationsværdierne for spillerens orientation og retningen til næste mål. Pilen indikerer spillerens retning mens den røde indikator viser retningen til målet. 
+                </p>
+                
+                <br><br><br>
+                
                 <h3>Logo-design</h3>
                 
+                <img src="Images/Logo2.png" alt="DevArt" class="image">
                 <p>
                   Projektet omfattede desuden design af applikationens visuelle identitet gennem udviklingen af et logo. 
                   Logoet blev udformet med en kongekrone placeret over navnet Royal-Go, sat i en serif-skrifttype for at understøtte et klassisk og eksklusivt udtryk. 
                   Farvevalget blev foretaget med henblik på at forstærke appens tematiske fokus på luksus og eventyr. Følgende farver blev anvendt: guld (#FFD700), kongeblå (#4169E1) og baggrundsblå (#3E7ACB).
                 </p>
-                
+
                 <p>
                   Sammenfattende blev der lagt vægt på at sikre sammenhæng mellem æstetik, funktionalitet og tematik, således at designvalg og tekniske løsninger understøttede applikationens overordnede formål og brugervenlighed.
                 </p>
@@ -513,7 +530,7 @@
 
                 <ul>
                   <li><b>KingClicker:</b> inspireret  af "Cookie Clicker</li>
-                  <li><b>FalppyKing:</b> inspireret af "flappy Bird</li>
+                  <li><b>FlappyKing:</b> inspireret af "flappy Bird</li>
                   <li><b>CatchKing:</b> inspireret af klassiske "dropper"-spil </li>
                 </ul>
 
