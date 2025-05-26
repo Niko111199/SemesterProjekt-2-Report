@@ -35,7 +35,6 @@
     <br>
     
 
-    <h1>Abdul Wahid Hanan, 353400</h1>
     <h1>Nikolaj Bræmer Christen, 354322</h1>
     <h1>Patick Overgaard Blauert, 353829</h1>
     <h1>Peter Hougaard, 353296</h1>
@@ -499,19 +498,30 @@
                 <h3>Udvikling af ButikScene</h3>
 
                 <p>
-                  Dette projekt har haft som mål at udvikle en shop-funktion i Unity, hvor spilleren kan købe kosmetiske genstande for en opsamlet valuta (guld). 
-                  Udviklingsprocessen har bestået af en iterativ tilgang, hvor funktionalitet gradvist blev udvidet og testet i sammenhæng med brugergrænseflade og gameplay-integration.
+                    Under udvikling af en shop-funktion i Unity, hvor spilleren kan købe kosmetiske genstande for en opsamlet valuta (guld). 
+                    Udviklingsprocessen har bestået af en iterativ tilgang, hvor funktionalitet gradvist blev udvidet og testet i sammenhæng med brugergrænseflade og gameplay-integration.
                 </p>
 
                 <p>
                     Projektet blev startet med et færdigt "gold script", der håndterede spillerens valuta, inklusive lagring og visning af guld. Dette script dannede fundamentet for hele shop-systemet. 
-                    Dernæst blev et ShopManager-script udviklet med målet om at undgå hårdkodning og i stedet lade shop-items konfigureres via Unity-editoren.
+                    Dernæst blev et ShopManager-script udviklet med målet om at undgå hårdkodning og i stedet lade shop-items konfigureres via Unity-editoren.Projektet blev startet med et færdigt "gold script", der håndterede spillerens valuta, inklusive lagring og visning af guld. 
+                    Dette script dannede fundamentet for hele shop-systemet. Dernæst blev et ShopManager-script udviklet med målet om at undgå hårdkodning og i stedet lade shop-items konfigureres via Unity-editoren. Hvert item kunne defineres med navn, pris og billede, hvilket gjorde løsningen både fleksibel og skalerbar i forhold til fremtidig udvidelse.
                 </p>
 
                 <p>
-                  UI blev designet med mobilanvendelse i tankerne. 
-                  Herunder blev en Scroll View konfigureret korrekt til mobil, og shop-items blev lagt ind som prefabs med Vertical Layout Group og Content Size Fitter, 
-                  så visningen automatisk tilpasser sig forskellige skærmstørrelser.
+                    Gold-systemet blev senere omstruktureret til at følge en mere SOLID-venlig arkitektur. 
+                    Et interface, IGoldManager, blev introduceret for at abstrahere logikken for at tilføje, bruge og hente guld. 
+                    GoldManager-klassen implementerer dette interface og indeholder ansvar for datahåndtering (PlayerPrefs), UI-opdatering og Singleton-initialisering. 
+                    Denne opdeling giver en klar separation af ansvar og øger genbrugelighed og testbarhed i koden. UML-diagrammet nedenfor illustrerer denne struktur og viser tydeligt, hvordan GoldManager implementerer interfacet og kapsler logikken ind.
+                </p>
+
+                <p>
+                  UI blev designet med mobilanvendelse i tankerne. Herunder blev en Scroll View konfigureret korrekt til mobil, og shop-items blev lagt ind som prefabs med Vertical Layout Group og Content Size Fitter, så visningen automatisk tilpasser sig forskellige skærmstørrelser. 
+                  Derudover blev der arbejdet med responsiv opbygning, hvor knapper og layout automatisk justeres afhængigt af opløsning og format, hvilket sikrer en ensartet oplevelse på tværs af enheder.
+                </p>
+
+                <p>
+                    Købsfunktionen blev koblet til ShopManager, så det automatisk valideres, om spilleren har nok valuta til at gennemføre et køb. Systemet blev desuden udbygget, så det let kunne udvides med yderligere logik – eksempelvis opdatering af en kosmetik-liste, eller integration med andre scener og systemer i spillet.
                 </p>
 
                 <h3>Integration med ARFaceList</h3>
