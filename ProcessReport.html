@@ -144,6 +144,23 @@
           <p>
               Jeg påtog mig rollerne som "Implementer", hvor jeg fokuserede på at omdanne ideer til funktionelle løsninger og bidrog med teknisk viden inden for UI og spiludvikling i Unity.
           </p>
+
+          <h3>Victor</h3>
+
+          <p>
+              Jeg har primært i gruppearbejdet stået for bearbejdning og opbevarelse af gps og kompas-data. Meget af min tid har været brugt på at opstille arkitekturen for spillets databehandlingssystem. 
+              Dette navigationssystem er designet ud fra at lade andre dele af spillets funktioner, såsom instantiering af objekter på punkter, nemt tilgå et behandlet og letlæseligt datasæt. 
+          </p>
+
+          <p>
+              Jeg har desuden været ansvarlig for et disse systemer, altså visualiseringen af spillerens nuværende retning samt retningen af det næste punkt spilleren skal bevæge sig mod.
+              Blandt dette system er også logikken for at fjerne punkter ved spillerens ankomst og udregne hvilket næste punkt er tættest på.
+          </p>
+
+          <p>
+              Til sidst har jeg sammen med Peter lavet implementationstests af diverse systemer i arkitekturen. Her har jeg været ansvarlig for at teste det visuelle system af spiller- og lokationsretninger.
+          </p>
+
         </p>
         <div class="SideNummer"></div>
         
@@ -245,6 +262,42 @@
             Denne fremgangsmåde kan nemt udvides til at inkludere funktionalitet,
             der muliggør instantiationen af objekter på specifikke positioner.
 
+            <h3>Navigationssystem</h3>
+
+            <p>
+              Navigationssystemet er designet ved hjælp af Facade-mønsteret, til at samle de mange unikke subklasser der er nødvendige.
+              Det betyder at klassen NavigationsSystem benytter facaden til at klasserne KompasSystem, GPSSystem, DirectionCheck og PositionCheck,
+              men at alt relevant data nemt og simpelt kan tilgås.  
+            </p>
+
+            <p>
+              For at undgå en opadgående afhængighed benyttes Observer-mønstret til at sprede klassen NavigationSystemData til alle lyttere.
+              Dennes publisher bruger en timer til at refreshe NavigationsSystemet, og dermed producere NavigationSystemData,
+              som indeholder alt relevant data fra NavigationsSystem. 
+            </p>
+
+            <p>
+              Eftersom navigationssystemet er meget vigtig for kernen af spillets koncept, skal der være ekstra opmærksomhed på ikke at skabe en "Gudeklasse".
+              En måde hvorpå der forsøges at styrre dette på er ved ikke at have noget konkret udregning i NavigationSystem, blot samling af data fra flere steder. 
+            </p>
+
+            <p>
+              For at simplificere outputtet fra forskellige klasser har de oftest fået en separat klasse der håndterer deres inputs.
+              Fx GetGPSData fra GPSSystem retunere klassen GPSData, der er en klasse der indeholder horisontal præcision, længde – og breddegrader. 
+              Der blev diskuteret hvor vidt det var bedre at kalde de individuelle funktioner hver for sig, over at oprette en helt ny klasse for at have dataen, 
+              da det virkede lidt som at ”hælde fra en spand, til en anden”. Den endelige beslutning blev truffet da der blev enighed om at det stemte mest overens med
+              single responsibility at have en enkelt public funktion der retunerede et sæt data. 
+            </p>
+
+            <p>
+              I diskussionerne før facade mønstret blev endeligt besluttet blev der udforsket brugen af et decorator mønster.
+              De ligner meget hinanden ved at bruge aggregation, i stedet for nedarvning, og de har begge adgang til mange classer. 
+              På samme måde kan begge mønstre håndtere mange unikke retur typer og forskellige kald af funktoner. 
+              Den endelige beslutning blev truffet ud fra at et decorator mønster er mere egnet til at udvidde en funktion i runtime, noget som projektet ikke havde behov for,
+              da facaden starter med alle de klasser den har brug for. Derudover er det også tiltænkt at der kun er en enkelt NavigationSystem aktiveret i scenen ad gangen, 
+              så hele nedarvnings princippet decorator mønstret facilitere er ikke nødvendigt.  
+            </p>
+
             <h3>Indsamling af lokations- og kompasinformation</h3>
             
             <p>
@@ -304,6 +357,29 @@
                   Det nuværende system instansierer dog stadig objekterne dynamisk i nærheden af spilleren.
                 </p>
             
+                <img src="Images/factoryPrefab.jpg" alt="DevArt" class="image">
+
+                <p>
+                  Instantieringen bliver gjordt ved brug af factory mønsteret der i hele projektet gør grundlag for instantiering af elementer i AR verdenen.
+                  Dette er også med til at gøre det nemt og hurtigt senere i processen at udvide systemets funktionalitet med henblik på instantiering af andre elementer, for eksempel Skatteeventet.
+                  Alle scripts som forholder sig til dette factory pattern bliver dernæst gæmt i en prefab som gør det muligt at ændre diverse variable, såsom typen af element som instantieres.
+                </p>
+
+                <p>
+                  Ansvarligt for alt hvad der instantieres i scenen er "World Spawn Controlleren". Den fungerer i basis som en presenter for 3D-scenen.
+                  Scriptet er i sig selv ikke synderligt komplekst men afhænger derimod af observer mønstre fra resten af modellen til at afgøre opdateringen af AR-verdenen. 
+                  Scripts såsom "Juvel Controller", som holder styr på instantieringen af juveler, startes af World Spawn Controlleren.
+                </p>
+
+                <p>
+                  "World Element Spawner" er ansvarlig for at finde det rigtige tid og sted at spawne et element ind i verdenen. 
+                  I AR-verdenen er der behov for en reference / flade at instantiere noget på, i forbindelse med dette er der to vigtige ting at huske: For det første skal der være et sted at spawne, 
+                  og for det andet, hvis der ikke er, skal spillet forsøge at spawne når der engang bliver et sted. Det er denne logik som World Element Spawneren står for, igennem funktionen
+                  SpawnObjectInArWorld().
+                </p>
+
+                <img src="Images/FactoryDiagram.jpg" alt="DevArt" class="image">
+
                 <p>
                   Efter implementeringen af denne funktionalitet var næste skridt at definere interaktionen mellem spilleren og kronjuvelerne.
                   Dette blev realiseret ved, at systemet registrerer spillerens tryk på skærmen og udsender en ray fra dette punkt.
@@ -313,11 +389,19 @@
                 </p>
               
                 <p>
+                  Implementationen er gjordt gennem interfacet "IPressHandeler" som har funktionen OnPressed() som parameter i ARPressDetectoren, der nedarver fra MonoBehaviour og som derfor skal eksistere på et GameObject.
+                  Ved instantiering af juvelen tilføjer JuvelProdukt, ARPressDetectoren til GameObjectet som det befinder sig på. 
+                </p>
+
+                <img src="Images/juvelprodukt.jpg" alt="DevArt" class="image">
+
+                <p>
                   I forlængelse heraf blev der også implementeret et simpelt valutasystem,
                   som forbereder spillet på en fremtidig økonomifunktion. Systemet anvender Singleton Design Pattern for at sikre,
                   at den samme instans af valuta - kaldet “guld” - anvendes på tværs af alle scener og spilsituationer.
                   Da guld blot repræsenteres af en integer-værdi, gemmes denne ved hjælp af PlayerPrefs, hvilket sikrer,
                   at spillerens valuta bevares på tværs af spilsessioner - også efter at applikationen er lukket.
+                  Singletonen tilgås fra JuvelProdukt ved hjælp af interfacet "IGoldManager".
                 </p>
               
                 <p>
@@ -401,6 +485,17 @@
                     For at muliggøre hurtig prototypeudvikling blev navigation og funktionalitet hardkodet, velvidende at denne metode er mindre skalerbar i større produktionsmiljøer, men egnet til en effektiv tidlig version.
                 </p>
 
+                <h3>Brugergrænseflade (UI) </h3>
+                <p>
+                  Brugergrænsefladen er designet ved hjælp af Model-View-Presenter (MVP) mønsteret. 
+                  Her tænkes der på view delen som klasserne fra Unitys UnityEngine.UI namespace, hvilket er hvad der bruges til at designe udseenet til i Unitys builder. 
+                  Presenteren bliver derfor primært vedhæftet det GameObject som indeholder det UI view den skal arbejde med. 
+                </p>
+
+                <p>
+                  Den primære kontakt til presenteren fra modellen vil være ved gennem events, for at få så løs en kobling til modellen som muligt. 
+                </p>
+                
                 <h3>Udvikling af ButikScene</h3>
 
                 <p>
@@ -502,6 +597,23 @@
 
                 <p>Denne løsning understøtter således både funktionel integration mellem separate scener og sikrer datavedholdelse for brugerens købte indhold,
                    hvilket er centralt for en konsistent brugeroplevelse.</p>
+
+                <h3>AR World Scene </h3>
+
+                <p>
+                  AR world scenen er alt hvad der vises af 3d rum på telefonen, når AR er aktiveret. 
+                  For at have et centralt sted at tilføje og fjerne ting fra denne scene er Factory mønsteret oplagt.  
+                </p>
+
+                <p>
+                  Klassen WorldSpawnControlleren er ansvarlig for oprettelsen af instantieringen af 3d modeller fra Skatte event og Juvel event i AR scenen. 
+                  Factory controlleren har subscribet til en række events, der signalerer hvad og hvor noget skal spawne. 
+                  Factory mønsteret sikrer, at der er en nem og stabil måde at udvide systemet i fremtiden, fx hvis der skulle implementerers en AR-rutevejledning. 
+                </p>
+
+                <p>
+                  Der var ikke specielt meget diskussion om hvordan dette burde implementeres, da factory mønstret er åbenlyst velegnet til formålet.  
+                </p>
 
                 <h3>Implementering af miniGame System</h3>
 
@@ -621,7 +733,99 @@
                         Selvom vi oprindeligt vurderede, at opgaven ville tage omkring 100 story points, viste det sig, at den reelle arbejdsbyrde var tættere på 16 story points, da koden i høj grad allerede var givet og kun krævede integration og justeringer.
                     </p>
 
+                    <h3>Unit- og integrationstesting</h3>
 
+                    <p>
+                        Med hensigt på regelmæssigt testing, især før push af ændringer, blev implementationen af unit tests startet tidligt i projektet.
+                        Implementationen var anderledes end blot at unit teste c# scripts og der var derfor en læringskurve i forhold til vaner og routiner.
+                        En stor grund til dette var at mange af de inputs som spillet gør brug af befinder sig i MonoBehaviour klassen som er del af det aktive spil miljø. 
+                        Disse inputs kan unit testing ikke tilgå og der blev derfor brugt mere tid på integrationstest i form af Unitys "PlayMode" tests, som inkluderer oprettelse af et spilmiljø.
+                    </p>
+
+                    <p>
+                        Skattejagsscenen bliver testet for følgende funktioner: Instantiering af scenen, opstart af navigationssystemet, signal fra juvel controllere, 
+                        signal fra skatte event controlleren, instantiering af juveler, instantiering af skatte event, tilføjelse af guld og point og opdatering af visuel repræsnetation af spiller- og lokations retninger.
+                        Efter indledende fejlede forsøg lykkedes det at opsætte et simuleret test miljø, som AR suiten i Unity genkender. Dette muliggjorde yderligere at teste plane-detection samt synkronisering med orientering i AR.
+                    </p>
+
+                    <p>
+                      Oprindeligt var alle tests defineret for sig selv, men grundet brugen af prefabs i scenen fejlede nogle af disse grundet flere instantieringer af objekter som ellers ikke ville forekomme.
+                      Derfor blev alle tests samlet i én, som sikrede at scenen og andre prefabs kun instantieres én gang hvilket undgik unødvendige fejl på tests. 
+                      Testene udnytter funktionen WaitUntil() som muliggører at vente til et bestemt event sker før fortsættelse af test, hvilket gav bedre mulighed for at simulere forskellige situationer.
+                    </p>
+
+
+                    <h3>Fejlhåndtering</h3>
+
+                    <h4>Kompas komplikationer</h4>
+
+                    <p>
+                        Den oprindelige implementation af kompasset gjorde brug af Unitys gamle "Input" system, det samme som projektet udnytter til GPS-data.
+                        Dog ved det endelige build returnede Input funktionen "magneticHeading", som koden ellers var skrevet rundt om, altid 0 uanset hvordan enheden blev holdt.
+                        Ved nærmere eftersyn viste det sig at kompas funktionaliteten var forældet og ikke længere understøttet. I denne sammenhæng blev gruppen enig om at terminere
+                        det daværende sprint (7. Sprint) for at fokusere på at lave en løsning til denne vigtige del af projektet.
+                    </p>
+
+                    <p>
+                        Herfra blev skiftet lavet til det nye input system. Efter kig i dokumentationen blev det dog tydeligt at kompas implementationen ikke var overført til det nye input system,
+                        hvor der i stedet var en funktion der kaldte en sensor, MagneticFieldSensor, som registrer der omkringværende ambiente magnetfelt af enheden. 
+                        Sensoren returnerer en Vector3, der beskriver telefonens placering ud fra magnetfeltet, hvor x, y og z repræsentere henholdsvis nord / syd aksen, øst / vest, og op / ned.  
+                    </p>
+
+                    <p>
+                        Magnetfeltssensoren har en række fordele over det 2dimensionelle kompas. Primært den at beregning af telefonens relation til nord er muliggjordt i enhver position. 
+                        Dette betyder at brugeren undgår at skulle holde enheden vandret for at finde den korrekte nord.
+                        Inklusionen af en tredje akse, z, giver også mulighed for at bestemme orientationen af skærmen, som dog ikke endte med at blive relevant for projektet.
+                    </p>
+
+                    <img src="Images/Kompaskode.jpg" alt="kompas kode" class="image">
+                    
+                    <p>
+                        Implementationen af kompasset afhænger af atan2 funktionen. Denne funktion returnerer vinklen mellem to punkter, baseret på en fuld cirkel. 
+                        Implementationen er bygget ud fra guiden "how to convert magnetometer data into compass heading". (https://digilent.com/blog/how-to-convert-magnetometer-data-into-compass-heading/)
+                        Der oprindeligt er baseret på en Arduinos magnetfeltssensor. Efter eksperimentation blev det tydeligt at denne guides x og y akse er byttet om i forhold til retur typen af Unitys brug af sensoren.
+                        Dette betød at retningen af øst og vest på enheden var omvendt, hvilket blev løst ved at vende fortegnet på x-aksen.
+                    </p>
+
+                    <p>
+                      Efter kodningen af databehandlingen af sensorens returnering var færdig var implementationen gnidningsløs. Arkitekturen havde blot et enkelt punkt som afhang af kompas-retningen.
+                    </p>
+
+                    <p>
+                      Efter grundigere tests blev det dog tydeligt at udregningerne af retningen var fejlagtige. På trods af en liste af unit tests der bekræftede systemets funktionalitet.
+                      Efter eksperimentering bundede fejlen ud i en afrundingsfejl, som skyldes brugen af floats til positioner hvor forskelen mellem punkter blev for lille til præcis udregning.
+                      De førnævnte tests udnyttede alle hele float værdier og stødte derfor ikke ind i problemet. Løsningen på dette blev at skifte datastrukturen ud med double værdier samt at
+                      bruge et Math-namespace som håndterede radianer i doubles i stedet for floats, da Unitys indbyggede math system regner dem i floats. 
+                      Ændringen blev lavet ved hjælp af Microsofts sprog model "Copilot" da der var tale om et systematisk og objektiv ændring af data typer som sprogmodeller excellerer i.
+                      Efter unit testing med ikke-runde double værdier var kompas systemet implementeret og funktionelt.
+                    </p>
+
+                    <h4>Afstand til punkt - Debug</h4>
+
+                    <p>
+                      Sent i projektet blev det nødvendigt at tilgå afstanden fra den nuværende position, til et bestemt koordinat. 
+                      Brugen af MVP, observer og facade mønsteret gjorde det nemt tilgængeligt at tilgå informationen.
+                      Facaden tillader et simpelt adgangspunkt til den ellers omstændige funktion for afstanden mellem to punkter.
+                      Herfra var det blot at tilføje afstanden til NavigationSystemData i navigations systemet, så den gennem observer mønstret bliver distribueret til debug presenteren. 
+                      Dette tillod gruppen at løbende tjekke værdien for afstanden til næste punkt, og hjalp med fejlfinding at det system.
+                    </p>
+
+                    <h4>Konstant instantiering af kroner</h4>
+
+                    <p>
+                      Ved test af instantiering af krone-prefabet, som skal ske én gang ved et bestemt punkt og enhedsretning, skete instantieringen konstant. 
+                      Udover at dette ikke var den ønskede opførsel førte det også til problemer ved interaktion med objekterne da logikken bag minigames var designet ud fra et maks af 1 krone ad gangen.
+                      Der er et par måder at løse det på, fx ved at lave kronen til en enkelt instans så factorien ikke producerer mange forskellige, 
+                      eller udvidde locationsmanageren til at kunne holde styr på om en location har spawnet en kongekrone eller ej.
+                      En endelig løsning er endnu ikke besluttet. På lang sigt vil der højst sandsynligt være brug for flere informationer fra locationsmanageren og derved vil udviddelsen af denne være optimal. 
+                      Samtidigt, kan der opstå tvivl om en bedre løsning ikke kunne være at have en separat manager til locations, som kun tilgås når spillet kører.
+                      Grundet denne tvivl om logikken bør være på locationsmanageren, endte løsningen at være at factoriet holder overblik over om en krone er spawnet eller ej. 
+                      Dette betyder at det senere vil være nemt at udvide factoriet med en object pool hvis instantieringen af kroner på flere lokationer samtidigt bliver nødvendigt.
+                    </p>
+
+                    <p>
+                      
+                    </p>
 
               </div>
               <div class="SideNummer"></div>
@@ -715,6 +919,32 @@
               Det har givet mig både selvtillid og motivation til at arbejde endnu mere målrettet med at skrive robust, fleksibel og vedligeholdelsesvenlig kode i fremtidige projekter.
           </p>
                   
+          <h3>Victor</h3>
+          <p>
+              Jeg mener at jeg har bidraget godt til gruppearbejdet. I forhold til kvantitativt hvor meget kode jeg har skrevet virker det ikke som så meget, men mit arbejde indenfor
+              strukturen og arkitekturen af databehandlingen har hjulpet til at gøre projektet mere overskueligt og stemme mere overens med SOLID-principper. Jeg føler jeg har været god til at
+              tilbyde indsigt og hjælp i andres kode og derved hjælpe med at troubleshoote. Jeg har desuden stået for validering af størstedelen af scripts der indgår i spillet og har derfor dannet mig et
+              godt overblik over projektet og dets indhold.
+          </p>
+
+          <p>
+              Den vigtigste viden jeg har opnået gennem projektarbejdet er hvor vigtig struktur og ordentlig planlægning er for større projekter. I starten begav jeg mig ud i 
+              at lave hvad jeg tænkte var gode systemer men da det senere blev problematisk at koble det op til resten af systemer blev det tydeligt at vi var nødsaget til at sætte os sammen
+              og strukturere projektet. 
+          </p>
+
+          <p>
+              Arbejdet med implementationstests var spændende og gav også ny læring og viden indenfor hvordan det bliver gjordt i Unity. Men det blev også tydeligt at det ikke altid var tilstrækkeligt
+              da diverse systemer og data-typer ikke altid fungerede ligeledes ved et build til mobilen. I kommende projekt der udnytter en anden platform end PC, hvor der bliver udviklet på, vil jeg 
+              mene der skal prioriteres at teste på enheden tidligere og løbende i processen. 
+          </p>
+
+          <p>
+              Generelt set synes jeg der har været et godt samabrejde i gruppen hvor alle har været gode til at påtage sig unikke roller, hvor nogen har specialiseret sig mere i bestemte systemer
+              andre har lavet flere generelle systemer og nogle har stået mere for det struktuerelle og dokumenteringen af det. På den måde har vi kunne nå relativt langt med projektet mens det har været
+              vel struktueret, dokumenteret og stemt overens med SOLID-principper.
+          </p>
+
         </p>
         <div class="SideNummer"></div>
         
