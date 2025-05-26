@@ -189,6 +189,16 @@
             </p>
 
             <p>
+              For at sikre et godt samarbejde og prøve at opstille konfliktløsninger får de opstår, lavede gruppen en gruppekontrakt. Dette var også med til at forvnentningsafstemme i forhold til hvor meget arbejde det forventes
+              for hver enkelt medlem at bidrage med.
+            </p>
+
+            <p>
+              Til fælleskommunikation, møder og resource-deling blev en Discord server oprettet. Her holdes de daglige scrum møder samt møder opsat på tværs af gruppemedlemmer i forhold til eventuel fejlfinding eller sparring.
+              Discord serveren var det primære redskab til deling af kilder og information under skabelsen af problemfeltet hvor alt kunne samles ét sted før den endelige Github struktur var sat op.
+            </p>
+
+            <p>
               For at skabe overblik over projektets omfang og brugernes behov, arbejdede vi med user stories. 
               Dette gav os en struktureret tilgang til at identificere nøglefunktioner i appen, og det dannede grundlag for en mere præcis kravspecifikation. 
               Brugen af user stories i opstartsfasen hjalp os med at fokusere på brugercentreret design og sikrede, at vi fra start havde en klar forståelse af, hvordan applikationen skulle anvendes i praksis.
@@ -201,8 +211,21 @@
             </p>
 
             <p>
-                Sideløbende med de tekniske beslutninger udarbejdede vi en overordnet tidsplan, hvor projektet blev opdelt i sprint-forløb med milepæle og opfølgningspunkter. 
-                Denne planlægning dannede grundlaget for vores SCRUM-baserede tilgang og hjalp os med at strukturere og styre projektets fremdrift fra starten.
+              Sideløbende med de tekniske beslutninger udarbejdede vi en overordnet tidsplan, hvor projektet blev opdelt i sprint-forløb med milepæle og opfølgningspunkter. 
+              Denne planlægning dannede grundlaget for vores SCRUM-baserede tilgang og hjalp os med at strukturere og styre projektets fremdrift fra starten.
+            </p>
+
+            <p>
+              Med disse beslutninger draget, oprettes et Github repository samt en mængde "branches". Heriblandt Main (Det endelige resultat af projektet), Validate (Hvori nyskrevent kode bliver lagt til validering af anden gruppemedlem før push til Main) og
+              en branch for hvert gruppemedlem til at lave prototyper, testing og implementation. Arbejde foregik primært individuelt under egne branches for at undgå "Merge Conflicts", altså problemer ved sammenfletning
+              af arbejde, især Unitys metadata som kan volde store problemer og eventuel tab af arbejde. 
+            </p>
+
+            <p>
+              Til rapportskrivning blev gruppen enige om at de ellers tilgængelige midler såsom Word og Google Docs ikke altid var lige attraktive. Med henblik på også at inkludere viden
+              fået fra semesterets web-udviklingsfag blev det besluttet at lave rapporter ved hjælp af viden fået fra det nævnte fag, heriblandt html, css og javascript kode.
+              I blandt javascript koden er logik for at omdanne dokumentets syntax og opbygning til at overholde de gældende krav for afleveringen.
+              Rapporten, scrum-dokumentation blandt andet møder, diagrammer og bilag deles derfra via en seperat Github repository.
             </p>
         </p>
         <div class="SideNummer"></div>
@@ -1020,7 +1043,30 @@
         <div class="SideNummer"></div>
 
         <h2 id="Konklusion">7. Konklusion</h2>
-        <p>[Indsæt din tekst her]</p>
+        <p>
+          Overordnet set har samarbejdet foregået uden stor konflikt samt tilbageslag, hvilket har resulteret i et produkt som tillader brugeren at finde kronjuveler tilfældigt omkring samt
+          kongekroner ved forudbestemte lokationer og derved få gevinster i form af guld som kan bruges til digitale-kosmetiske gevinster i form af ansigtsfiltre.
+        </p>
+          Brugen af scrum samt arbejdet ud fra arkitektoniske principper såsom SOLID, har ført til en vel planlagt og rutineret arbejdsprocess og et resulterende produkt som er
+          veldokumenteret og let at redigere. Yderligere, brugen af design-mønstre såsom Facade og Strategy har henholdsvis gjordt fejlfinding og ændring af eksisterende systemer, så som kompasset, lettere
+          men også gjordt tilføjelse af yderligere indhold, her i form af minigames, til en streamlinet oplevelse for udviklere.
+          Desuden har scrum givet værktøjer til håndtering af tilbageslag samt planlægning af resten af projekt perioden, hvilket blev yderst brugbart ved de førnævnte kompas-komplikationer hvor 
+          det hurtigt blev nødvendigt at terminere og planlægge en ny sprint samt at holde overblik over mængden af arbejde lavet og manglet.
+        <p>
+
+        <p>
+          Fejlhåndtering af projektet har været tilnærmelsesvis simpelt grundet de løbende unit- og integrationstests som blev opsat. Dette var en vigtig del af arbejdsprocessen
+          som tillod at teste alle nye funktioner grundigt, specielt funktioner som gjorde brug af førhen-skrevent kode, inden funktionerne blev pushet til et højere niveau af branch i Repositoriet.
+          Udover dette gav inklusionen af en Validation branch mulighed for at dele ansvar for kode blandt udviklere i gruppen og derfor sikre at alt endeligt i projektet mindst har haft to sæt øjne på sig.
+        </p>
+
+        <p>
+          Det endelige produkt har stadig nogle mangler, såsom en implementeret løsning til den konstante initialisering af kroner. Her drages der igen fordel af brugen af design-mønstre
+          hvor det brugte Factory-mønster nemt kan udvides til at inkludere et object pool som kunne byde en løsning. Factory mønsteret er blandt de andre mønstre og brugen af SOLID med til
+          at skabe et endeligt produkt som er designet ud fra altid at kunne udvides yderligere på funktionalitet. 
+        </p>
+
+        </p>
         <div class="SideNummer"></div>
         
         <h2 id="referencer">8. Referencer</h2>
