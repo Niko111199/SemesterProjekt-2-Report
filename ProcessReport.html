@@ -388,16 +388,42 @@
                 </p>
 
                 <h3>Simulator (UI):</h3>
+
                 <p>
-                  Udviklingen af mobilapplikationen Royal-Go blev gennemført med fokus på design, 
-                  brugergrænseflade og visuel identitet. I udviklingsfasen blev der udarbejdet en funktionel og intuitiv brugergrænseflade målrettet mobile enheder. 
-                  Startmenuen blev designet til at give adgang til tre centrale funktioner: Skattejagt, Skattekammer og Butik, hvor navigationen mellem scener blev realiseret gennem et skript i Unity. 
-                  Et indkøbskurvsikon blev integreret som en grafisk navigationsknap, der skaber visuel og funktionel sammenhæng til butiksscenen.
+                  Udviklingen af mobilapplikationen Royal-Go UI blev gennemført med fokus på design, brugergrænseflade og visuel identitet. 
+                  I udviklingsfasen blev der udarbejdet en funktionel og intuitiv brugergrænseflade målrettet mobile enheder. 
+                  Startmenuen blev designet til at give adgang til fem centrale funktioner: Skattejagt, Skattekammer, Submit Score, Leaderboard og Butik. 
+                  Navigation mellem disse scener blev realiseret via et Scripts ” MainSceneChanger” i Unity, der kontrollerer sceneovergange baseret på brugerens input.
+                </p>
+
+                <img src="Images/TheUI.png" alt="DevArt" class="image" style="width: 300px; height: auto;">
+
+                <p>
+                    Et simpelt og genkendeligt design blev anvendt med tydelige knapper, grønne farveindikatorer for interaktive elementer og ikon baserede navigationssymboler, hvilket understøtter brugervenlighed på mobile enheder. 
+                    Et indkøbskurvsikon blev i starten tilføjet som en visuel og funktionel knap til butiksscenen for at styrke brugerens mentale model af appens funktioner. 
+                    Selve funktionaliteten blev bibeholdt, men det grafiske ikon blev ikke videreført i det endelige produkt, da det ikke passede ind i den visuelle helhed og appens øvrige designstil. UI’et anvender fortsat en vertikal struktur med letgenkendelige knapper og tekst, der guider spilleren gennem handlinger som køb, scoreindsendelse og visning af highscore.
                 </p>
 
                 <p>
-                    Til den tekniske implementering blev C# anvendt i Unity-miljøet. 
-                    For at muliggøre hurtig prototypeudvikling blev navigation og funktionalitet hardkodet, velvidende at denne metode er mindre skalerbar i større produktionsmiljøer, men egnet til en effektiv tidlig version.
+                    Butiksscenen (vist i det femte skærmbillede) er designet med et simpelt og pædagogisk layout, hvor hvert kosmetisk item (f.eks. hat, maske, ansigt) vises med billede, pris og en “Køb”-knap. 
+                    Guldmængden vises øverst i interfacet, hvilket giver brugeren konstant feedback på deres valuta. Scroll View, Vertical Layout Group og Content Size Fitter blev anvendt til dynamisk tilpasning af butiksindholdet, så det fungerer hensigtsmæssigt på skærme med forskellige opløsninger.
+                </p>
+
+                <p>
+                    I Leaderboard-delen vises spillernes navne og scores med brug af TextMeshPro-komponenter og en dynamisk opdatering via en ekstern API. Submit Score-scenen er blevet tilpasset, så spillerens score automatisk hentes og vises uden manuel indtastning, hvilket forbedrer både dataintegritet og brugeroplevelse.
+                </p>
+
+                <p>
+                    Der blev også integreret en Debug-knap i Startmenuen. Denne knap gjorde det muligt at teste funktionalitet hurtigt under udviklingsfasen og var et effektivt redskab til fejlfinding og validering af funktioner i realtid.
+                </p>
+
+                <p>
+                    Til den tekniske implementering blev C# anvendt. For at muliggøre hurtig prototypeudvikling blev navigation og funktionalitet hardkodet, velvidende at denne metode er mindre skalerbar i større produktionsmiljøer, men egnet til en effektiv tidlig version. 
+                    Denne tilgang gjorde det muligt hurtigt at afprøve og evaluere interaktioner og flow mellem UI-komponenter.
+                </p>
+
+                <p>
+                    Brugergrænsefladen er udformet med enkle former og farver for at sikre visuel klarhed, især på mindre skærme. De anvendte designprincipper – som konsistens, visuel feedback, og minimal kognitiv belastning – understøtter en brugervenlig og funktionel oplevelse, hvilket har været centralt i designstrategien for Royal-Go.
                 </p>
 
                 <h3>Udvikling af ButikScene</h3>
