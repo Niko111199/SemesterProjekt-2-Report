@@ -321,29 +321,27 @@
                 <p>
                   Da applikationen gør brug af GPS-lokationer ved at tilgå GPS-signaler fra brugerens enhed,
                   er det essentielt, at denne funktion håndteres i overensstemmelse med gældende lovgivning,
-                  herunder persondataforordningen (GDPR). I henhold til artikel 6, stk. 1 i GDPR,
+                  herunder persondataforordningen (GDPR). I henhold til artikel 6, stk. 1 i GDPR (GDPR.DK ApS, 2025),
                   kræves et gyldigt retsgrundlag for behandling af personoplysninger, herunder lokaliseringsdata.
-                  For at sikre, at behandlingen sker lovligt, tages der udgangspunkt i Digitaliseringsstyrelsens "Huskeregler for app-udbydere",
+                  For at sikre, at behandlingen sker lovligt, tages der udgangspunkt i Digitaliseringsstyrelsens "Huskeregler for app-udbydere"(Huskeregler for App-Udbydere, 2025),
                   hvor det blandt andet anbefales at være gennemsigtig omkring anvendelsen af GPS samt at indhente eksplicit
                   samtykke ved opstart af applikationen.
                 <br><br>
-                  Implementeringen sker ved, at der i AndroidManifest-filen angives,
+                  Implementeringen sker ved, at der i AndroidManifest-filen(bilag I4) angives,
                   at tilladelse til adgang til lokaliseringsdata er nødvendig for,
-                  at applikationen kan fungere. Derudover anvendes scriptet AccessLocationPermission,
+                  at applikationen kan fungere. Derudover anvendes scriptet AccessLocationPermission(bilag I1),
                   som først kontrollerer, om brugeren overhovedet har givet tilladelse til,
                   at applikationer må benytte GPS-signaler. Såfremt denne tilladelse foreligger,
                   anmoder applikationen direkte brugeren om adgang til GPS-data for den specifikke app. som anført i figur 1.
-                  Først når begge tilladelser er givet, aktiveres GPS-sporingen ved hjælp af funktionen Input.location.Start().
+                  Først når begge tilladelser er givet, aktiveres GPS-sporingen ved hjælp af funktionen Input.location.Start() (Unity - Scripting API: LocationService, 2025).
                 <br><br>
                   Af hensyn til dataminimering og for at sikre, at brugerens lokation ikke spores unødigt,
-                  anvendes den indbyggede metode OnApplicationQuit(), hvor Input.location.Stop() kaldes.
+                  anvendes den indbyggede metode OnApplicationQuit(), hvor Input.location.Stop() (Unity - Scripting API: LocationService, 2025) kaldes.
                   Herved sikres det, at sporing udelukkende finder sted under aktiv brug af applikationen,
                   hvilket er i overensstemmelse med GDPR's principper om proportionalitet og dataminimering.
                 </p>
             </div>
             
-            <br class="dontshow">
-            <br class="dontshow">
             <br class="dontshow">
             <br class="dontshow">
             <div class="SideNummer"></div>
@@ -354,13 +352,13 @@
             I den første iteration af applikationen skal systemet kunne få adgang til oplysninger om brugerens placering og sammenligne,
             om brugeren befinder sig på samme sted som en given position.
             For at opnå adgang til brugerens latitude og longitude kan metoderne
-            input.location.lastData.latitude og input.location.lastData.longitude anvendes,
+            input.location.lastData.latitude og input.location.lastData.longitude anvendes (Unity - Scripting API: LocationService, 2025),
             når funktionen input.location.start() aktiveres. Dette muliggør,
             at systemet med hver opdatering kan registrere brugerens aktuelle koordinater (latitude og longitude).
             Derudover bør der implementeres et system til position sammenligning,
             idet målet er at udvikle et succesfuldt og langtidsholdbart software.
             For at sikre, at systemet er i overensstemmelse med SOLID-principperne,
-            vil Haversine-formlen blive anvendt. Denne formel beregner afstanden mellem
+            vil Haversine-formlen (GeeksforGeeks, 2025) blive anvendt. Denne formel beregner afstanden mellem
             to punkter på en globus baseret på forskellene i latitude og longitude,
             hvilket sikrer mere præcise resultater, især over større afstande.
             </div>
@@ -386,11 +384,10 @@
               som indeholder alt relevant data fra NavigationsSystem. 
             </p>
 
-            <p>
-              Eftersom navigationssystemet er meget vigtig for kernen af spillets koncept, skal der være ekstra opmærksomhed på ikke at skabe en "Gudeklasse".
-              En måde hvorpå der forsøges at styrre dette på er ved ikke at have noget konkret udregning i NavigationSystem, blot samling af data fra flere steder. 
-            </p>
-
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
             <br class="dontshow">
             <div class="SideNummer"></div>
             <br class="dontshow">
@@ -399,8 +396,13 @@
             <br class="dontshow">
 
             <p>
+              Eftersom navigationssystemet er meget vigtig for kernen af spillets koncept, skal der være ekstra opmærksomhed på ikke at skabe en "Gudeklasse".
+              En måde hvorpå der forsøges at styrre dette på er ved ikke at have noget konkret udregning i NavigationSystem, blot samling af data fra flere steder. 
+            </p>
+
+            <p>
               For at simplificere outputtet fra forskellige klasser har de oftest fået en separat klasse der håndterer deres inputs.
-              Fx GetGPSData fra GPSSystem retunere klassen GPSData, der er en klasse der indeholder horisontal præcision, længde – og breddegrader. 
+              Fx GetGPSData fra GPSSystem (Bilag I18) retunere klassen GPSData, der er en klasse der indeholder horisontal præcision, længde - og breddegrader. 
               Der blev diskuteret hvor vidt det var bedre at kalde de individuelle funktioner hver for sig, over at oprette en helt ny klasse for at have dataen, 
               da det virkede lidt som at ”hælde fra en spand, til en anden”. Den endelige beslutning blev truffet da der blev enighed om at det stemte mest overens med
               single responsibility at have en enkelt public funktion der retunerede et sæt data. 
@@ -423,7 +425,16 @@
               Denne opdeling muliggører en mere effektiv anvendelse af Unitys indbyggede "MonoBehaviour"-package,
               idet databehandling og tilhørende beregninger kan håndteres uden for MonoBehaviour.
               Dette bidrager til en reduceret belastning af brugerens enhed og sikrer en mere ressourceeffektiv drift.
-            </p>
+            </p>  
+
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <div class="SideNummer"></div>
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
 
             <h3>Databehandling uden for MonoBehaviour</h3>
 
@@ -431,14 +442,8 @@
 
             <p>
               I forbindelse med betinget instansiering af kongekroner skal der verificeres, om spilleren befinder sig inden for en given radius af et referencepunkt.
-              Denne afstandsberegning udføres ved hjælp af Haversine-formlen og er implementeret uden for MonoBehaviour i klassen "PositionCheck".
+              Denne afstandsberegning udføres ved hjælp af Haversine-formlen og er implementeret uden for MonoBehaviour i klassen "PositionCheck"(bilag I50).
             </p>
-
-            <br class="dontshow">
-            <div class="SideNummer"></div>
-            <br class="dontshow">
-            <br class="dontshow">
-            <br class="dontshow">
 
             <p>
               Klassen tilbyder en offentlig metode, som returnerer en bool værdi afhængigt af, om spillerens position og
@@ -452,7 +457,7 @@
             <p>
               Udover afstanden skal også spillerens orientering verificeres for at muliggøre instansiering af kongekroner.
               Dette gøres ved anvendelse af bearing-formlen, som beregner vinklen mellem to punkter på en sfærisk overflade. 
-              Implementeringen foretages i klassen "DirectionCheck", som er adskilt fra MonoBehaviour.
+              Implementeringen foretages i klassen "DirectionCheck"(bilag I12), som er adskilt fra MonoBehaviour.
               Klassen indeholder en metode, der returnerer en bool afhængigt af,
               om vinklen mellem spillerens og objektets position befinder sig inden for en defineret grænseværdi for acceptabel retning.
             </p>
@@ -472,16 +477,51 @@
                   Disse objekter er placeret i nærheden af spilleren med det formål
                   at gøre dem let tilgængelige uden afhængighed af præcise GPS-koordinater.
                 </p>
+
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <div class="SideNummer"></div>
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
               
                 <p>
                   For at opnå dette blev der udviklet et system baseret på plane detection.
                   Systemet anvender en raycasting-teknik, hvor der med faste tidsintervaller -
                   defineret mellem to inputværdier i sekunder  udsendes en ray fra telefonens kamera.
                   Denne ray fortsætter, indtil den registrerer et plane med en passende størrelse,
-                  hvorefter et præfabrikeret objekt som vist på figur 2 (prefab) instansieres på den fundne position.
+                  hvorefter et præfabrikeret objekt som vist på figur 2 instansieres på den fundne position.
                   På sigt planlægges dette system optimeret ved brug af objekt-pooling,
-                  hvor objekter genbruges frem for at blive destrueret og oprettet på ny.
-                  Det nuværende system instansierer dog stadig objekterne dynamisk i nærheden af spilleren.
+                  Det nuværende system instansierer dog stadig objekterne dynamisk i nærheden af spilleren.(Bilag I31)
+
+            
+                <figure class="image">
+                <img src="Images/factoryPrefab.jpg" alt=" AR Factory" class="image">
+                <figcaption>figur 3. AR Factory</figcaption>
+                </figure>
+                <p>
+                  Instantieringen bliver gjordt ved brug af factory mønsteret som vist på figur 3 der i hele projektet gør grundlag for instantiering af elementer i AR verdenen.
+                  Dette er også med til at gøre det nemt og hurtigt senere i processen at udvide systemets funktionalitet med henblik på instantiering af andre elementer, for eksempel Skatteeventet.
+                  Alle scripts som forholder sig til dette factory pattern(bilag I32, I67, I57, I33, I21, I28, I58) bliver dernæst gæmt i en prefab som gør det muligt at ændre diverse variable, såsom typen af element som instantieres.
+                </p>
+
+                <p>
+                  Ansvarligt for alt hvad der instantieres i scenen er "World Spawn Controlleren".(bilag I66) Den fungerer i basis som en presenter for 3D-scenen.
+                  Scriptet er i sig selv ikke synderligt komplekst men afhænger derimod af observer mønstre fra resten af modellen til at afgøre opdateringen af AR-verdenen. 
+                  Scripts såsom "Juvel Controller"(bilag I31), som holder styr på instantieringen af juveler, startes af World Spawn Controlleren.
+                </p>
+
+                <p>
+                  "World Element Spawner"(bilag I65), som fremvist på figur 4, er ansvarlig for at finde det rigtige tid og sted at spawne et element ind i verdenen. 
+                  I AR-verdenen er der behov for en reference / flade at instantiere noget på, i forbindelse med dette er der to vigtige ting at huske: For det første skal der være et sted at spawne, 
+                  og for det andet, hvis der ikke er, skal spillet forsøge at spawne når der engang bliver et sted. Det er denne logik som World Element Spawneren står for, igennem funktionen
+                  SpawnObjectInArWorld().
                 </p>
 
                 <br class="dontshow">
@@ -492,29 +532,6 @@
                 <br class="dontshow">
                 <br class="dontshow">
                 <br class="dontshow">
-            
-                <figure class="image">
-                <img src="Images/factoryPrefab.jpg" alt=" AR Factory" class="image">
-                <figcaption>figur 3. AR Factory</figcaption>
-                </figure>
-                <p>
-                  Instantieringen bliver gjordt ved brug af factory mønsteret som vist på figur 3 der i hele projektet gør grundlag for instantiering af elementer i AR verdenen.
-                  Dette er også med til at gøre det nemt og hurtigt senere i processen at udvide systemets funktionalitet med henblik på instantiering af andre elementer, for eksempel Skatteeventet.
-                  Alle scripts som forholder sig til dette factory pattern bliver dernæst gæmt i en prefab som gør det muligt at ændre diverse variable, såsom typen af element som instantieres.
-                </p>
-
-                <p>
-                  Ansvarligt for alt hvad der instantieres i scenen er "World Spawn Controlleren". Den fungerer i basis som en presenter for 3D-scenen.
-                  Scriptet er i sig selv ikke synderligt komplekst men afhænger derimod af observer mønstre fra resten af modellen til at afgøre opdateringen af AR-verdenen. 
-                  Scripts såsom "Juvel Controller", som holder styr på instantieringen af juveler, startes af World Spawn Controlleren.
-                </p>
-
-                <p>
-                  "World Element Spawner", som frevist på figur 4, er ansvarlig for at finde det rigtige tid og sted at spawne et element ind i verdenen. 
-                  I AR-verdenen er der behov for en reference / flade at instantiere noget på, i forbindelse med dette er der to vigtige ting at huske: For det første skal der være et sted at spawne, 
-                  og for det andet, hvis der ikke er, skal spillet forsøge at spawne når der engang bliver et sted. Det er denne logik som World Element Spawneren står for, igennem funktionen
-                  SpawnObjectInArWorld().
-                </p>
 
                 <figure class="image">
                 <img src="Images/FactoryDiagram.jpg" alt="World Element Spawner" class="image">
@@ -525,19 +542,12 @@
                   Efter implementeringen af denne funktionalitet var næste skridt at definere interaktionen mellem spilleren og kronjuvelerne.
                   Dette blev realiseret ved, at systemet registrerer spillerens tryk på skærmen og udsender en ray fra dette punkt.
                   Hvis ray'en rammer et objekt, der har det korrekte tag (dvs. identificeres som en “kronjuvel”),
-                  aktiveres en funktion, der tilføjer en vis mængde guld til spillerens konto.
+                  aktiveres en funktion, der tilføjer en vis mængde guld til spillerens konto (bilag I33).
                   Objektet destrueres derefter (eller senere i udviklingen returneres til objekt-poolen).
                 </p>
               
-                <br class="dontshow">
-                <div class="SideNummer"></div>
-                <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
-              
                 <p>
-                  Implementationen er gjordt gennem interfacet "IPressHandeler" som har funktionen OnPressed() som parameter i ARPressDetectoren, der nedarver fra MonoBehaviour og som derfor skal eksistere på et GameObject.
+                  Implementationen er gjordt gennem interfacet "IPressHandeler"(bilag I28) som har funktionen OnPressed() som parameter i ARPressDetectoren, der nedarver fra MonoBehaviour og som derfor skal eksistere på et GameObject.
                   Ved instantiering af juvelen tilføjer JuvelProdukt, figur 5, ARPressDetectoren til GameObjectet som det befinder sig på. 
                 </p>
 
@@ -547,12 +557,12 @@
                 </figure>
 
                 <p>
-                  I forlængelse heraf blev der også implementeret et simpelt valutasystem,
+                  I forlængelse heraf blev der også implementeret et simpelt valutasystem(bilag I17),
                   som forbereder spillet på en fremtidig økonomifunktion. Systemet anvender Singleton Design Pattern for at sikre,
                   at den samme instans af valuta - kaldet “guld” - anvendes på tværs af alle scener og spilsituationer.
                   Da guld blot repræsenteres af en integer-værdi, gemmes denne ved hjælp af PlayerPrefs, hvilket sikrer,
                   at spillerens valuta bevares på tværs af spilsessioner - også efter at applikationen er lukket.
-                  Singletonen tilgås fra JuvelProdukt ved hjælp af interfacet "IGoldManager".
+                  Singletonen tilgås fra JuvelProdukt ved hjælp af interfacet "IGoldManager"(bilag I24).
                 </p>
               
                 <p>
@@ -560,19 +570,6 @@
                   og de planlægges løbende optimeret med hensyn til ydeevne og brugervenlighed.
                 </p>
 
-                <h3>Lokationssporing og Spilområde</h3>
-
-               <p>
-                I denne nyupstartede iteration af systemet introduceres muligheden for sporing af specifikke positioner.
-                Dette realiseres gennem en ny objektstruktur kaldet Location. Et Location-objekt indeholder tre variabler:
-                en string, der repræsenterer navnet på positionen, samt to floats,
-                som angiver henholdsvis breddegrad (latitude) og længdegrad (longitude).
-                På baggrund heraf oprettes en liste, Locations, der samler flere Location-objekter og
-                danner grundlag for videre funktionalitet, såsom søgning efter specifikke positioner.
-                </p>
-                
-                <br class="dontshow">
-                <br class="dontshow">
                 <br class="dontshow">
                 <br class="dontshow">
                 <br class="dontshow">
@@ -584,8 +581,19 @@
                 <br class="dontshow">
                 <br class="dontshow">
 
+                <h3>Lokationssporing og Spilområde</h3>
+
+               <p>
+                I denne nyupstartede iteration af systemet introduceres muligheden for sporing af specifikke positioner.
+                Dette realiseres gennem en ny objektstruktur kaldet Location(bilag I39). Et Location-objekt indeholder tre variabler:
+                en string, der repræsenterer navnet på positionen, samt to floats,
+                som angiver henholdsvis breddegrad (latitude) og længdegrad (longitude).
+                På baggrund heraf oprettes en liste, Locations, der samler flere Location-objekter og
+                danner grundlag for videre funktionalitet, såsom søgning efter specifikke positioner.
+                </p>
+
                 <p>
-                Yderligere introduceres konceptet om et "spilområde" (game area),
+                Yderligere introduceres konceptet om et "spilområde" (game area) (I68),
                 hvilket definerer det geografiske område, inden for hvilket spillet skal foregå.
                 Hvis en spiller bevæger sig uden for dette område, modtager vedkommende en besked, der informerer om,
                 at han eller hun er uden for det tilladte spilleområde.
@@ -604,12 +612,21 @@
                 <p>
                 Når spilleren når den tilsigtede lokation og kongekronen initisaliseres, er det nødvendigt for systemet at skifte målet for spilleren til et nyt.
                 Både for at undgå yderligere end 1 initialisering af kronen men også for at spilleren kan udforske alle punkter på listen. 
-                Til dette er der implementeret en funktion i navigationssystemet kaldet "RemoveAndSetNewTarget()". 
+                Til dette er der implementeret en funktion i navigationssystemet(bilag I45) kaldet "RemoveAndSetNewTarget()". 
                 Her slettes først det nuværende "target" fra listen over placeringer før det nye bliver valgt.
-                Funktionen udnytter den førnævnte klasse "positionCheck" som bruger Haversine-formlen til at give en afstand mellem punkter. 
+                Funktionen udnytter den førnævnte klasse "positionCheck"(bilag I50) som bruger Haversine-formlen til at give en afstand mellem punkter. 
                 Med dette bruges en for-løkke til at køre i gennem alle punkter i listen over placeringer og finder den mindste afstand fra spillerens nuværende position.
                 </p>
-                
+
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <div class="SideNummer"></div>
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
                 
                <h3>Visualiering af spiller- og lokationsretninger</h3>
                 
@@ -621,13 +638,9 @@
                 <p>
                   For at kunne indikere en retning for spillerne at gå, 
                   kan en blanding af det nuværende mål og dets position, spillerens enheds kompas-retning og retningen til målet fra spillerens position bruges.
-                  Alt informationen kan tilgås ved hjælp af event systemet som trækker data fra navigationssystemet. I en UIPresenter kaldet "DirectionPresenter"
+                  Alt informationen kan tilgås ved hjælp af event systemet som trækker data fra navigationssystemet(bilag I45). I en UIPresenter kaldet "DirectionPresenter"(bilag I13)
                   opdateres to UI elementer med rotationsværdierne for spillerens orientation og retningen til næste mål. Pilen indikerer spillerens retning mens den røde indikator viser retningen til målet. 
                 </p>
-
-                 <div class="SideNummer"></div>
-                <br class="dontshow">
-                <br class="dontshow">
                 
                 <h3>Logo-design</h3>
                 
@@ -645,13 +658,28 @@
                   Sammenfattende blev der lagt vægt på at sikre sammenhæng mellem æstetik, funktionalitet og tematik, således at designvalg og tekniske løsninger understøttede applikationens overordnede formål og brugervenlighed.
                 </p>
 
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <div class="SideNummer"></div>
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+
+
                 <h3>Simulator (UI):</h3>
 
                 <p>
                   Udviklingen af mobilapplikationen Royal-Go UI blev gennemført med fokus på design, brugergrænseflade og visuel identitet. 
                   I udviklingsfasen blev der udarbejdet en funktionel og intuitiv brugergrænseflade målrettet mobile enheder. 
                   Startmenuen blev designet til at give adgang til fem centrale funktioner: Skattejagt, Skattekammer, Submit Score, Leaderboard og Butik. 
-                  Navigation mellem disse scener blev realiseret via et Scripts ” MainSceneChanger” i Unity, der kontrollerer sceneovergange baseret på brugerens input.
+                  Navigation mellem disse scener blev realiseret via et Scripts ” MainSceneChanger”(bilag I41) i Unity, der kontrollerer sceneovergange baseret på brugerens input.
                 </p>
 
                 <figure class="image">
@@ -662,6 +690,16 @@
                 <p>
                     Et simpelt og genkendeligt design blev anvendt med tydelige knapper, grønne farveindikatorer for interaktive elementer og ikon baserede navigationssymboler, hvilket understøtter brugervenlighed på mobile enheder (se figur 8). 
                     Et indkøbskurvsikon blev i starten tilføjet som en visuel og funktionel knap til butiksscenen for at styrke brugerens mentale model af appens funktioner. 
+                </p>
+                
+                <p>
+                    Selve funktionaliteten blev bibeholdt, men det grafiske ikon blev ikke videreført i det endelige produkt, da det ikke passede ind i den visuelle helhed og appens øvrige designstil. UI’et anvender fortsat en vertikal struktur med letgenkendelige knapper og tekst, der guider spilleren gennem handlinger som køb, scoreindsendelse og visning af highscore.
+                </p>
+
+
+                <p>
+                    Butiksscenen er designet med et simpelt og pædagogisk layout, hvor hvert kosmetisk item (f.eks. hat, maske, ansigt) vises med billede, pris og en “Køb”-knap. 
+                    Guldmængden vises øverst i interfacet, hvilket giver brugeren konstant feedback på deres valuta. Scroll View, Vertical Layout Group og Content Size Fitter blev anvendt til dynamisk tilpasning af butiksindholdet, så det fungerer hensigtsmæssigt på skærme med forskellige opløsninger.
                 </p>
 
                 <br class="dontshow">
@@ -674,18 +712,6 @@
                 <br class="dontshow">
                 <br class="dontshow">
                 <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
-
-                <p>
-                    Selve funktionaliteten blev bibeholdt, men det grafiske ikon blev ikke videreført i det endelige produkt, da det ikke passede ind i den visuelle helhed og appens øvrige designstil. UI’et anvender fortsat en vertikal struktur med letgenkendelige knapper og tekst, der guider spilleren gennem handlinger som køb, scoreindsendelse og visning af highscore.
-                </p>
-
-
-                <p>
-                    Butiksscenen er designet med et simpelt og pædagogisk layout, hvor hvert kosmetisk item (f.eks. hat, maske, ansigt) vises med billede, pris og en “Køb”-knap. 
-                    Guldmængden vises øverst i interfacet, hvilket giver brugeren konstant feedback på deres valuta. Scroll View, Vertical Layout Group og Content Size Fitter blev anvendt til dynamisk tilpasning af butiksindholdet, så det fungerer hensigtsmæssigt på skærme med forskellige opløsninger.
-                </p>
 
                 <p>
                     I Leaderboard-delen vises spillernes navne og scores med brug af TextMeshPro-komponenter og en dynamisk opdatering via en ekstern API. Submit Score-scenen er blevet tilpasset, så spillerens score automatisk hentes og vises uden manuel indtastning, hvilket forbedrer både dataintegritet og brugeroplevelse.
@@ -701,7 +727,7 @@
                 </p>
 
                 <p>
-                    Brugergrænsefladen er udformet med enkle former og farver for at sikre visuel klarhed, især på mindre skærme. De anvendte designprincipper – som konsistens, visuel feedback, og minimal kognitiv belastning – understøtter en brugervenlig og funktionel oplevelse, hvilket har været centralt i designstrategien for Royal-Go. (Alle nævnte elementer er illustreret i det vedlagte skærmbillede.)
+                    Brugergrænsefladen er udformet med enkle former og farver for at sikre visuel klarhed, især på mindre skærme. De anvendte designprincipper – som konsistens, visuel feedback, og minimal kognitiv belastning – understøtter en brugervenlig og funktionel oplevelse, hvilket har været centralt i designstrategien for Royal-Go. (Alle nævnte elementer er illustreret i figur 8)
                 </p>
 
                 <h3>Brugergrænseflade (UI) </h3>
@@ -709,13 +735,7 @@
                   Brugergrænsefladen er designet ved hjælp af Model-View-Presenter (MVP) mønsteret. 
                   Her tænkes der på view delen som klasserne fra Unitys UnityEngine.UI namespace, hvilket er hvad der bruges til at designe udseenet til i Unitys builder. 
                   Presenteren bliver derfor primært vedhæftet det GameObject som indeholder det UI view den skal arbejde med. 
-
-                  <div class="SideNummer"></div>
                 </p>
-
-                <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
 
                 <p>
                   Den primære kontakt til presenteren fra modellen vil være ved gennem events, for at få så løs en kobling til modellen som muligt. 
@@ -728,25 +748,6 @@
                     Udviklingsprocessen har bestået af en iterativ tilgang, hvor funktionalitet gradvist blev udvidet og testet i sammenhæng med brugergrænseflade og gameplay-integration.
                 </p>
 
-                <p>
-                    Projektet blev startet med et færdigt "gold script", der håndterede spillerens valuta, inklusive lagring og visning af guld. Dette script dannede fundamentet for hele shop-systemet. 
-                    Dernæst blev et ShopManager-script udviklet med målet om at undgå hårdkodning og i stedet lade shop-items konfigureres via Unity-editoren.Projektet blev startet med et færdigt "gold script", der håndterede spillerens valuta, inklusive lagring og visning af guld. 
-                    Dette script dannede fundamentet for hele shop-systemet. Dernæst blev et ShopManager-script udviklet med målet om at undgå hårdkodning og i stedet lade shop-items konfigureres via Unity-editoren. Hvert item kunne defineres med navn, pris og billede, hvilket gjorde løsningen både fleksibel og skalerbar i forhold til fremtidig udvidelse.
-                </p>
-
-                <p>
-                    Gold-systemet blev senere omstruktureret til at følge en mere SOLID-venlig arkitektur. 
-                    Et interface, IGoldManager, blev introduceret for at abstrahere logikken for at tilføje, bruge og hente guld. 
-                    GoldManager-klassen implementerer dette interface og indeholder ansvar for datahåndtering (PlayerPrefs), UI-opdatering og Singleton-initialisering. 
-                    Denne opdeling giver en klar separation af ansvar og øger genbrugelighed og testbarhed i koden.
-                </p>
-
-                <p>
-                  UI blev designet med mobilanvendelse i tankerne. Herunder blev en Scroll View konfigureret korrekt til mobil, og shop-items blev lagt ind som prefabs med Vertical Layout Group og Content Size Fitter, så visningen automatisk tilpasser sig forskellige skærmstørrelser. 
-                  Derudover blev der arbejdet med responsiv opbygning, hvor knapper og layout automatisk justeres afhængigt af opløsning og format, hvilket sikrer en ensartet oplevelse på tværs af enheder.
-                </p>
-
-                <br class="dontshow">
                 <br class="dontshow">
                 <br class="dontshow">
                 <br class="dontshow">
@@ -758,20 +759,25 @@
                 <br class="dontshow">
 
                 <p>
-                    Købsfunktionen blev koblet til ShopManager, så det automatisk valideres, om spilleren har nok valuta til at gennemføre et køb. Systemet blev desuden udbygget, så det let kunne udvides med yderligere logik – eksempelvis opdatering af en kosmetik-liste, eller integration med andre scener og systemer i spillet.
-                </p>
-
-                <h3>Integration med ARFaceList</h3>
-                <p>
-                  Som en del af shop-funktionaliteten blev der arbejdet på at integrere købte AR-face-prefabs direkte i en ARFaceList, som bruges af AR-systemet i Skattekammer-scenen. 
-                  Løsningen gjorde det muligt for spilleren at købe kosmetiske ansigtsgenstande (f.eks. masker), som derefter blev tilføjet automatisk til en liste (ScriptableObject). 
-                  Denne liste blev brugt af FacePrefabSelector i AR-scenen til at vise og skifte mellem de købte ansigter. Shoppen blev dermed direkte koblet til AR-oplevelsen, og implementeringen understøttede dynamisk opbygning uden hårdkodning.
+                    Projektet blev startet med et færdigt "gold script"(bilag I17), der håndterede spillerens valuta, inklusive lagring og visning af guld. Dette script dannede fundamentet for hele shop-systemet. 
+                    Dernæst blev et ShopManager-script(bilag I56) udviklet med målet om at undgå hårdkodning og i stedet lade shop-items konfigureres via Unity-editoren. Hvert item kunne defineres med navn,
+                    pris og billede, hvilket gjorde løsningen både fleksibel og skalerbar i forhold til fremtidig udvidelse.
                 </p>
 
                 <p>
-                    Selvom løsningen teknisk fungerede og opfyldte kravene, blev den ikke et elementært delelement i det endelige projekt. 
-                    Undervejs i forløbet blev der identificeret en anden metode, som bedre matchede projektets behov og mål – både med hensyn til performance, fleksibilitet og brugeroplevelse. 
-                    Derfor blev metoden fravalgt til fordel for en mere effektiv tilgang, men arbejdet med denne del har givet vigtig indsigt i integration mellem shop-system og runtime-data i Unity.
+                    Gold-systemet(I17) blev senere omstruktureret til at følge en mere SOLID-venlig arkitektur. 
+                    Et interface, IGoldManager(I24), blev introduceret for at abstrahere logikken for at tilføje, bruge og hente guld. 
+                    GoldManager-klassen(I17) implementerer dette interface og indeholder ansvar for datahåndtering (PlayerPrefs), UI-opdatering og Singleton-initialisering. 
+                    Denne opdeling giver en klar separation af ansvar og øger genbrugelighed og testbarhed i koden.
+                </p>
+
+                <p>
+                  UI blev designet med mobilanvendelse i tankerne. Herunder blev en Scroll View konfigureret korrekt til mobil, og shop-items blev lagt ind som prefabs med Vertical Layout Group og Content Size Fitter, så visningen automatisk tilpasser sig forskellige skærmstørrelser. 
+                  Derudover blev der arbejdet med responsiv opbygning, hvor knapper og layout automatisk justeres afhængigt af opløsning og format, hvilket sikrer en ensartet oplevelse på tværs af enheder.
+                </p>
+
+                <p>
+                    Købsfunktionen blev koblet til ShopManager(bilag I56), så det automatisk valideres, om spilleren har nok valuta til at gennemføre et køb. Systemet blev desuden udbygget, så det let kunne udvides med yderligere logik – eksempelvis opdatering af en kosmetik-liste, eller integration med andre scener og systemer i spillet.
                 </p>
 
                 <h3>Udvikling og Justering af AR-Produkter til Virtuel Butik</h3>
@@ -781,8 +787,17 @@
                   som brugerne kunne iføre sig og tage billeder af i augmented reality (AR).
                   Efter adskillige timers arbejde viste det sig dog,
                   at Unitys dokumentation - i det med småt - angav,
-                  at fuld kropssporing udelukkende understøttes på iOS-enheder.
+                  at fuld kropssporing udelukkende understøttes på iOS-enheder((Body Tracking | Unity MARS | 1.3.1, 2025)).
                 </p>
+
+                  <br class="dontshow">
+                  <br class="dontshow">
+                  <br class="dontshow">
+                <div class="SideNummer"></div>
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
 
                 <p>
                   Da projektets målplatform udelukkende anvender Samsung-enheder og gør brug af Google ARCore,
@@ -791,12 +806,12 @@
                   Det blev besluttet at anvende Face Tracking som alternativ.
                 </p>
 
-                <br class="dontshow">
-                <div class="SideNummer"></div>
-                <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
+                <h3>Integration med ARFaceList</h3>
+                <p>
+                  Som en del af shop-funktionaliteten blev der arbejdet på at integrere købte AR-face-prefabs direkte i en ARFaceList(bilag I5), som bruges af AR-systemet i Skattekammer-scenen. 
+                  Løsningen gjorde det muligt for spilleren at købe kosmetiske ansigtsgenstande (f.eks. masker), som derefter blev tilføjet automatisk til en liste (ScriptableObject). 
+                  Denne liste blev brugt af FacePrefabSelector(bilag I14) i AR-scenen til at vise og skifte mellem de købte ansigter. Shoppen blev dermed direkte koblet til AR-oplevelsen, og implementeringen understøttede dynamisk opbygning uden hårdkodning.
+                </p>
 
                 <p>
                   Denne tilgang tillod stadig brugeren at tage billeder af sig selv i AR,
@@ -804,13 +819,30 @@
                 </p>
 
                 <p>
-                  For at påbegynde implementeringen af Face Tracking blev Unitys Learning Path for teknologien gennemgået.
+                  For at påbegynde implementeringen af Face Tracking blev Unitys Learning Path(Create a Basic Face Filter - Unity Learn, 2021) for teknologien gennemgået.
                   Herefter blev der udviklet en klasse til håndtering af ansigtsfiltre. Denne klasse gjorde det muligt at tilføje og bladre mellem forskellige filtre.
                   For at gøre systemet mere skalerbart og integrerbart med butikken,
                   blev filtrene struktureret som ScriptableObjects, der indeholder en liste over tilgængelige filtre.
                   En metode til dynamisk at tilføje nye filtre, som figur 9, blev tilføjet, hvilket gør det muligt at knytte købte varer til filtrene,
                   således at et filter bliver tilgængeligt for brugeren efter køb.
                 </p>
+
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <div class="SideNummer"></div>
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
+                <br class="dontshow">
 
                   <figure class="image">
                   <img src="Images/ARFace.png" alt="DevArt" class="image">
@@ -824,27 +856,15 @@
                   som sikrer sekventiel udførelse. Inden selve billedet tages, sættes UI-elementernes alfaværdi til 0 (gennemsigtige),
                   og efter billedet er gemt, sættes alfaværdien tilbage til 255 (fuldt synlig).
                   Billedet gemmes via en platformsspecifik filsti tilpasset Android/Samsung-enheder,
-                  og brugeren modtager samtidig en Toast-meddelelse med bekræftelse af, at billedet er gemt.
+                  og brugeren modtager samtidig en Toast-meddelelse med bekræftelse af, at billedet er gemt(bilag I55).
                 </p>
 
                 <p>
-                  Afslutningsvis blev AndroidManifest.xml opdateret,
+                  Afslutningsvis blev AndroidManifest.xml(bilag I4) opdateret,
                   så applikationen eksplicit anmoder om tilladelse til at benytte kameraet -
                   analogt med hvordan tilladelser til lokationstracking håndteres.
                   Dette skridt er taget for at sikre overholdelse af gældende lovgivning vedrørende brugen af kamera og persondata.
                 </p>
-
-                <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
-                <div class="SideNummer"></div>
-                <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
 
                 <h3>Implementering af tværgående funktionalitet mellem scener: Butik og AR-ansigtsfiltre</h3>
 
@@ -858,11 +878,17 @@
                   Herefter undersøges det, om den valgte vare er gyldig. Hvis begge betingelser er opfyldt,
                   tilføjes det pågældende ansigtsfilter (repræsenteret som et prefab) til en liste over tilgængelige filtre for brugeren.
                   Denne funktionalitet blev realiseret ved hjælp af scriptet ARFaceFilters, som håndterer brugerens samling af filtre.</p>
+
+                   <br class="dontshow">
+                   <div class="SideNummer"></div>
+                   <br class="dontshow">
+                   <br class="dontshow">
+                   <br class="dontshow">
                   
                 <p>et væsentligt aspekt af denne opgave var at sikre persistens, så købte varer forbliver tilgængelige på tværs af sessioner.
                   Da Unitys PlayerPrefs og JSON-format ikke understøtter direkte lagring af GameObject-referencer, blev der i stedet valgt en løsning,
                   hvor navnene på de købte filtre gemmes som strings i JSON-format. Disse gemmes i PlayerPrefs,
-                  og ved genstart af applikationen indlæses navnene og matches mod en statisk liste over alle tilgængelige ansigtsfiltre i systemet.
+                  og ved genstart af applikationen indlæses navnene og matches mod en statisk liste over alle tilgængelige ansigtsfiltre(bilag I5) i systemet.
                   Ved et match rekonstrueres brugerens samling, hvilket sikrer, at købte varer forbliver tilgængelige.</p>
 
                 <p>Når et køb er gennemført, fratrækkes den relevante mængde guld fra brugerens saldo.
@@ -872,16 +898,6 @@
                 <p>Denne løsning understøtter således både funktionel integration mellem separate scener og sikrer datavedholdelse for brugerens købte indhold,
                    hvilket er centralt for en konsistent brugeroplevelse.</p>
 
-                <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
-                <br class="dontshow">
-                   <div class="SideNummer"></div>
-                   <br class="dontshow">
-                   <br class="dontshow">
-                   <br class="dontshow">
-
                 <h3>AR World Scene </h3>
 
                 <p>
@@ -890,8 +906,8 @@
                 </p>
 
                 <p>
-                  Klassen WorldSpawnControlleren er ansvarlig for oprettelsen af instantieringen af 3d modeller fra Skatte event og Juvel event i AR scenen. 
-                  Factory controlleren har subscribet til en række events, der signalerer hvad og hvor noget skal spawne. 
+                  Klassen WorldSpawnControlleren (bilag I66) er ansvarlig for oprettelsen af instantieringen af 3d modeller fra Skatte event og Juvel event i AR scenen. 
+                  Factory controlleren (bilag I32) har subscribet til en række events, der signalerer hvad og hvor noget skal spawne. 
                   Factory mønsteret sikrer, at der er en nem og stabil måde at udvide systemet i fremtiden, fx hvis der skulle implementerers en AR-rutevejledning. 
                 </p>
 
@@ -904,37 +920,62 @@
                 <p>I dette sprint blev det besluttet at fokusere på at færdiggøre selve kernen af spiloplevelsen - det,
                    vi betegner som "skattejagten". Den primære målsætning var at etablere funktionaliteten omkring interaktionen med en kongekrone,
                    som fungerer som udgangspunkt for en række minispil.
-                   Når spilleren interagerer med kronen, skal et tilfældigt minispil aktiveres, hvilket,
-                   ved succesfuld gennemførelse, belønner spilleren med en vis mængde guld.</p>
+                </p>
+                
+                <br class="dontshow">
+                 <div class="SideNummer"></div>
+                  <br class="dontshow">
+                  <br class="dontshow">
+                  <br class="dontshow">
+                  <br class="dontshow">
+
+                <p>
+                   Når spilleren interagerer med kronen(bilag I69), skal et tilfældigt minispil aktiveres, hvilket,
+                   ved succesfuld gennemførelse, belønner spilleren med en vis mængde guld.
+                  </p>
 
                 <p>For at sikre systemets fleksibilitet og fremtidige udvidelsesmuligheder
                    blev der valgt en arkitektonisk løsning baseret på Strategy Pattern.
                    Denne tilgang muliggør nem integration af nye minispil uden behov for at ændre den eksisterende logik.
-                   Et centralt element i implementeringen var en MiniGameManager, som automatisk identificerer og registrerer alle spil,
-                   der implementerer det definerede IMiniGame interface. Ved aktivering udvælges et af disse spil tilfældigt.</p>
+                   Et centralt element i implementeringen var en MiniGameManager(bilag I44), som automatisk identificerer og registrerer alle spil,
+                   der implementerer det definerede IMiniGame interface(bilag I27). Ved aktivering udvælges et af disse spil tilfældigt.</p>
 
                 <p>Eftersom alle spilkomponenter er afhængige af Unitys MonoBehaviour,
-                   blev der oprettet en abstrakt klasse, MiniGameBase,
-                   som fungerer som bindeled mellem IMiniGame og de konkrete spiltyper.
-                   Denne løsning muliggør, at minispil både kan nedarve fra MonoBehaviour og samtidig overholde IMiniGame interfacet.</p>
+                   blev der oprettet en abstrakt klasse, MiniGameBase(bilag I42),
+                   som fungerer som bindeled mellem IMiniGame(bilag I27) og de konkrete spiltyper.
+                   Denne løsning muliggør, at minispil både kan nedarve fra MonoBehaviour og samtidig overholde IMiniGame interfacet(bilag I27).</p>
 
                 <h3>Valg og Implementering af Minispil</h3>
 
                 <p>Til at begynde med blev der udviklet tre minispil,
                    som alle tager udgangspunkt i kendte spilmekanikker for at sikre høj brugerforståelse og lav indlæringskurve.
                   Disse er:
-                  <div class="SideNummer"></div>
                 </p>
-
-                  <br class="dontshow">
-                  <br class="dontshow">
-                  <br class="dontshow">
 
                 <ul>
                   <li><b>KingClicker:</b> inspireret  af "Cookie Clicker</li>
                   <li><b>FlappyKing:</b> inspireret af "flappy Bird</li>
                   <li><b>CatchKing:</b> inspireret af klassiske "dropper"-spil </li>
                 </ul>
+
+                  <br class="dontshow">
+                  <br class="dontshow">
+                  <br class="dontshow">   
+                  <br class="dontshow">
+                  <br class="dontshow">
+                  <br class="dontshow">
+                  <br class="dontshow">
+                  <br class="dontshow">
+                  <br class="dontshow">
+                  <br class="dontshow">
+                  <br class="dontshow">
+                  <br class="dontshow">
+                  <br class="dontshow">
+                    <div class="SideNummer"></div>
+                  <br class="dontshow">
+                  <br class="dontshow">
+                  <br class="dontshow">
+                  <br class="dontshow">
 
                 <figure class="image">
                 <img src="Images/Flappyking.png" alt="Flappyking" class="image">
@@ -949,7 +990,7 @@
                 <p>Dette var det første spil, der blev implementeret.
                    Spillet går ud på, at spilleren optjener guld ved at klikke gentagne gange på en kongekrone inden for en begrænset tidsramme.
                    Tidens udløb vises via en grafisk UI-slider. Spillet er simpelt i sin mekanik,
-                   men tjener som en effektiv introduktion til minispilssystemet.</p>
+                   men tjener som en effektiv introduktion til minispilssystemet.(bilag I34, I61)</p>
 
                   <h4>FlappyKing</h4>
                   <p>Dette spil er en UI-baseret version af "Flappy Bird", som vist på figur 10,
@@ -958,21 +999,7 @@
                      En teknisk udfordring i dette spil var,
                      at UI-elementer i Unity ikke understøtter klassiske fysiske komponenter som colliders.
                      Derfor blev logikken implementeret ved hjælp af RectTransform overlap-tjek frem for fysiske kollisioner.
-                     På trods af dette lykkedes det at skabe en oplevelse, der minder om originalen.</p>
-
-                  <br class="dontshow">
-                  <br class="dontshow">
-                  <br class="dontshow">   
-                  <br class="dontshow">
-                  <br class="dontshow">
-                  <br class="dontshow">
-                  <br class="dontshow">
-                  <br class="dontshow">
-                    <div class="SideNummer"></div>
-                  <br class="dontshow">
-                  <br class="dontshow">
-                  <br class="dontshow">
-                  
+                     På trods af dette lykkedes det at skabe en oplevelse, der minder om originalen. (bilag I15, I16, I47, I48)</p>                 
 
                   <h4>CatchKing</h4>
                   <p>Det sidste spil, der blev udviklet i denne sprint, var CatchKing.
@@ -980,38 +1007,55 @@
                      og spilleren skal forsøge at samle så mange kroner som muligt uden at røre bomberne.
                      Spillet benytter sig af en Object Pooling-mekanisme til at håndtere de faldende elementer effektivt.
                      En udfordring her var at sikre korrekt interaktion mellem objekterne i puljen og brugerens input,
-                     hvilket dog blev løst tilfredsstillende.
+                     hvilket dog blev løst tilfredsstillende. (bilag I7, I8, I40, I49)
                     </p>
+
+                    <br class="dontshow">
+                    <br class="dontshow">
+                    <div class="SideNummer"></div>
+                    <br class="dontshow">
+                    <br class="dontshow">
+                    <br class="dontshow">
+                    <br class="dontshow">
 
                   <h3>Integration og Visuelle Forbedringer</h3>
 
-                  <p>Efter implementeringen af de individuelle spil blev MiniGameManager integreret med kongekronen i spilverdenen.
+                  <p>Efter implementeringen af de individuelle spil blev MiniGameManager(bilag I44) integreret med kongekronen i spilverdenen.
                      Det betyder, at hver gang en krone genereres i spillet,
                      medfølger funktionaliteten til at starte minispil direkte ved interaktion.
-                     Derudover blev der udviklet en separat klasse, der håndterer rotationen af kongekronen
+                     Derudover blev der udviklet en separat klasse, der håndterer rotationen af kongekronen (bilag I70)
                      for at give en animeret og mere iøjnefaldende præsentation, hvilket bidrager til et mere levende og dynamisk visuelt udtryk.</p>
 
                   <p>Det samlede resultat af sprintet er et fleksibelt og skalerbart minispilssystem,
                      der gør det muligt for udviklere nemt at tilføje nye spil blot ved at implementere
-                     det eksisterende interface og arve fra den abstrakte MiniGameBase klasse.
+                     det eksisterende interface og arve fra den abstrakte MiniGameBase klasse(bilag I42).
                      Denne arkitektur sikrer en nem vedligeholdelse og udvidelse af systemet i fremtidige iterationer
                      og understøtter videreudviklingen af den samlede spiloplevelse.</p>
+                  </p>
 
                     <h3>Implementering af point-system (ScoreTracker)</h3>
 
                     <p> 
-                        For at udvide shop-systemet og øge spillerens motivation blev et nyt pointsystem implementeret sideløbende med det eksisterende guld. 
+                        For at udvide shop-systemet og øge spillerens motivation blev et nyt pointsystem implementeret (bilag I19) sideløbende med det eksisterende guld. 
                         Ideen bag systemet var, at spilleren optjener point hver gang der optjenes guld, men uden at miste disse point ved køb. 
                         På den måde fungerer point som en form for "samlet optjent guld", som giver et billede af den langsigtede progression.
                     </p>
 
                     <p>
                         Systemet blev designet ud fra SOLID-principper – særligt Single Responsibility og Dependency Inversion. 
-                        Logikken blev derfor delt op i interfaces: IAddScore og IGetScore, og selve tracking-klassen ScoreTrackerSeparated blev isoleret fra UI. 
-                        UI-delen blev håndteret af en separat ScoreTrackerPresenter, som kommunikerer via SetPresenter(...)-metoden. 
+                        Logikken blev derfor delt op i interfaces: IAddScore(bilag I20) og IGetScore(bilag I23), og selve tracking-klassen ScoreTrackerSeparated blev isoleret fra UI. 
+                        UI-delen blev håndteret af en separat ScoreTrackerPresenter(bilag I52), som kommunikerer via SetPresenter metoden. 
                         Denne opdeling gør systemet lettere at vedligeholde og udvide, f.eks. hvis man senere vil vise point på flere UI-elementer eller skifte lagringsmetode.
                     </p>
 
+                    <br class="dontshow">
+                    <br class="dontshow">
+                    <br class="dontshow">
+                    <br class="dontshow">
+                    <br class="dontshow">
+                    <br class="dontshow">
+                    <br class="dontshow">
+                    <br class="dontshow">
                     <br class="dontshow">
                     <div class="SideNummer"></div>
                     <br class="dontshow">
@@ -1027,13 +1071,13 @@
                     
                     <p>
                         Et leaderboard blev tilføjet som en afsluttende del af point-systemet, så spilleren kan sammenligne sin score med andre. 
-                        Dette system blev bygget ud fra en Unity-pakke leveret af Pelle, som indeholdt scripts som SubmitScorePanel, ScoreView, ScoreList, LeaderBoard, HighscoreData og AddScore. (Se illustration i figur 11)
+                        Dette system blev bygget ud fra en Unity-pakke leveret af Pelle, som indeholdt scripts som SubmitScorePanel(bilag I62), ScoreView(bilag I54), ScoreList(bilag I51), LeaderBoard(bilag I36), HighscoreData(bilag I19) og AddScore(bilag I3). (Se illustration i figur 11)
                     </p>
 
                     <p>
-                        Leaderboardet blev integreret med det eksisterende ScoreTrackerSeparated og ScoreTrackerPresenter-system ved at ændre SubmitScorePanel-scriptet. 
+                        Leaderboardet blev integreret med det eksisterende ScoreTrackerSeparated(bilag I53) og ScoreTrackerPresenter-system(bilag I52) ved at ændre SubmitScorePanel-scriptet(bilag I62). 
                         I stedet for manuelt indtastede scores hentes spillerens faktiske score nu automatisk og vises i et låst felt. 
-                        Dette bidrager til en mere brugervenlig oplevelse og forbedrer dataintegriteten. Til integrationen blev der benyttet en API Key og et Game ID udleveret af Pelle, som konfigureres i HighscoreData for at muliggøre ekstern lagring og visning af highscores.
+                        Dette bidrager til en mere brugervenlig oplevelse og forbedrer dataintegriteten. Til integrationen blev der benyttet en API Key og et Game ID udleveret af Pelle, som konfigureres i HighscoreData(bilag I19) for at muliggøre ekstern lagring og visning af highscores.
                     </p>
 
                     <b>API Key:</b>
@@ -1048,17 +1092,16 @@
 
                     <p>
                         UI'et fra pakken blev også tilpasset, så det visuelt passede med resten af projektet og fungerede på mobil. 
-                        Selvom vi oprindeligt vurderede, at opgaven ville tage omkring 100 story points, viste det sig, at den reelle arbejdsbyrde var tættere på 16 story points, da koden i høj grad allerede var givet og kun krævede integration og justeringer. (Se illustration i det vedlagte skærmbillede)
+                        Selvom vi oprindeligt vurderede, at opgaven ville tage omkring 100 story points, viste det sig, at den reelle arbejdsbyrde var tættere på 16 story points, da koden i høj grad allerede var givet og kun krævede integration og justeringer. (Se figur 11)
                     </p>
 
                     <br class="dontshow">
                     <br class="dontshow">
                     <br class="dontshow">
                     <br class="dontshow">
-                    <br class="dontshow">
-                    <br class="dontshow">
-                    <br class="dontshow">
                     <div class="SideNummer"></div>
+                    <br class="dontshow">
+                    <br class="dontshow">
                     <br class="dontshow">
                     <br class="dontshow">
                     <br class="dontshow">
@@ -1124,24 +1167,25 @@
                     
                     <p>
                         Implementationen af kompasset afhænger, som ses på figur 12, af atan2 funktionen. Denne funktion returnerer vinklen mellem to punkter, baseret på en fuld cirkel. 
-                        Implementationen er bygget ud fra guiden "how to convert magnetometer data into compass heading". (https://digilent.com/blog/how-to-convert-magnetometer-data-into-compass-heading/)
+                        Implementationen er bygget ud fra guiden "how to convert magnetometer data into compass heading" (Bleything, 2023).
                         Der oprindeligt er baseret på en Arduinos magnetfeltssensor. Efter eksperimentation blev det tydeligt at denne guides x og y akse er byttet om i forhold til retur typen af Unitys brug af sensoren.
                         Dette betød at retningen af øst og vest på enheden var omvendt, hvilket blev løst ved at vende fortegnet på x-aksen.
                     </p>
 
                     <p>
-                      Efter kodningen af databehandlingen af sensorens returnering var færdig var implementationen gnidningsløs. Arkitekturen havde blot et enkelt punkt som afhang af kompas-retningen.
+                      Efter kodningen af databehandlingen af sensorens returnering var færdig var implementationen gnidningsløs. Arkitekturen havde blot et enkelt punkt som afhang af kompas-retningen.(bilag I9, I10, I11)
                     </p>
 
+                    <br class="dontshow">
                       <br class="dontshow">
                     <br class="dontshow">
                     <br class="dontshow">
                     <br class="dontshow">
+                      <br class="dontshow">
                     <br class="dontshow">
                     <br class="dontshow">
                     <br class="dontshow">
                     <div class="SideNummer"></div>
-                    <br class="dontshow">
                     <br class="dontshow">
                     <br class="dontshow">
                     <br class="dontshow">
@@ -1494,7 +1538,91 @@
                 <p class="URL"><a target="_blank" href="https://www.bevaegdigforlivet.dk/" class="URL">https://www.bevaegdigforlivet.dk/</a></p>
             </div>
 
-            <div class="SideNummer"></div>
+            <div class="reference article-reference">
+                <p class="author"> GDPR.DK ApS</p>
+                <p class="year">2025. </p>
+                <p class="title">Artikel 6 – Lovlig behandling - GDPR.DK. </p>
+                <p class="journal-title">GDPR.DK ApS.  </p>
+                <p class="URL"><a target="_blank" href="https://gdpr.dk/databeskyttelsesforordningen/kapitel-2-principper/artikel-6-lovlig-behandling/?gad_source=1&gad_campaignid=20728534545&gbraid=0AAAAAC7tfkPWRYLVdAJSiWTfJJYoqRPjE&gclid=EAIaIQobChMI07CppZDDjQMVPASiAx19ewCJEAAYASAAEgKXXvD_BwE" class="URL">https://gdpr.dk/databeskyttelsesforordningen/kapitel-2-principper/artikel-6-lovlig-behandling/<br class="dontshow">z?gad_source=1&gad_campaignid=<br class="dontshow">20728534545&gbraid=0AAAAAC7tfkPWRYLVdAJSiWTfJJYoqRPjE&gclid=<br class="dontshow">EAIaIQobChMI07CppZDDjQMVPASiAx19ewCJEAAYASAAEgKXXvD_BwE</a></p>
+            </div>
+
+            <div class="reference article-reference">
+                <p class="author"> Digitaliseringsstyrelsen</p>
+                <p class="year">2025. </p>
+                <p class="title">Huskeregler for app-udbydere</p>
+                <p class="journal-title">Huskeregler for app-udbydere </p>
+                <p class="URL"><a target="_blank" href="https://digst.dk/tilsyn/sporingsteknologiomraadet/vejledninger-til-tjenesteudbydere/huskeregler-for-app-udbydere/" class="URL">https://digst.dk/tilsyn/sporingsteknologiomraadet/vejledninger-til-tjenesteudbydere/huskeregler-for-app-udbydere/</a></p>
+            </div>
+
+            <div class="reference article-reference">
+                <p class="author"> Unity</p>
+                <p class="year">2025. </p>
+                <p class="title">Scripting API: LocationService</p>
+                <p class="journal-title">Scripting API: LocationService </p>
+                <p class="URL"><a target="_blank" href="https://docs.unity3d.com/6000.1/Documentation/ScriptReference/LocationService.html" class="URL">https://docs.unity3d.com/6000.1/Documentation/ScriptReference/LocationService.html</a></p>
+            </div>
+
+            <div class="reference article-reference">
+                <p class="author"> GeeksforGeeks</p>
+                <p class="year">2025. </p>
+                <p class="title">Haversine formula to find distance between two points on a sphere</p>
+                <p class="journal-title">Haversine formula to find distance between two points on a sphere </p>
+                <p class="URL"><a target="_blank" href="https://www.geeksforgeeks.org/haversine-formula-to-find-distance-between-two-points-on-a-sphere/" class="URL">https://www.geeksforgeeks.org/haversine-formula-to-find-distance-between-two-points-on-a-sphere/</a></p>
+            </div>
+
+            <br class="dontshow">
+             <div class="SideNummer"></div>
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+
+            <div class="reference article-reference">
+                <p class="author"> Unity</p>
+                <p class="year">2025. </p>
+                <p class="title">Body Tracking</p>
+                <p class="journal-title">Unity MARS</p>
+                <p class="URL"><a target="_blank" href="https://docs.unity3d.com/Packages/com.unity.mars@1.3/manual/BodyTracking.html" class="URL">https://docs.unity3d.com/Packages/com.unity.mars@1.3/manual/BodyTracking.html</a></p>
+            </div>
+
+            <div class="reference article-reference">
+                <p class="author"> Unity</p>
+                <p class="year">2021.</p>
+                <p class="title">Create a basic face filter</p>
+                <p class="journal-title">Unity MARS</p>
+                <p class="URL"><a target="_blank" href="https://learn.unity.com/pathway/mobile-ar-development/unit/create-a-basic-face-filter-tutorials?version=2021.3" class="URL">https://learn.unity.com/pathway/mobile-ar-development/unit/create-a-basic-face-filter-tutorials?version=2021.3</a></p>
+            </div>
+
+            <div class="reference article-reference">
+                <p class="author"> Bleything, T.</p>
+                <p class="year">2023.</p>
+                <p class="title">How to Convert Magnetometer Data into Compass Heading </p>
+                <p class="journal-title">Digilent Blog</p>
+                <p class="URL"><a target="_blank" href="https://digilent.com/blog/how-to-convert-magnetometer-data-into-compass-heading/" class="URL">https://digilent.com/blog/how-to-convert-magnetometer-data-into-compass-heading/</a></p>
+            </div>
+
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+            <br class="dontshow">
+             <div class="SideNummer"></div>
           </p>
     </div>
 
