@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c8f3ab3a2b1644b8fd2e34cf9e04f3, type: 3}
+  m_Name: HighScoreData
+  m_EditorClassIdentifier: 
+  apiKey: '6d5ad9adc2e3ecc525b288b9af5719f0b6b082352715ab8f8efa03daa012e6c3 '
+  gameId: SEP2-AR-RRI
+  submitUrl: https://gamecraft.dk/leaderboard/submit_score.php
+  leaderboardUrl: https://gamecraft.dk/leaderboard/leaderboard.php
