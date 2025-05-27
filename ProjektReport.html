@@ -133,137 +133,69 @@
         
         <h2 id="Hovedafsnit">3. Hovedafsnit</h2>
 
-        <h4>Metoder</h4>
-        <p>
-            Projektet anvendte en iterativ udviklingsmetode baseret på SCRUM, hvor arbejdet blev opdelt i sprints og organiseret gennem møder og sprint-backlogs. 
-            Sprintene havde en varighed på 3-4 dage og kørte regelmæssigt fra Mandag-Torsdag & Torsdag-Mandag. I løbet af disse sprints blev der holdt daglige scrum-møder hvor der blev lavet
-            reviews og retrospection og snakket fælles om udfordringer / roadblocks. Gruppen valgte ikke at have en konstant product owner samt scrum master, men i stedet ved hver sprint planning at
-            udnævne nye gruppemedlemmer til disse roller, for at alle får mulighed for den læringsoplevelse.
-            De teknologiske valg blev truffet ud fra funktionalitetskrav og stabilitet, herunder brugen af Unity 6.3.6f1 som udviklingsplatform samt GitHub til versionsstyring og samarbejde.
-        </p>
+        <h4>Inception-Phase</h4>
 
-        <h4>Projektaktiviteter</h4>
-
-        <h5>Inception-Phase</h5>
+        <h5>
+            Krav og use case diagram
+        </h5>
         <p>
-            I dette projekt har vi anvendt Unified Process (UP) som rammeværk, og den indledende fase – Inception Phase – havde til formål at etablere en fælles forståelse af projektets vision, formål og overordnede omfang. 
-            I tråd med UP's principper fokuserede vi ikke på at definere alle krav i detaljer, men på at vurdere projektets overordnede idé, forretningsværdi og tekniske gennemførlighed. Unified Process bygger på iterativ og inkrementel udvikling, hvor krav og design gradvist formes. 
-            Ifølge Larman (2004) er målet i denne fase at etablere et fælles grundlag for projektets retning: "Inception is not the time to define all the requirements, or generate a believable estimate or project plan. That happens during elaboration" (s. 62).
-        </p>
-
-        <p>Valg af målgruppe og teknologi</p>
-        <p>
-            Vi valgte at rette fokus mod børn og unge, da flere rapporter og undersøgelser (bl.a. Bak, 2022) peger på en markant stigning i fysisk inaktivitet i denne aldersgruppe. 
-            Mobiltelefonen fylder meget i deres hverdag og bruges i stigende grad som en adgang til oplevelser – hvilket åbner mulighed for at motivere til fysisk bevægelse via den platform, de allerede engagerer sig i.
+            For at sikre, at Royal GO lever op til bruger- og forretningsbehov, er der opstillet en række funktionelle krav (se refferenec), og ikke funktionelle krav (se refference), som danner grundlag for design, implementering og test. Kravene er formuleret som user stories med fokus på brugerinteraktion.
         </p>
 
         <p>
-            På den baggrund valgte vi at udvikle en mobilapplikation baseret på Augmented Reality (AR). 
-            Dette valg blev foretaget, fordi AR på mobiltelefoner kombinerer det digitale med det fysiske rum og dermed skaber en hybrid oplevelse, som potentielt kan flytte brugerens opmærksomhed ud i det fysiske miljø. 
-            Et alternativ som f.eks. et brætspil eller et computerprogram ville ikke kunne understøtte den ønskede sammenkobling mellem bevægelse og virkelighed.
+            Ud fra disse storypoints er user case diagrammet lavet (se refference), der med individuelle use cases beskriver Royal GO. Her blev der identificeret centrale funktioner i systemet som: GPS-location, placering af viretuelle objecter i AR, butiks funktioner, cosmetics og minigames. Disse user stories og use case diagram danner grundlag for den følgende elaboration fase.
         </p>
 
-        <p>Aktiviteter i Inception Phase</p>
+        <h5>
+            Vision og business case
+        </h5>
         <p>
-            Vi påbegyndte fasen med udarbejdelsen af et velunderbygget problemfelt, som identificerede samfundsudfordringer ved fysisk inaktivitet, og formulerede en række målsætninger for, hvordan en AR-baseret spiloplevelse kunne understøtte Royal Run 2025 i Viborg. 
+            Med Royal GO ønskes at skabe en løsning, der kan motivere tilskuere til Royal Run til at bevæge sig mere. Dette gøres ved at tilbyde en smartphonebaseret oplevelse, som både er sjov, lokal og fysisk engagerende.
         </p>
-        <p style="color: red;">”Problemformuleringen henvises til bilag X.” (er ikke sikker på hvordan den skal henvises)</p>
+        
 
-        <p>
-            I denne fase gennemførte vi følgende aktiviteter og leverancer:
-        </p>
 
+        <h5>Metoder</h5>
         <p>
-            Vision og business case: Vi ønskede at skabe en løsning, der kunne motivere ikke-deltagende tilskuere til Royal Run til at bevæge sig, ved at tilbyde en mobil oplevelse, som både var sjov, lokal og fysisk engagerende.
+           For at kunne organisere og styrer projektet bruges SCRUM som arbejdes metode, i forlængelse af Unified process (UP), sammen med unified modeling language (UML). Disse valg er taget på baggrund af gruppen og projektets størrelse, samt behovet for et veldokumenteret og veltestet software.  
         </p>
 
         <p>
-            Krav og use cases: Vi udarbejdede med omkring 20 krav, som senere blev omskrevet til 7 use cases. Udvalgte use cases blev beskrevet i detaljer gennem ca. 10 use case descriptions, som vi brugte til at teste, om de opstillede krav kunne realiseres i praksis. 
-            Derudover blev et use case-diagram udarbejdet for at visualisere systemets funktionalitet og give et overblik over de vigtigste aktører og deres interaktioner med Royal GO-applikationen. Diagrammet viser, hvordan forskellige brugerroller – herunder spiller, sponsor, udvikler og arrangør – tilgår centrale funktioner som jagtspil, butik, statistik og leaderboard. 
-            Der anvendes include og extend-relationer til at indikere afhængigheder og valgfri funktionalitet (se det vedhæftede bilag)
-
+            I forbindelse med opstarten af SCRUM har vi besluttet at have sprintlænger på 3-4 dage, hvor SCRUM møder foregår mandag, og tordag. De daily meetings bliver afholdt kl 11:00, enten fysisk eller digital. Vi har derudover vedtaget at rollerne SCRUM master og Product Owner går på skift blandt medlemmerne i gruppen, en beslutning der er truffet på bagrund af vores ønske om at få størst mulig indflydelse på projektet. Desuden har vi forsøgt at organisere rolle fordelingen således at det personer med kraftige gule karaktertræk har Produkt Owner rollen i begyndelsen hvor der er plads til udforskning. Hvorimod personer med Røde karaktertræk står for rollen i afslutningen af projektet, sålede at der er fokus på at komme i mål.
         </p>
+
+        <p>
+            UP er valgt på baggrund af den systematiske og iterative natur, der spiller godt sammen med opbygningen af SCRUM. UP er et effektivt værktøj til at producere veldokumenteret, gennemtestet software af høj kvalitet, og med en udbredt brug i mere end 25 år et sikkert valg. 
+        </p>
+
+        <p>
+            UML er valgt til dokumentation, da det er meget kompatibelt med UP, med et komplet sæt af værktøjer til at dokumentere og udvikle software.
+        </p>
+
+        <p>
+            Baseret på de user stories og use case desriptions der er udført, har vi valgt at benytte Unity og github kontruktion og versionstyring af projektet. 
+        </p>
+
+        <p>
+            Vi benytter Unitys seneste version med lang tids support:  6.3.6f1. Samt de indbyggede XR pakker: XR Core Utilities v2.5.1, XR Interaction Toolkit v. 3.1.1, XR Legacy Input Helpers 2.1.11, XR Plugin Management v. 4.5.0. Disse valg er truffet ud fra tilgængeligheden af game engines med AR kompatibilitet, og holdets tekniske kompetencer. 
+        </p>
+    
+        <p>
+            Til version styring benytter vi Github Desktop, der bliver hostet af Github. Dette valg blev truffet baseret på tilgængelighed og holdets tekniske præferencer. 
+        </p>
+      
         <img src="Images/UseCaseDiagram.png" alt="UseCaseDiagram" style="width: 550px;" height="auto">
 
-        <p>
-            Planning Poker og story points: For at vurdere omfanget af opgaverne i vores projekt anvendte vi Planning Poker som metode. 
-            Hver opgave blev diskuteret og tildelt et estimat i form af story points, baseret på gruppens konsensus. Metoden gjorde det muligt at balancere realisme og planlægning i sprintstrukturen. 
-            Disse story points dannede senere grundlag for prioritering og sprintinddeling.
-        </p>
 
-        <p>
-            Planning Poker og story points: For at estimere og prioritere projektets opgaver anvendte vi Planning Poker – en anerkendt metode til opgavestimering i agile udviklingsmetoder. 
-            Den første Planning Poker-session blev afholdt online, da vi havde gruppemedlemmer som var sygemeldte og ikke kunne møde fysisk. For at sikre alles deltagelse valgte vi derfor at gennemføre Planning Poker digitalt. 
-            Da vi benyttede en gratis version af værktøjet, var vi dog begrænset til kun tre spilrunder ad gangen, hvilket betød, at vi måtte genstarte spillet manuelt efter hver tredje opgave. Det gav lidt ekstra ventetid, men påvirkede ikke vores mulighed for at nå frem til fælles estimater.
-            Metoden var særligt nyttig i den tidlige fase, hvor vi havde behov for at skabe overblik og afklare, hvilke opgaver der var mest krævende i forhold til både tid og kompleksitet. Hver deltager tildelte en opgave et antal story points ud fra sin egen vurdering af opgavens kompleksitet, usikkerhed og forventede tidsforbrug. 
-            Derefter diskuterede vi forskellene i estimaterne, og nåede frem til enighed gennem konsensus. 
-            Vi brugte en skala baseret på (1, 2, 3, 5, 8, 13, 20, 40, 100), hvilket er en almindelig praksis i SCRUM og hjælper med at undgå falsk præcision i estimering.
-        </p>
 
-        <p>
-            Et eksempel på denne estimering er opgaven:
-            “Som spiller vil jeg gerne kunne tage billeder af mig selv i augmented reality med de cosmetics jeg køber”, som blev vurderet til 40 story points, da den krævede både AR-integration, billedhåndtering og UI-design.
-            I modsætning hertil blev opgaver som “offline mode” eller “UI med få knapper” estimeret til blot 1–3 story points, da de var hurtigere at implementere og teknisk ukomplicerede.
-        </p>
+  
 
-        <p>
-            Efter den første estimeringsrunde gennemførte vi en anden vurdering, da nogle opgaver viste sig at være mere omfattende eller mindre komplekse end først antaget. Disse to runder hjalp os med at refinere vores sprintplanlægning og ressourcestyring.
-        </p>
 
-        <p>
-            Story points blev anvendt som grundlag for prioritering, sprintinddeling og arbejdsfordeling gennem hele udviklingsforløbet. Samlet set blev der estimeret 405 story points, hvilket gav os et overblik over projektets samlede arbejdsbyrde.
-        </p>
 
-        <p>
-            Teknologivalg og arkitektur: Udviklingsmiljøet blev opsat i Unity 6.3.6f1, da det understøtter både mobiludvikling og AR-komponenter via AR Foundation. Versionsstyring blev håndteret gennem GitHub, hvor vi arbejdede med branches og pull requests. 
-            Enkle mock-ups og tekniske proof-of-concepts blev anvendt til at validere løsningsidéer.
-        </p>
+  
+     
+    
 
-        <p>
-            Risikoidentifikation: I inception-fasen identificerede vi centrale tekniske og praktiske risici. Det inkluderede f.eks. potentielle problemer med GPS-nøjagtighed i bymiljøer, begrænsninger i mobildata og AR-præcision, samt risici vedrørende brugeropmærksomhed i trafikerede områder. 
-            Disse risici blev dokumenteret og vurderet med hensyn til sandsynlighed og konsekvens, og de indgår i vores arkitektur- og designovervejelser.
-        </p>
-
-        <p>
-            Tidsplan og gruppekontrakt: Projektets arbejdsindsats blev estimeret ud fra en kombination af undervisningstimer og selvstændigt udviklingsarbejde. Tidsplanen blev organiseret i korte sprintforløb á tre dage for at sikre løbende fremdrift og fleksibel prioritering. 
-            Til at understøtte dette arbejdede vi efter en SCRUM-lignende struktur og etablerede en gruppekontrakt, der fastsatte rammer for møder, kommunikation og ansvarsfordeling.
-        </p>
-
-        <p>
-            For at følge vores progression og skabe visuel transparens i projektets fremdrift, valgte vi at anvende et BurnDownChart. Selvom BurnDownCharts ikke længere er en officiel del af SCRUM-rammeværket, vurderede vi, at det var et effektivt værktøj til at skabe overblik og understøtte gruppens motivation. 
-            Diagrammet viste både det ideelle nedløb af opgaver over tid samt vores faktiske arbejdsbelastning, målt i story points.
-        </p>
-
-        <p>
-            I starten lå den faktiske fremdrift bag forventningerne, hovedsageligt fordi vi havde en påskeferie. Dette kan ses i diagrammet, hvor den faktiske kurve flader ud i flere dage (f.eks. fra 12/04 til 22/04). Senere i forløbet accelererede opgaveløsningen markant, hvilket resulterede i en stejl nedgang i resterende opgaver fra d. 15/05 og frem til aflevering.
-        </p>
-
-        <p>
-            Som det ses, blev projektet gradvist indhentet, og vi afsluttede arbejdet med næsten alle kerneopgaver fuldført til tiden.
-            
-        </p>
-        <img src="Images/BurnDownCharts .png" alt="UseCaseDiagram" style="width: 500px;" height="auto">
-
-        <p>Tidsplan</p>
-        <ul>
-            <li>12/03 kl. 23:59 – Godkendelse af projektbeskrivelse</li>
-            <p>Undervisning: 5 dage × 3 timer = 15 timer</p>
-
-            <li>13/03 – 07/05 – Forberedende arbejde</li>
-            <p>Undervisning: 6 dage × 3 timer = 18 timer</p>
-            <p>Selvstændigt arbejde: 30 dage × 3,8 timer = 114 timer</p>
-
-            <li>08/05 – 26/05 – Projektperiode</li>
-            <p>Selvstændigt: 10 dage × 7 timer = 70 timer</p>
-            <p>Crunch time: 4 dage × 15 timer = 60 timer</p>
-
-            <li>27/05 kl. 00:00 – Aflevering</li>
-        </ul>
-        <p>Samlet arbejdstid: ca. 277 timer pr. person</p>
-
-        <p>
-            Refleksion over metoden
-        </p>
 
         <p>
             Ved at begrænse dokumentation og krav i inception-fasen fulgte vi intentionerne i Unified Process. Som Larman (2004) beskriver, er formålet i inception ikke at færdiggøre alle krav eller planer, men at sikre et grundlag for det videre arbejde. 
