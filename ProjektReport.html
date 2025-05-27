@@ -312,6 +312,79 @@
         <h4>Resultater</h4>
            
 
+        <h3>Elaboration fase</h3>
+
+        <h4>Dokumentation af systemkrav</h4>
+        <img src="Images/usecasediagram.png" alt="DevArt" class="image">
+        <p>
+            I forbindelse med dokumentationen af systemkravene til projektet blev der med udgangspunkt i de opstillede user stories udviklet et overordnet use case-diagram. (Se bilag XXX) 
+            Dette diagram havde til formål at give et struktureret overblik over systemets funktionalitet samt de forskellige aktørers interaktion med systemet. 
+            Gennem analysearbejdet blev der identificeret fire primære aktører: Spilleren, Sponsorer, Udviklere og Arrangører. Til disse aktører blev der knyttet i alt ni use cases, 
+            der repræsenterer centrale funktioner i applikationen. Fokus i elaboration-fasen blev lagt på at dokumentere hovedparten af disse use cases grundigt, 
+            da dette var essentielt for at opnå et fælles forståelsesgrundlag i gruppen, samt for at kunne danne en stærk arkitektonisk basis for den videre systemudvikling.
+        </p>
+
+        <h4>Uddybelse af Use cases</h4>
+
+        <p>
+            Efter fastlæggelsen af det overordnede use case-diagram blev næste skridt at foretage en systematisk og detaljeret analyse af de enkelte use cases. 
+            I denne proces blev det prioriteret at fokusere på de use cases, som involverer spilleren direkte, idet brugerens oplevelse og interaktion med spillet er det centrale mål af projektet. 
+            Det blev vurderet, at en dybdegående forståelse af disse funktioner var afgørende for at kunne træffe kvalificerede beslutninger vedrørende systemets design og implementering.
+            Derimod blev visse use cases, såsom "Åben debugmenu" (Se bilag XXX), bevidst nedprioriteret i denne fase. Dette skyldes i dette eksempel, at funktionerne typisk først bliver relevante under selve udviklingen, 
+            hvor behovet for fejlsøgning og datavisualisering i systemet bliver tydeligere. På tilsvarende vis blev dokumentationen af use cases som "Submit Score" (Se bilag XXX) og "Se LeaderBord" (Se bilag XXX) udsat til construction-fasen, 
+            da disse funktionaliteter i højere grad blev vurderet som sekundære og først relevante i den senere del af projektets levetid hvis tid og resourcer tillod at implementere det. 
+            Beslutningen blev truffet ud fra en vurdering af opgavens samlede omfang og prioritering, med det formål at allokere udviklingsressourcerne mest hensigtsmæssigt.
+        </p>
+
+        <p>
+            Med henblik på at danne et grundlag for kodningen og implementationen af de valgte usecases under elaboration fasen blev en række af aktivitetsdiagrammer opsat. 
+            Heriblandt aktivitetsdiagrammet for usecaset "Åben Jagt-Spil", (Se bilag XXX & bilag XXX (Første er for use caset, andet for aktivitetsdiagrammet.)) som gruppen identificerede som værende
+            kernedelen af projektet. Aktivitetsdiagrammet dækker over den endelige implementation og kodning skabt under elaboration fasen, som sammen med klassediagrammet (Se bilag XXX) dannede grundlag
+            for opbygningen af systemet som skulle understøtte vores usecases. 
+        </p>
+
+        <p>
+            Under udarbejdelsen af disse modeller blev det tydeligt, at visse tekniske aspekter, herunder realtidsopdatering af GPS-data og anvendelsen af plane detection til placering af AR-objekter, 
+            ikke var tilstrækkeligt afdækket i de oprindelige use case-beskrivelser. Elaborationsfasen gjorde det dermed muligt at klarlægge teknologiske krav, 
+            som ellers kunne være blevet overset, og som var afgørende for systemets funktionalitet.
+        </p>
+
+        <p>
+            Et system sequence diagram blev ligeledes udviklet for at skabe et mere præcist overblik over de dynamiske interaktioner mellem systemets komponenter, 
+            samt rækkefølgen hvori objekter og instanser oprettes og interagerer med hinanden. (Se bilag XXX) 
+            Diagrammet bidrog til at identificere nødvendige afhængigheder og databehov som yderligere hjælper med den fælles forståelse af omfanget samt funktionaliteten på projektet.
+        </p>
+
+        <h4>Strukturering af projektet</h4>
+        <img src="Images/packagediagram.png" alt="DevArt" class="image">
+        <p>
+            Inden implementationen og kodningen af kernedelen af spillet påbegyndtes blev et package diagram oprettet med henblik på at sikre en konkret struktur og arkitektur til projektets opbygning. (Se bilag XXX)
+            Package diagrammet sikrer en dokumenteret struktur og giver yderligere indblik i de påkrævede systemer der skal til for at opfylde kravene specificeret fra use cases. Yderligere ved udarbejdelsen af
+            diagrammet blev det på baggrund af single responsibility besluttet at dele håndteringen af GPS og AR-funktionaliteter i seperate moduler for at sikre vedligeholdelsen på den lange bane.
+        </p>
+
+
+        <h4>Dannelse af kerne-arkitektur og prototype</h4>
+
+        <p>
+            Elaborationsfasens sidste del fokuserede på implementeringen af det identificerede kernesystem, som skulle danne grundlaget for spillets centrale funktionalitet. 
+            Det indebar udvikling af systemer til behandling af GPS- og koordinatdata samt oprettelsen af funktionalitet til instansiering og håndtering af objekter i AR-verdenen. 
+            Resultatet var en funktionel prototype, der demonstrerede, hvordan "kronjuveler" kunne placeres i AR-verdenen og interageres med af spilleren, 
+            samtidig med at spillerens lokationsdata blev opsamlet og gemt i form af længde- og breddegrader.
+            Denne prototype havde ikke kun til formål at verificere funktionaliteten, men tjente også som et vigtigt værktøj til at evaluere teknologivalg, 
+            systemarkitektur og arbejdsgange i Unity. Prototypen gav desuden gruppen et realistisk indblik i tidsforbruget ved implementering af diverse komponenter, 
+            hvilket viste sig at være afgørende i en mere realistisk og præcis planlægning af de kommende udviklingssprints.
+        </p>
+
+        <h4>Konklusion på elaboration-fasen</h4>
+
+        <p>
+            Elaboration-fasen spillede en essentiel rolle i at forme det endelige systemdesign og sikre, at gruppen havde et solidt teknisk og forståelsesmæssigt fundament for den videre udvikling. 
+            Gennem udvikling af modeller, prototyper og systembeskrivelser blev centrale krav til systemet gjordt konkrete.
+            Fasen bekræftede de valgte teknologier og skabte en fælles forståelse for systemets opbygning. Med udgangspunkt i det arbejde, 
+            der blev udført i denne fase, stod gruppen med en forøget forståelse for omfanget af projektet, kravene bag og mængden af tid diverse opgaver fremadrettet bør tage.
+        </p>
+
         <h2 id="Diskution">4. Diskussion</h2>
         <p>
             Der er ikke nogle objektive resultater at diskutere, da der ikke er udført nogle test, eller indsamlet noget data i dette projekt. Ingen af de benyttede metoder i projektet har givet afkast i en objektiv indsigt, indenfor projektets rammer.
