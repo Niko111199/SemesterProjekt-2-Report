@@ -214,7 +214,7 @@
             Det blev vurderet, at en dybdegående forståelse af disse funktioner var afgørende for at kunne træffe kvalificerede beslutninger vedrørende systemets design og implementering.
             Derimod blev visse use cases, såsom "Åben debugmenu" (bilag B8), bevidst nedprioriteret i denne fase. Dette skyldes i dette eksempel, at funktionerne typisk først bliver relevante under selve udviklingen, 
             hvor behovet for fejlsøgning og datavisualisering i systemet bliver tydeligere. På tilsvarende vis blev dokumentationen af use cases som "Submit Score" (bilag B5) og "Se LeaderBord" (bilag B3) udsat til construction-fasen, 
-            da disse funktionaliteter i højere grad blev vurderet som sekundære og først relevante i den senere del af projektets levetid hvis tid og resourcer tillod at implementere det. 
+            da disse funktionaliteter i højere grad blev vurderet som sekundære og først relevante i den senere del af projektets levetid hvis tid og ressourcer tillod at implementere det. 
             Beslutningen blev truffet ud fra en vurdering af opgavens samlede omfang og prioritering, med det formål at allokere udviklingsressourcerne mest hensigtsmæssigt.
         </p>
 
@@ -239,7 +239,7 @@
 
         <h4>Strukturering af projektet</h4>
         <p>
-            Inden implementationen og kodningen af kernedelen af spillet påbegyndtes blev et package diagram oprettet med henblik på at sikre en konkret struktur og arkitektur til projektets opbygning. (bilag C11)
+            Inden implementationen og kodningen af kernedelen af spillet påbegyndtes, blev et package diagram oprettet med henblik på at sikre en konkret struktur og arkitektur til projektets opbygning. (bilag C11)
             Package diagrammet sikrer en dokumenteret struktur og giver yderligere indblik i de påkrævede systemer der skal til for at opfylde kravene specificeret fra use cases. Yderligere ved udarbejdelsen af
             diagrammet blev det på baggrund af single responsibility besluttet at dele håndteringen af GPS og AR-funktionaliteter i seperate moduler for at sikre vedligeholdelsen på den lange bane.
         </p>
@@ -285,7 +285,7 @@
         </p>
 
         <p>
-            Prefabs er primært benyttet til tre formål: at håndtere objekter med geometri så de kan bruges somm flyweight, at organisere scripts og componenter til mere komplekse funktioner, og til sidst til at samle hele scener. Sidst nævnte er primært for at undgå git-relateret problemer med Unitys scener, men det har også fordele når det kommer til integrations test af scener.
+            Prefabs er primært benyttet til tre formål: at håndtere objekter med geometri så de kan bruges somm flyweight, at organisere scripts og componenter til mere komplekse funktioner, og til sidst til at samle hele scener. Sidst nævnte er primært for at undgå git-relateret problemer med Unitys scener, men det har også fordele når det kommer til integrations test.
         </p>
 
         <p>
@@ -297,7 +297,7 @@
         </h4>
 
         <p>
-            Der er fem overordnede systemer i Royal GO, NavigationsSystemet, AR scenen, UI, persistency og Minigames. Disse fem systemer kan beskriver kernen i spillet, hvortil der kommer der andre supporterende systemer for spiloplevelsen, som fx butikken og dens varer. Dette afsnit vil beskæftige sig med de fem overordnede systemer.
+            Der er fire overordnede systemer i Royal GO, NavigationsSystemet, AR scenen, persistency og Minigames. Disse fire systemer kan beskriver kernen i spillet, hvortil der kommer andre supporterende systemer for spiloplevelsen, som fx butikken og dens varer. Dette afsnit vil beskæftige sig med de fem overordnede systemer.
         </p>
 
         <h5>
@@ -381,7 +381,7 @@
         </h5>
 
         <p>
-            For at kunne udføre unit tests af system er det som nævnt nødvendigt at arbejde med rene C# klasser. Samtidig skal der også være nogle reelle beregninger og input at beregne for at kunne bevise funktionaliteten. Derfor er Navigations systemet det mest gennemtestede system, da det ikke netop ikke bruger Monobehaviours, og skal håndtere en masse forskellige input. Det er samtidig det system der har den største interne kompleksitet, som følge af facade mønsterets struktur. 
+            For at kunne udføre unit tests af system er det som nævnt nødvendigt at arbejde med rene C# klasser. Samtidig skal der også være nogle reelle beregninger og input at beregne for at kunne bevise funktionaliteten. Derfor er Navigations systemet det mest gennemtestede system, da det netop ikke bruger Monobehaviours, og skal håndtere en masse forskellige input. Det er samtidig det system der har den største interne kompleksitet, som følge af facade mønsterets struktur. 
         </p>
 
         <p>
@@ -406,7 +406,7 @@
         </p>
         
         <P>
-            I projekt blev transition-fasen ikke formelt udført,
+            I projektet blev transition-fasen ikke formelt udført,
             da udviklingsforløbet afsluttes med aflevering og ikke en egentlig produktlancering.
             Dog kan det argumenteres for, at selve afleveringstidspunktet fungerer som en naturlig overgang til transition-fasen.
             Hvis systemet videreudvikles eller afprøves under selve Royal Run-eventen,
@@ -432,7 +432,7 @@
             For os ville feedbacken fra Royal Run-deltagere kunne give værdifuld indsigt i,
             hvorvidt spillets AR-funktioner er intuitive, engagerende og teknisk velfungerende i praksis,
             og det ville være på baggrund af dette, at der ville kunne dannes endegyldige konklusioner,
-            omkring opfyldelsen af vores problemformulering, som på nuværende tidspunkt står uden en endelig konklusion da,
+            omkring opfyldelsen af vores problemformulering, som på nuværende tidspunkt står uden en endelig konklusion, da
             disse informationer fra brugeren omkring applikationen er manglende.
         </p>
 
@@ -440,18 +440,18 @@
             Til sidst ville det også være under transition fasen af systemet skulle blive Deployed,
             i dette tilfælde som førnævnt ville appen ikke fuldt blive lanceret,
             og grundet generelle udfordring omhandlende at få Applikationer på Google Play inden for kort tid,
-            ville det tænkes at appen (bilag K2) ville blive åbnet for til royalrun for ”tester” igennem en alternativ metode,
+            ville det tænkes at appen(bilag K2) ville blive åbnen for ”tester” igennem en alternativ metode under Royal Run - 
             enten ved installation direkte fra unity,
-            eller en opsætning af en hjemmeside med guide til hvordan brugeren selvstændigt kan hente appen ned på deres telefon,
-            dette ville fungere som en alternativ løsning for at undgå de gennerale udfordring omkring google play.
+            eller en opsætning af en hjemmeside med guide til hvordan brugeren selvstændigt kan hente appen ned på deres telefon.
+            dette ville fungere som en alternativ løsning for at undgå de generelle udfordring omkring google play.
          </p>
 
         <h4>Resultater</h4>
 
         <p>
-            på nuværende tidspunkt i projeket, er det ikke muligt at danne resultater på baggrund af det inværende arbjede, efter som 
-            at data omkring, hvorvidt at ROYAL GO, Realt har en invirking på tilskuere til Royal run, kommer til at være aktive, dog 
-            ville information omkring dette kunne formidels til eksamen, da data vil blive indsamlet under royal som der derved
+            på nuværende tidspunkt i projeket, er det ikke muligt at danne resultater på baggrund af det nuværende arbejde, efter som 
+            at data omkring, hvorvidt at ROYAL GO. Reelt har en invirking på tilskuere til Royal run, kommer til at være aktive, dog 
+            ville information omkring dette kunne formidels til eksamen, da data vil blive indsamlet under Royal Run som der derved
             kan analyseres og dannes resultater på.
         </p>
 
