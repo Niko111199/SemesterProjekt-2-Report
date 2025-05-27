@@ -215,7 +215,7 @@
             Det blev vurderet, at en dybdegående forståelse af disse funktioner var afgørende for at kunne træffe kvalificerede beslutninger vedrørende systemets design og implementering.
             Derimod blev visse use cases, såsom "Åben debugmenu" (Se bilag B8), bevidst nedprioriteret i denne fase. Dette skyldes i dette eksempel, at funktionerne typisk først bliver relevante under selve udviklingen, 
             hvor behovet for fejlsøgning og datavisualisering i systemet bliver tydeligere. På tilsvarende vis blev dokumentationen af use cases som "Submit Score" (Se bilag B5) og "Se LeaderBord" (Se bilag B3) udsat til construction-fasen, 
-            da disse funktionaliteter i højere grad blev vurderet som sekundære og først relevante i den senere del af projektets levetid hvis tid og resourcer tillod at implementere det. 
+            da disse funktionaliteter i højere grad blev vurderet som sekundære og først relevante i den senere del af projektets levetid hvis tid og ressourcer tillod at implementere det. 
             Beslutningen blev truffet ud fra en vurdering af opgavens samlede omfang og prioritering, med det formål at allokere udviklingsressourcerne mest hensigtsmæssigt.
         </p>
 
@@ -241,7 +241,7 @@
         <h4>Strukturering af projektet</h4>
         <img src="Images/packagediagram.png" alt="DevArt" class="image">
         <p>
-            Inden implementationen og kodningen af kernedelen af spillet påbegyndtes blev et package diagram oprettet med henblik på at sikre en konkret struktur og arkitektur til projektets opbygning. (Se bilag C11)
+            Inden implementationen og kodningen af kernedelen af spillet påbegyndtes, blev et package diagram oprettet med henblik på at sikre en konkret struktur og arkitektur til projektets opbygning. (Se bilag C11)
             Package diagrammet sikrer en dokumenteret struktur og giver yderligere indblik i de påkrævede systemer der skal til for at opfylde kravene specificeret fra use cases. Yderligere ved udarbejdelsen af
             diagrammet blev det på baggrund af single responsibility besluttet at dele håndteringen af GPS og AR-funktionaliteter i seperate moduler for at sikre vedligeholdelsen på den lange bane.
         </p>
@@ -271,7 +271,7 @@
         <h3>Construction</h3>
 
         <p>
-            Følgende afsnit beskriver construktions fasen af Royal GO. Her gennemgås hvordan design og analyse er blevet implementeret i arkiteturen, samt hvordan integrationen med Unitys editor er håndteret. I dette afsnit vil der blive referetet intensivt til Design klasse diagrammet (indsæt reff), og Highscore sekvens diagrammet (indsæt reff) som herfra vil benævnes som henholdsvis DKD (design klasse diagram) og HSD (highscore sekvens diagram). 
+            Følgende afsnit beskriver construktions fasen af Royal GO. Her gennemgås hvordan design og analyse er blevet implementeret i arkiteturen, samt hvordan integrationen med Unitys editor er håndteret. I dette afsnit vil der blive refereret intensivt til Design klasse diagrammet (indsæt reff), og Highscore sekvens diagrammet (indsæt reff) som herfra vil benævnes som henholdsvis DKD (design klasse diagram) og HSD (highscore sekvens diagram). 
         </p>
 
         <h4>
@@ -279,7 +279,8 @@
         </h4>
 
         <p>
-            Royal Runs business kode er primært skrevet i rene c# klasser, hvor Monobehaviour klasser er forsøgt at holde til et minimum, og kun hvor der interageres direkte med Unity editoren. Som det ses på DKD under klassen: Monobehaviour, der  repræsentere integrationen mellem vores model og Unity. 
+            Royal Runs business kode er primært skrevet i rene c# klasser, hvor Monobehaviour klasser er forsøgt at holde til et minimum, og kun hvor der interageres direkte med Unity editoren. 
+            Dette kan ses på DKD hvor klassen "Monobehaviour" ræpræsenterer integrationen mellem vores model og Unity. 
         </p>
 
         <p>
@@ -287,7 +288,7 @@
         </p>
 
         <p>
-            Prefabs er primært benyttet til tre formål: at håndtere objekter med geometri så de kan bruges somm flyweight, at organisere scripts og componenter til mere komplekse funktioner, og til sidst til at samle hele scener. Sidst nævnte er primært for at undgå git-relateret problemer med Unitys scener, men det har også fordele når det kommer til integrations test af scener.
+            Prefabs er primært benyttet til tre formål: at håndtere objekter med geometri så de kan bruges somm flyweight, at organisere scripts og componenter til mere komplekse funktioner, og til sidst til at samle hele scener. Sidst nævnte er primært for at undgå git-relateret problemer med Unitys scener, men det har også fordele når det kommer til integrations test.
         </p>
 
         <p>
@@ -299,7 +300,7 @@
         </h4>
 
         <p>
-            Der er fem overordnede systemer i Royal GO, NavigationsSystemet, AR scenen, UI, persistency og Minigames. Disse fem systemer kan beskriver kernen i spillet, hvortil der kommer der andre supporterende systemer for spiloplevelsen, som fx butikken og dens varer. Dette afsnit vil beskæftige sig med de fem overordnede systemer.
+            Der er fire overordnede systemer i Royal GO, NavigationsSystemet, AR scenen, persistency og Minigames. Disse fire systemer kan beskriver kernen i spillet, hvortil der kommer andre supporterende systemer for spiloplevelsen, som fx butikken og dens varer. Dette afsnit vil beskæftige sig med de fem overordnede systemer.
         </p>
 
         <h5>
@@ -311,15 +312,15 @@
         </p>
 
         <p>
-            Facademønstret bliver brugt til at samle de mange klasser der bruges i indsamling og beregning. Bag facaden indsamler klasserne GPSSystem, og Kompas system data fra telefonens sensorer, omregner dette til mere brugbare informatiner. Disse informationer samles af: NavigationSystemData, der herefter bliver broadcastet til alle klasser der har abonneret på den i observer mønsteret. 
+            Facademønstret bliver brugt til at samle de mange klasser der bruges i indsamling og beregning. Bag facaden indsamler klasserne GPSSystem, og Kompassystem data fra telefonens sensorer, omregner dette til mere brugbare informationer. Disse informationer samles af: NavigationSystemData, der herefter bliver broadcastet til alle klasser der har abonneret på den i observer mønsteret. 
         </p>
 
         <p>
-            Observeren bruges til at fjerne afhængigheden fra de dybe databaserede lag, og for at sikre at den geografiske data er let tilgængelig i hele systemet. Det er også herfra muligt at styre refresh-raten på den interne logik, da observereen transmitter baseret på en udvikler defineret timer. I den nuvrærende udgave af Royal Run er det de to klasser: JuvelController og KorneController der primært er afhængige af indputtet fra geolocationen, da disse styre spillets centrale interaktioner: at finde en kron juvel, eller en konge krone. 
+            Observeren bruges til at fjerne afhængigheden fra de dybe databaserede lag, og for at sikre at den geografiske data er let tilgængelig i hele systemet. Det er også herfra muligt at styre refresh-raten på den interne logik, da observereen transmitter baseret på en udvikler defineret timer. I den nuvrærende udgave af Royal Run er det de to klasser: JuvelController og KroneController der primært er afhængige af indputtet fra geolocationen, da disse styre spillets centrale interaktioner: at finde en kronjuvel, eller en kongekrone. 
         </p>
 
         <p>
-            Endeligt, er singleton mønstret implementeret, da det er fordelagtigt at undgå flere forskellige instancer af denne klasse. Da NavigationsSystemDataen boradcastes af en timer, kan flere instancer nemt kunne lede til alvorlige performance problemer, der er besværlige at fejlsøge for.
+            Endeligt, er singleton mønstret implementeret, da det er fordelagtigt at undgå flere forskellige instancer af denne klasse. Da NavigationsSystemDataen broadcastes af en timer, kan flere instancer nemt kunne lede til alvorlige performance problemer, der er besværlige at fejlsøge for.
         </p>
 
         <h5>
@@ -327,7 +328,7 @@
         </h5>
 
         <p>
-            Vi benytter Unity’s XR pakke til at styrer AR oplevelse i vores spil. Denne pakke indeholder værktøjer til at interagere og manipulere en spilverden overlagt en live video feed af virkeligheden. Sov vist på DKD, er Royal GOs arkitektur opbygget omkring et enkelt indgangspunkt: ARFactory prefabet. Dette prefab består af to hoved komponenter: WorldSpawnController – der er ansvarlig for at styre hvad og hvornår der skal spawne, og WorldElementSpawner - der håndtere logikken for hvordan det kan spawnes. Først nævnte har en række under controllere der signallere om kriterierne for en spawn er opfyldt, og på HSD vises sekvensen for at spawne en juvel under punkt 11 og frem. Sekvensen 11 til 11.1.1 viser hvordan WorldSpawnControlleren modtager signal fra JuvelControlleren, mens sekvens 11.1.1.1.1.1 viser hvordan WorldElementSpawneren begynder spawn processen. 
+            Vi benytter Unity’s XR pakke til at styrer AR oplevelsen i vores spil. Denne pakke indeholder værktøjer til at interagere og manipulere en spilverden overlagt en live video feed af virkeligheden. Som vist på DKD, er Royal GOs arkitektur opbygget omkring et enkelt indgangspunkt: ARFactory prefabet. Dette prefab består af to hoved komponenter: WorldSpawnController – der er ansvarlig for at styre hvad og hvornår der skal spawne, og WorldElementSpawner - der håndtere logikken for hvordan det kan spawnes. Først nævnte har en række undercontrollerer der signallere om kriterierne for en spawn er opfyldt, og på HSD vises sekvensen for at spawne en juvel under punkt 11 og frem. Sekvensen 11 til 11.1.1 viser hvordan WorldSpawnControlleren modtager signal fra JuvelControlleren, mens sekvens 11.1.1.1.1.1 viser hvordan WorldElementSpawneren begynder spawnprocessen. 
         </p>
 
         <p>
@@ -351,11 +352,11 @@
         </p>
 
         <p>
-            HSD beskriver hvordan en spiller starter spillet, får point fra en juvel, og hvordan disse point gemmes lokalt. Mest interessant for persistens er sekvens 15.111 til 15.1.1.4.1.1, hvor det kan ses at ScoreTrackerSeparated (indsæt kilde henvisning) bruges efter guldet er tilføjet, og kalder AddScore() (line refference?) til at overføre den nye score til trackeren, der så gemmer den med SaveScore() ()line reff?). Scoren gemmes i PlayerPref under key’en: ”GemScore” der overskrives ved hver ny entry.
+            HSD beskriver hvordan en spiller starter spillet, får point fra en juvel, og hvordan disse point gemmes lokalt. Mest interessant for persistens er sekvens 15.1.1.1 til 15.1.1.4.1.1, hvor det kan ses at ScoreTrackerSeparated (indsæt kilde henvisning) bruges efter guldet er tilføjet, og kalder AddScore() (line refference?) til at overføre den nye score til trackeren, der så gemmer den med SaveScore() ()line reff?). Scoren gemmes i PlayerPref under key’en: ”GemScore” der overskrives ved hver ny entry.
         </p>
 
         <p>
-            Den online highscore styres af et trediepart system der er designet, leveret og hostet af Pelle Sølvkjær Christensen. Klassen der benyttes hedder AddScore (indsæt reference)  hvor metoden SubmitScore(string 	initials, int score) bliver kaldt. Dette score board viser de 10 højeste entries, og kan kaldes med metoden GetLeaderboard fra klassen LeaderBorad (indsæt reff).
+            Den online highscore styres af et trediepart system der er designet, leveret og hostet af Pelle Sølvkjær Christensen. Klassen der benyttes hedder AddScore (indsæt reference)  hvor metoden SubmitScore(string 	initials, int score) bliver kaldt. Dette score board viser de 10 højeste entries, og kan kaldes med metoden GetLeaderboard fra klassen LeaderBoard (indsæt reff).
         </p>
 
 
@@ -364,7 +365,7 @@
         </h4>
 
         <p>
-            At teste et system i Unity kan gribes an på to måder: white box og black box. Her i construction fasen er der primært benyttet whitebox testing, ved at skrive automatiserede test. Til det har unit en række værktøjer, hvoraf der i dette projekt er benyttet editor test (unit test) og play mode test (integration test).  Den praktiske forskel på disse test er at unit testen ikke kan teste scripts der nedarver fra Monobehaviour, da de har brug for en aktiv scene til at fungere. Hvorimod integrationstesten simulerer en afspillet scene. 
+            At teste et system i Unity kan gribes an på to måder: white box og black box. Her i construction fasen er der primært benyttet whitebox testing, ved at skrive automatiserede test. Til det har Unity en række værktøjer, hvoraf der i dette projekt er benyttet editor test (unit test) og play mode test (integration test).  Den praktiske forskel på disse test er at unit testen ikke kan teste scripts der nedarver fra Monobehaviour, da de har brug for en aktiv scene til at fungere. Hvorimod integrationstesten simulerer en afspillet scene. 
         </p>
 
         <h5>    
@@ -372,7 +373,7 @@
         </h5>
 
         <p>
-            For at kunne udføre unit tests af system er det som nævnt nødvendigt at arbejde med rene C# klasser. Samtidig skal der også være nogle reelle beregninger og input at beregne for at kunne bevise funktionaliteten. Derfor er Navigations systemet det mest gennemtestede system, da det ikke netop ikke bruger Monobehaviours, og skal håndtere en masse forskellige input. Det er samtidig det system der har den største interne kompleksitet, som følge af facade mønsterets struktur. 
+            For at kunne udføre unit tests af system er det som nævnt nødvendigt at arbejde med rene C# klasser. Samtidig skal der også være nogle reelle beregninger og input at beregne for at kunne bevise funktionaliteten. Derfor er Navigations systemet det mest gennemtestede system, da det netop ikke bruger Monobehaviours, og skal håndtere en masse forskellige input. Det er samtidig det system der har den største interne kompleksitet, som følge af facade mønsterets struktur. 
         </p>
 
         <p>
@@ -397,7 +398,7 @@
         </p>
         
         <P>
-            I projekt blev transition-fasen ikke formelt udført,
+            I projektet blev transition-fasen ikke formelt udført,
             da udviklingsforløbet afsluttes med aflevering og ikke en egentlig produktlancering.
             Dog kan det argumenteres for, at selve afleveringstidspunktet fungerer som en naturlig overgang til transition-fasen.
             Hvis systemet videreudvikles eller afprøves under selve Royal Run-eventen,
@@ -423,7 +424,7 @@
             For os ville feedbacken fra Royal Run-deltagere kunne give værdifuld indsigt i,
             hvorvidt spillets AR-funktioner er intuitive, engagerende og teknisk velfungerende i praksis,
             og det ville være på baggrund af dette, at der ville kunne dannes endegyldige konklusioner,
-            omkring opfyldelsen af vores problemformulering, som på nuværende tidspunkt står uden en endelig konklusion da,
+            omkring opfyldelsen af vores problemformulering, som på nuværende tidspunkt står uden en endelig konklusion, da
             disse informationer fra brugeren omkring applikationen er manglende.
         </p>
 
@@ -431,18 +432,18 @@
             Til sidst ville det også være under transition fasen af systemet skulle blive Deployed,
             i dette tilfælde som førnævnt ville appen ikke fuldt blive lanceret,
             og grundet generelle udfordring omhandlende at få Applikationer på Google Play inden for kort tid,
-            ville det tænkes at appen ville blive åbnet for til royalrun for ”tester” igennem en alternativ metode,
+            ville det tænkes at appen ville blive åbnen for ”tester” igennem en alternativ metode under Royal Run - 
             enten ved installation direkte fra unity,
-            eller en opsætning af en hjemmeside med guide til hvordan brugeren selvstændigt kan hente appen ned på deres telefon,
-            dette ville fungere som en alternativ løsning for at undgå de gennerale udfordring omkring google play.
+            eller en opsætning af en hjemmeside med guide til hvordan brugeren selvstændigt kan hente appen ned på deres telefon.
+            dette ville fungere som en alternativ løsning for at undgå de generelle udfordring omkring google play.
          </p>
 
         <h4>Resultater</h4>
 
         <p>
-            på nuværende tidspunkt i projeket, er det ikke muligt at danne resultater på baggrund af det inværende arbjede, efter som 
-            at data omkring, hvorvidt at ROYAL GO, Realt har en invirking på tilskuere til Royal run, kommer til at være aktive, dog 
-            ville information omkring dette kunne formidels til eksamen, da data vil blive indsamlet under royal som der derved
+            på nuværende tidspunkt i projeket, er det ikke muligt at danne resultater på baggrund af det nuværende arbejde, efter som 
+            at data omkring, hvorvidt at ROYAL GO. Reelt har en invirking på tilskuere til Royal run, kommer til at være aktive, dog 
+            ville information omkring dette kunne formidels til eksamen, da data vil blive indsamlet under Royal Run som der derved
             kan analyseres og dannes resultater på.
         </p>
 
