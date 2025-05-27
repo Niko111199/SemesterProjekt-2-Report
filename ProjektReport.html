@@ -133,6 +133,132 @@
 
         <h4>Projektaktiviteter</h4>
 
+        <h5>Inception-Phase</h5>
+        <p>
+            I dette projekt har vi anvendt Unified Process (UP) som rammeværk, og den indledende fase – Inception Phase – havde til formål at etablere en fælles forståelse af projektets vision, formål og overordnede omfang. 
+            I tråd med UP's principper fokuserede vi ikke på at definere alle krav i detaljer, men på at vurdere projektets overordnede idé, forretningsværdi og tekniske gennemførlighed. Unified Process bygger på iterativ og inkrementel udvikling, hvor krav og design gradvist formes. 
+            Ifølge Larman (2004) er målet i denne fase at etablere et fælles grundlag for projektets retning: "Inception is not the time to define all the requirements, or generate a believable estimate or project plan. That happens during elaboration" (s. 62).
+        </p>
+
+        <p>Valg af målgruppe og teknologi</p>
+        <p>
+            Vi valgte at rette fokus mod børn og unge, da flere rapporter og undersøgelser (bl.a. Bak, 2022) peger på en markant stigning i fysisk inaktivitet i denne aldersgruppe. 
+            Mobiltelefonen fylder meget i deres hverdag og bruges i stigende grad som en adgang til oplevelser – hvilket åbner mulighed for at motivere til fysisk bevægelse via den platform, de allerede engagerer sig i.
+        </p>
+
+        <p>
+            På den baggrund valgte vi at udvikle en mobilapplikation baseret på Augmented Reality (AR). 
+            Dette valg blev foretaget, fordi AR på mobiltelefoner kombinerer det digitale med det fysiske rum og dermed skaber en hybrid oplevelse, som potentielt kan flytte brugerens opmærksomhed ud i det fysiske miljø. 
+            Et alternativ som f.eks. et brætspil eller et computerprogram ville ikke kunne understøtte den ønskede sammenkobling mellem bevægelse og virkelighed.
+        </p>
+
+        <p>Aktiviteter i Inception Phase</p>
+        <p>
+            Vi påbegyndte fasen med udarbejdelsen af et velunderbygget problemfelt, som identificerede samfundsudfordringer ved fysisk inaktivitet, og formulerede en række målsætninger for, hvordan en AR-baseret spiloplevelse kunne understøtte Royal Run 2025 i Viborg. 
+        </p>
+        <p style="color: red;">”Problemformuleringen henvises til bilag X.” (er ikke sikker på hvordan den skal henvises)</p>
+
+        <p>
+            I denne fase gennemførte vi følgende aktiviteter og leverancer:
+        </p>
+
+        <p>
+            Vision og business case: Vi ønskede at skabe en løsning, der kunne motivere ikke-deltagende tilskuere til Royal Run til at bevæge sig, ved at tilbyde en mobil oplevelse, som både var sjov, lokal og fysisk engagerende.
+        </p>
+
+        <p>
+            Krav og use cases: Vi udarbejdede med omkring 20 krav, som senere blev omskrevet til 7 use cases. Udvalgte use cases blev beskrevet i detaljer gennem ca. 10 use case descriptions, som vi brugte til at teste, om de opstillede krav kunne realiseres i praksis. 
+            Derudover blev et use case-diagram udarbejdet for at visualisere systemets funktionalitet og give et overblik over de vigtigste aktører og deres interaktioner med Royal GO-applikationen. Diagrammet viser, hvordan forskellige brugerroller – herunder spiller, sponsor, udvikler og arrangør – tilgår centrale funktioner som jagtspil, butik, statistik og leaderboard. 
+            Der anvendes include og extend-relationer til at indikere afhængigheder og valgfri funktionalitet (se det vedhæftede bilag)
+
+        </p>
+        <img src="Images/UseCaseDiagram.png" alt="UseCaseDiagram">
+
+        <p>
+            Planning Poker og story points: For at vurdere omfanget af opgaverne i vores projekt anvendte vi Planning Poker som metode. 
+            Hver opgave blev diskuteret og tildelt et estimat i form af story points, baseret på gruppens konsensus. Metoden gjorde det muligt at balancere realisme og planlægning i sprintstrukturen. 
+            Disse story points dannede senere grundlag for prioritering og sprintinddeling.
+        </p>
+
+        <p>
+            Planning Poker og story points: For at estimere og prioritere projektets opgaver anvendte vi Planning Poker – en anerkendt metode til opgavestimering i agile udviklingsmetoder. 
+            Den første Planning Poker-session blev afholdt online, da vi havde gruppemedlemmer som var sygemeldte og ikke kunne møde fysisk. For at sikre alles deltagelse valgte vi derfor at gennemføre Planning Poker digitalt. 
+            Da vi benyttede en gratis version af værktøjet, var vi dog begrænset til kun tre spilrunder ad gangen, hvilket betød, at vi måtte genstarte spillet manuelt efter hver tredje opgave. Det gav lidt ekstra ventetid, men påvirkede ikke vores mulighed for at nå frem til fælles estimater.
+            Metoden var særligt nyttig i den tidlige fase, hvor vi havde behov for at skabe overblik og afklare, hvilke opgaver der var mest krævende i forhold til både tid og kompleksitet. Hver deltager tildelte en opgave et antal story points ud fra sin egen vurdering af opgavens kompleksitet, usikkerhed og forventede tidsforbrug. 
+            Derefter diskuterede vi forskellene i estimaterne, og nåede frem til enighed gennem konsensus. 
+            Vi brugte en skala baseret på (1, 2, 3, 5, 8, 13, 20, 40, 100), hvilket er en almindelig praksis i SCRUM og hjælper med at undgå falsk præcision i estimering.
+        </p>
+
+        <p>
+            Et eksempel på denne estimering er opgaven:
+            “Som spiller vil jeg gerne kunne tage billeder af mig selv i augmented reality med de cosmetics jeg køber”, som blev vurderet til 40 story points, da den krævede både AR-integration, billedhåndtering og UI-design.
+            I modsætning hertil blev opgaver som “offline mode” eller “UI med få knapper” estimeret til blot 1–3 story points, da de var hurtigere at implementere og teknisk ukomplicerede.
+        </p>
+
+        <p>
+            Efter den første estimeringsrunde gennemførte vi en anden vurdering, da nogle opgaver viste sig at være mere omfattende eller mindre komplekse end først antaget. Disse to runder hjalp os med at refinere vores sprintplanlægning og ressourcestyring.
+        </p>
+
+        <p>
+            Story points blev anvendt som grundlag for prioritering, sprintinddeling og arbejdsfordeling gennem hele udviklingsforløbet. Samlet set blev der estimeret 405 story points, hvilket gav os et overblik over projektets samlede arbejdsbyrde.
+        </p>
+
+        <p>
+            Teknologivalg og arkitektur: Udviklingsmiljøet blev opsat i Unity 6.3.6f1, da det understøtter både mobiludvikling og AR-komponenter via AR Foundation. Versionsstyring blev håndteret gennem GitHub, hvor vi arbejdede med branches og pull requests. 
+            Enkle mock-ups og tekniske proof-of-concepts blev anvendt til at validere løsningsidéer.
+        </p>
+
+        <p>
+            Risikoidentifikation: I inception-fasen identificerede vi centrale tekniske og praktiske risici. Det inkluderede f.eks. potentielle problemer med GPS-nøjagtighed i bymiljøer, begrænsninger i mobildata og AR-præcision, samt risici vedrørende brugeropmærksomhed i trafikerede områder. 
+            Disse risici blev dokumenteret og vurderet med hensyn til sandsynlighed og konsekvens, og de indgår i vores arkitektur- og designovervejelser.
+        </p>
+
+        <p>
+            Tidsplan og gruppekontrakt: Projektets arbejdsindsats blev estimeret ud fra en kombination af undervisningstimer og selvstændigt udviklingsarbejde. Tidsplanen blev organiseret i korte sprintforløb á tre dage for at sikre løbende fremdrift og fleksibel prioritering. 
+            Til at understøtte dette arbejdede vi efter en SCRUM-lignende struktur og etablerede en gruppekontrakt, der fastsatte rammer for møder, kommunikation og ansvarsfordeling.
+        </p>
+
+        <p>
+            For at følge vores progression og skabe visuel transparens i projektets fremdrift, valgte vi at anvende et BurnDownChart. Selvom BurnDownCharts ikke længere er en officiel del af SCRUM-rammeværket, vurderede vi, at det var et effektivt værktøj til at skabe overblik og understøtte gruppens motivation. 
+            Diagrammet viste både det ideelle nedløb af opgaver over tid samt vores faktiske arbejdsbelastning, målt i story points.
+        </p>
+
+        <p>
+            I starten lå den faktiske fremdrift bag forventningerne, hovedsageligt fordi vi havde en påskeferie. Dette kan ses i diagrammet, hvor den faktiske kurve flader ud i flere dage (f.eks. fra 12/04 til 22/04). Senere i forløbet accelererede opgaveløsningen markant, hvilket resulterede i en stejl nedgang i resterende opgaver fra d. 15/05 og frem til aflevering.
+        </p>
+
+        <p>
+            Som det ses, blev projektet gradvist indhentet, og vi afsluttede arbejdet med næsten alle kerneopgaver fuldført til tiden.
+            
+        </p>
+        <img src="Images/BurnDownCharts .png" alt="UseCaseDiagram" style="width: 500px;" height="auto">
+
+        <p>Tidsplan</p>
+        <ul>
+            <li>12/03 kl. 23:59 – Godkendelse af projektbeskrivelse</li>
+            <p>Undervisning: 5 dage × 3 timer = 15 timer</p>
+
+            <li>13/03 – 07/05 – Forberedende arbejde</li>
+            <p>Undervisning: 6 dage × 3 timer = 18 timer</p>
+            <p>Selvstændigt arbejde: 30 dage × 3,8 timer = 114 timer</p>
+
+            <li>08/05 – 26/05 – Projektperiode</li>
+            <p>Selvstændigt: 10 dage × 7 timer = 70 timer</p>
+            <p>Crunch time: 4 dage × 15 timer = 60 timer</p>
+
+            <li>27/05 kl. 00:00 – Aflevering</li>
+        </ul>
+        <p>Samlet arbejdstid: ca. 277 timer pr. person</p>
+
+        <p>
+            Refleksion over metoden
+        </p>
+
+        <p>
+            Ved at begrænse dokumentation og krav i inception-fasen fulgte vi intentionerne i Unified Process. Som Larman (2004) beskriver, er formålet i inception ikke at færdiggøre alle krav eller planer, men at sikre et grundlag for det videre arbejde. 
+            Dette princip – just enough, just in time – sikrede, at vi ikke overinvesterede i krav, som alligevel ville ændre sig under projektets videre udvikling.
+        </p>
+
         <H5>Transition-fasen i Unified Process</H5>
         <p>
             Transition-fasen er den afsluttende fase i Unified Process og markerer overgangen fra udvikling til produktets reelle brug.
