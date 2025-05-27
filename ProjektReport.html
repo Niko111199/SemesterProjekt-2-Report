@@ -385,6 +385,125 @@
             der blev udført i denne fase, stod gruppen med en forøget forståelse for omfanget af projektet, kravene bag og mængden af tid diverse opgaver fremadrettet bør tage.
         </p>
 
+        <h3>Construction</h3>
+
+        <p>
+            Følgende afsnit beskriver construktions fasen af Royal GO. Her gennemgås hvordan design og analyse er blevet implementeret i arkiteturen, samt hvordan integrationen med Unitys editor er håndteret. I dette afsnit vil der blive referetet intensivt til Design klasse diagrammet (indsæt reff), og Highscore sekvens diagrammet (indsæt reff) som herfra vil benævnes som henholdsvis DKD (design klasse diagram) og HSD (highscore sekvens diagram). 
+        </p>
+
+        <h4>
+            Integration med unity
+        </h4>
+
+        <p>
+            Royal Runs business kode er primært skrevet i rene c# klasser, hvor Monobehaviour klasser er forsøgt at holde til et minimum, og kun hvor der interageres direkte med Unity editoren. Som det ses på DKD under klassen: Monobehaviour, der  repræsentere integrationen mellem vores model og Unity. 
+        </p>
+
+        <p>
+            For at tilgå Unitys indbyggede metoder er namspaceed ”UnityEngine” implementeret på størstedelen af alle klasser, hvor nedarvning fra Monobehaviour er forsøgt undgået. Der er dog nogle steder hvor monobehaviouren kunne være undgået, men er implementere for at lette udvikleres arbejde, som det fx ses i WorldSpawnerControlleren, WorldFactory og WorldElementSpawner, da det giver en nemmere adgang til at styre klasserne gennem editoren. De steder hvor Monobehaviours er nødvendige er i specifikke Unity objekter som GameObjects og prefabs.  
+        </p>
+
+        <p>
+            Prefabs er primært benyttet til tre formål: at håndtere objekter med geometri så de kan bruges somm flyweight, at organisere scripts og componenter til mere komplekse funktioner, og til sidst til at samle hele scener. Sidst nævnte er primært for at undgå git-relateret problemer med Unitys scener, men det har også fordele når det kommer til integrations test af scener.
+        </p>
+
+        <p>
+            Der er benyttet en simpel scene struktur, hvor der prioriteres at have en enkelt scene aktiveret ad gangen. Det kommer også til syne på DKD at klassen MainSceneChanger har relationer til en masse forskellige scener. I praksis er denne knap refereret på alle UI knapper der har med sceneskift at gøre.
+        </p>
+
+        <h4>
+            Overordnet Arkitektur
+        </h4>
+
+        <p>
+            Der er fem overordnede systemer i Royal GO, NavigationsSystemet, AR scenen, UI, persistency og Minigames. Disse fem systemer kan beskriver kernen i spillet, hvortil der kommer der andre supporterende systemer for spiloplevelsen, som fx butikken og dens varer. Dette afsnit vil beskæftige sig med de fem overordnede systemer.
+        </p>
+
+        <h5>
+            Navigationsystem
+        </h5>
+
+        <p>
+            Navigations systemet - kaldet NavigationSystem på DKD - er drivkraften for spillets core play-loop: at finde skatte. Denne klasse benytter 3 design mønstre: Facade, observer og singleton. 
+        </p>
+
+        <p>
+            Facademønstret bliver brugt til at samle de mange klasser der bruges i indsamling og beregning. Bag facaden indsamler klasserne GPSSystem, og Kompas system data fra telefonens sensorer, omregner dette til mere brugbare informatiner. Disse informationer samles af: NavigationSystemData, der herefter bliver broadcastet til alle klasser der har abonneret på den i observer mønsteret. 
+        </p>
+
+        <p>
+            Observeren bruges til at fjerne afhængigheden fra de dybe databaserede lag, og for at sikre at den geografiske data er let tilgængelig i hele systemet. Det er også herfra muligt at styre refresh-raten på den interne logik, da observereen transmitter baseret på en udvikler defineret timer. I den nuvrærende udgave af Royal Run er det de to klasser: JuvelController og KorneController der primært er afhængige af indputtet fra geolocationen, da disse styre spillets centrale interaktioner: at finde en kron juvel, eller en konge krone. 
+        </p>
+
+        <p>
+            Endeligt, er singleton mønstret implementeret, da det er fordelagtigt at undgå flere forskellige instancer af denne klasse. Da NavigationsSystemDataen boradcastes af en timer, kan flere instancer nemt kunne lede til alvorlige performance problemer, der er besværlige at fejlsøge for.
+        </p>
+
+        <h5>
+            Ar scene
+        </h5>
+
+        <p>
+            Vi benytter Unity’s XR pakke til at styrer AR oplevelse i vores spil. Denne pakke indeholder værktøjer til at interagere og manipulere en spilverden overlagt en live video feed af virkeligheden. Sov vist på DKD, er Royal GOs arkitektur opbygget omkring et enkelt indgangspunkt: ARFactory prefabet. Dette prefab består af to hoved komponenter: WorldSpawnController – der er ansvarlig for at styre hvad og hvornår der skal spawne, og WorldElementSpawner - der håndtere logikken for hvordan det kan spawnes. Først nævnte har en række under controllere der signallere om kriterierne for en spawn er opfyldt, og på HSD vises sekvensen for at spawne en juvel under punkt 11 og frem. Sekvensen 11 til 11.1.1 viser hvordan WorldSpawnControlleren modtager signal fra JuvelControlleren, mens sekvens 11.1.1.1.1.1 viser hvordan WorldElementSpawneren begynder spawn processen. 
+        </p>
+
+        <p>
+            For at kunne spawne i en AR verden er der to kriterier der skal være opfyldt: Der skal være et GameObject at spawne, og en placering at spawne det på. I Royal GO, bruges der udelukkende plane detection til at finde en egnet placering. I praktisk betyder det at når der skal spawnes, skal der konstant kigges efter om der er en egnet plan at placere et GameObject på, og det er netop denne logik som WorldElementSpawneren håndtere.
+        </p>
+
+        <p>
+            Selve spawn processen foregår ved at kalde WorldSpawnFactorien (HSD-sekvens: 11.1.1.1.1.1), og give den en konkret Factory, fx JuvelFactorien. Her sørger den konkrete Factory for at et konkret produkt eksistere på angivne prefab (HSD-sekvens: 13), og at det spawnes på den givne location fra WorldElementSpawneren (HSD-sekvens: 11.1.1.1.1.1.1.1).
+        </p>
+
+        <p>
+            Det konkrete produkt script er ansvarlig for interaktionen for det GameObject den er tilføjet til. Fx kan det ses på DKD at både JuvelProduktet og KroneProduktet bruger IPressHandle, med funktionen OnPress, hvor det på HSD kan ses på sekvens 13.1.1 hvordan produktet tilføjer ARPressDetector til Juvel prefab’et. Noter på HSD sekvens 14, at ARPressDetector configureres efter den er tilføjet som component. I juvelens tilfælde vil et tryk resultere i at der tilføjes guld og point til spillerens score, som herefter gemmes lokalt.
+        </p>
+
+        <h5>
+            Persistens
+        </h5>
+
+        <p>
+            Der er tre funktioner der benytter persistens i Royal GO: Score, guld og butik systemerne. De benytter hver især lokal lagring gennem PlayerPrefs, dertil kommer at score også kan tilgå en online database for at gemme og vise highscore.
+        </p>
+
+        <p>
+            HSD beskriver hvordan en spiller starter spillet, får point fra en juvel, og hvordan disse point gemmes lokalt. Mest interessant for persistens er sekvens 15.111 til 15.1.1.4.1.1, hvor det kan ses at ScoreTrackerSeparated (indsæt kilde henvisning) bruges efter guldet er tilføjet, og kalder AddScore() (line refference?) til at overføre den nye score til trackeren, der så gemmer den med SaveScore() ()line reff?). Scoren gemmes i PlayerPref under key’en: ”GemScore” der overskrives ved hver ny entry.
+        </p>
+
+        <p>
+            Den online highscore styres af et trediepart system der er designet, leveret og hostet af Pelle Sølvkjær Christensen. Klassen der benyttes hedder AddScore (indsæt reference)  hvor metoden SubmitScore(string 	initials, int score) bliver kaldt. Dette score board viser de 10 højeste entries, og kan kaldes med metoden GetLeaderboard fra klassen LeaderBorad (indsæt reff).
+        </p>
+
+
+        <h4>
+            Udvikling af test til systemet
+        </h4>
+
+        <p>
+            At teste et system i Unity kan gribes an på to måder: white box og black box. Her i construction fasen er der primært benyttet whitebox testing, ved at skrive automatiserede test. Til det har unit en række værktøjer, hvoraf der i dette projekt er benyttet editor test (unit test) og play mode test (integration test).  Den praktiske forskel på disse test er at unit testen ikke kan teste scripts der nedarver fra Monobehaviour, da de har brug for en aktiv scene til at fungere. Hvorimod integrationstesten simulerer en afspillet scene. 
+        </p>
+
+        <h5>    
+            Unit testing
+        </h5>
+
+        <p>
+            For at kunne udføre unit tests af system er det som nævnt nødvendigt at arbejde med rene C# klasser. Samtidig skal der også være nogle reelle beregninger og input at beregne for at kunne bevise funktionaliteten. Derfor er Navigations systemet det mest gennemtestede system, da det ikke netop ikke bruger Monobehaviours, og skal håndtere en masse forskellige input. Det er samtidig det system der har den største interne kompleksitet, som følge af facade mønsterets struktur. 
+        </p>
+
+        <p>
+            Der er i alt 9 test tilkoblet navigations systemet, der sikre at kompas og GPS beregninger udføres korrekt, samt eventuelle edge cases og fejl bliver håndteret korrekt. 
+        </p>
+
+        <h5>
+            Integration testing
+        </h5>
+
+        <p>
+            Integrations test i Unity har større omfang end almindelige unit tests. Her bliver hele systemet opstillet og testet, derfor kan hele funktionaliteten af systemet testes af få test. I dette system bliver der teste et fuld succesfuld scenarie af gennemførsel, det vil sige: opstart, spawn af juvel, opsamling af juvel, opdatering af guld og score systemet, ankomst til korrekt GPS location, spawn af krone op opsamling af krone. Derudover er der en integrations test af funktionerne for de visuelle elementer relateret til skattejagten.
+        </p>
+
         <h2 id="Diskution">4. Diskussion</h2>
         <p>
             Der er ikke nogle objektive resultater at diskutere, da der ikke er udført nogle test, eller indsamlet noget data i dette projekt. Ingen af de benyttede metoder i projektet har givet afkast i en objektiv indsigt, indenfor projektets rammer.
